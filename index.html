@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essays in Bloom</title>
+
+  <!--
+    ADOBE FONTS (Typekit) KIT: npx4mzh
+    Families present: artifex-hand-cf, the-seasons, futura-pt.
+    MISSING WEIGHTS (add these cuts to the kit in fonts.adobe.com so the
+    spec renders exactly): The Seasons Light (300), Futura PT Light (300),
+    Futura PT Demi/Medium (600). Until added, the browser falls back to the
+    nearest available weight (400/700).
+  -->
+  <link rel="stylesheet" href="https://use.typekit.net/npx4mzh.css" />
+
+  <style>
+    /* ---- Test A typography system ---------------------------------------
+       To run a different A/B variant, change only these four variables. */
+    :root {
+      --font-display:    "artifex-hand-cf", Georgia, serif;        /* Heavy  */
+      --font-heading:    "the-seasons", "Cormorant Garamond", serif; /* Light */
+      --font-subheading: "futura-pt", "Helvetica Neue", sans-serif;  /* Demibold */
+      --font-paragraph:  "futura-pt", "Helvetica Neue", sans-serif;  /* Light  */
+
+      --weight-display:    800;
+      --weight-heading:    300;
+      --weight-subheading: 600;
+      --weight-paragraph:  300;
+
+      --ink: #111;
+      --paper: #fff;
+      --rule: #111;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; padding: 0; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-paragraph);
+      font-weight: var(--weight-paragraph);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 14vh 28px 18vh;
+    }
+
+    /* DISPLAY — Artifex Hand CF Heavy, ALL CAPS */
+    .display {
+      font-family: var(--font-display);
+      font-weight: var(--weight-display);
+      text-transform: uppercase;
+      letter-spacing: 0;
+      font-size: clamp(3rem, 11vw, 7rem);
+      line-height: 0.98;
+      margin: 0 0 0.5rem;
+    }
+
+    /* HEADING — The Seasons Light, ALL CAPS */
+    .heading {
+      font-family: var(--font-heading);
+      font-weight: var(--weight-heading);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      font-size: clamp(1.6rem, 4.5vw, 2.75rem);
+      line-height: 1.1;
+      margin: 0 0 2.5rem;
+    }
+
+    /* SUBHEADING — Futura Demibold, ALL CAPS */
+    .subheading {
+      font-family: var(--font-subheading);
+      font-weight: var(--weight-subheading);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      margin: 0 0 0.75rem;
+    }
+
+    /* PARAGRAPH — Futura Light, sentence case */
+    .paragraph {
+      font-family: var(--font-paragraph);
+      font-weight: var(--weight-paragraph);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      max-width: 56ch;
+      margin: 0 0 1.5rem;
+    }
+
+    .rule {
+      width: 64px;
+      height: 2px;
+      background: var(--rule);
+      border: 0;
+      margin: 0 0 2rem;
+    }
+
+    .cta {
+      display: inline-block;
+      font-family: var(--font-subheading);
+      font-weight: var(--weight-subheading);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--paper);
+      background: var(--ink);
+      padding: 0.95rem 2.2rem;
+      margin-top: 1.5rem;
+    }
+    .cta:hover { opacity: 0.85; }
+
+    .section + .section { margin-top: 6rem; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="section">
+      <h1 class="display">Essays<br />in Bloom</h1>
+      <p class="heading">Writing that takes root</p>
+
+      <p class="subheading">A quiet field for ideas</p>
+      <hr class="rule" />
+      <p class="paragraph">
+        Essays in Bloom is a slow-growing collection of writing on the
+        things worth lingering over. Each piece begins as a single
+        seed of a thought and is given the room, and the light, to
+        unfold at its own pace.
+      </p>
+      <p class="paragraph">
+        New essays arrive when they are ready, never before. Subscribe
+        to follow along as the garden fills in.
+      </p>
+
+      <a class="cta" href="#">Read the latest</a>
+    </section>
+  </main>
+</body>
+</html>
