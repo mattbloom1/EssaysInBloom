@@ -5,12 +5,7 @@
 .DS_Store
 Thumbs.db
 
-# Adobe temp/swap files
-*.tmp
-~*
-
 # Large Adobe source files (track via Git LFS if needed)
-*.ai
 
 # Dependencies / build output (for the website, added later)
 node_modules/
