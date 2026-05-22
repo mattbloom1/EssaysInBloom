@@ -10,13 +10,11 @@ the production site will be built on.
 | Path | Purpose |
 |------|---------|
 | `index.html` | Simple landing page used for typography A/B testing |
-| `brand.html` | Master brand sheet (logos + colors + type scale) |
-| `brand-v1.html` / `brand-v2.html` / `brand-v3.html` | Brand sheet per logo version, for side-by-side comparison |
-| `brand-v1.jpg` / `brand-v2.jpg` / `brand-v3.jpg` | Exported full-page JPGs of the three brand sheets |
-| `export-jpg.mjs` | Script that renders the brand sheets to JPG |
-| `Public/Logos/` | Logo + wordmark SVGs (v1, v2, v3) |
+| `brand.html` | Master brand sheet — all logo options stacked + colors + type scale |
+| `brand.jpg` | Exported full-page JPG of the brand sheet |
+| `export-jpg.mjs` | Script that renders the brand sheet to JPG |
+| `Public/Logos/` | Logo + wordmark SVGs (options v1–v6) |
 | `Public/Pictures/` | Image assets |
-| `Asset 15.png` | Raster wordmark |
 | `Illustrator/` | Adobe Illustrator source files (not tracked — see `.gitignore`) |
 
 ## Brand kit
@@ -45,7 +43,7 @@ Requires Node and a local install of Google Chrome.
 
 ```bash
 npm install            # installs playwright-core
-node export-jpg.mjs    # writes brand-v1.jpg, brand-v2.jpg, brand-v3.jpg
+node export-jpg.mjs    # writes brand.jpg
 ```
 
 ## Viewing locally

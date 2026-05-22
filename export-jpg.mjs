@@ -2,7 +2,7 @@ import { chromium } from 'playwright-core';
 import { pathToFileURL } from 'url';
 import path from 'path';
 
-const files = ['brand-v1.html', 'brand-v2.html', 'brand-v3.html'];
+const files = ['brand.html'];
 const root = process.cwd();
 
 const browser = await chromium.launch({ channel: 'chrome' });

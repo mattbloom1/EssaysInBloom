@@ -43,19 +43,20 @@ so they render correctly once the cuts are added.
 | Warm white (bg) | `#FEFAF9` |
 
 ### Logos
-Three versions live in `Public/Logos/`: v1 (unprefixed), `v2 *`, `v3 *`. Each has
-a mark, a long wordmark, and a tall wordmark. Logo art is near-black and reverses
-cleanly to white on dark backgrounds (`filter: invert(1)`).
+Six logo options live in `Public/Logos/`, prefixed `v1 *` through `v6 *`. Options
+1–5 each have a mark (`Logo`), a long wordmark, a tall wordmark, and a `Lockup`;
+v6 is mark-only. Logo art is near-black and reverses cleanly to white on dark
+backgrounds (`filter: invert(1)`). All options are shown stacked in `brand.html`.
 
 ## Conventions
 
-- Static HTML/CSS only so far; no build step. Brand sheets share an inline
-  `:root` token block — keep colors/type identical across `brand-v*.html`.
+- Static HTML/CSS only so far; no build step. `brand.html` is the single brand
+  sheet — it stacks every logo option and shares an inline `:root` token block.
 - **Adobe Illustrator source files (`*.ai`) are gitignored** and live in
   `Illustrator/`. Do not commit them (they are large binaries).
 - `node_modules/` and the local `.claude/` directory are gitignored.
 
 ## Regenerating brand-sheet JPGs
 
-`node export-jpg.mjs` renders `brand-v{1,2,3}.html` to full-page JPGs using
+`node export-jpg.mjs` renders `brand.html` to a full-page JPG using
 `playwright-core` driving the system Chrome (`channel: 'chrome'`).
