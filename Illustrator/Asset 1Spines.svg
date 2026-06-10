@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792 612">
+  <defs>
+    <style>
+      .vi      { font-family: FuturaPT-Heavy,'Futura PT'; font-weight: 800; font-size: 6px; }
+      .title   { font-family: TheSeasons-Regular,'The Seasons'; font-size: 34px; }
+      .sub     { font-family: FuturaPT-Book,'Futura PT'; font-size: 7px; }
+      .shelf   { font-family: FuturaPT-Bold,'Futura PT'; font-weight: 700; font-size: 8px; }
+      .role    { font-family: FuturaPT-Heavy,'Futura PT'; font-weight: 800; font-size: 6px; }
+      .sname   { font-family: FuturaPT-Heavy,'Futura PT'; font-weight: 800; font-size: 9px; }
+      .shex    { font-family: FuturaPT-Bold,'Futura PT'; font-weight: 700; font-size: 7.5px; }
+    </style>
+    <linearGradient id="contact1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity=".16"/><stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="contact2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000000" stop-opacity=".16"/><stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <g id="Layer_1-2" data-name="Layer 1">
+    <!-- board -->
+    <rect width="792" height="612" fill="#fbf8f3"/>
+
+    <!-- header -->
+    <text class="vi" x="396" y="26" text-anchor="middle" fill="#9a9088" letter-spacing="2">VISUAL IDENTITY</text>
+    <text class="title" x="40" y="80" fill="#2b2622">The Colour Library</text>
+    <text class="sub" x="752" y="74" text-anchor="end" fill="#6b6258" letter-spacing="0.6">Every shade, spine&#8209;out · ten volumes</text>
+    <rect x="40" y="94" width="712" height="1" fill="#2b2622" opacity=".12"/>
+
+    <!-- ============ SHELF 01 · LIGHT ============ -->
+    <rect x="40" y="330" width="712" height="14" fill="url(#contact1)"/>
+    <rect x="32" y="330" width="728" height="6" fill="#e6dccd"/>
+    <rect x="32" y="330" width="728" height="1.2" fill="#f5efe4"/>
+    <rect x="32" y="335.2" width="728" height="1" fill="#d6cab6"/>
+
+    <!-- L1 Cream / Paper -->
+    <g>
+      <rect x="40" y="125" width="148" height="205" rx="1.5" fill="#f3ede3"/>
+      <rect x="40" y="125" width="3" height="205" fill="#ffffff" opacity=".07"/>
+      <rect x="184" y="125" width="4" height="205" fill="#000000" opacity=".10"/>
+      <rect x="40" y="125" width="148" height="20" fill="#2b2622" opacity=".14"/>
+      <text class="role" x="114" y="138" text-anchor="middle" fill="#2b2622" opacity=".85" letter-spacing="1">PAPER</text>
+      <rect x="50" y="300" width="128" height="1.4" fill="#2b2622" opacity=".45"/>
+      <rect x="50" y="305" width="128" height="1.4" fill="#2b2622" opacity=".45"/>
+      <circle cx="114" cy="314" r="2.6" fill="#2b2622" opacity=".6"/>
+      <g transform="translate(114 225.5) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#2b2622" letter-spacing="1.2">CREAM</tspan><tspan class="shex" dx="9" fill="#2b2622" opacity=".75" letter-spacing="0.4">#F3EDE3</tspan></text></g>
+    </g>
+    <!-- L2 Charcoal / Ink -->
+    <g>
+      <rect x="193" y="147" width="126" height="183" rx="1.5" fill="#2b2622"/>
+      <rect x="193" y="147" width="3" height="183" fill="#ffffff" opacity=".07"/>
+      <rect x="315" y="147" width="4" height="183" fill="#000000" opacity=".10"/>
+      <rect x="193" y="147" width="126" height="20" fill="#f3ede3" opacity=".14"/>
+      <text class="role" x="256" y="160" text-anchor="middle" fill="#f3ede3" opacity=".85" letter-spacing="1">INK</text>
+      <rect x="203" y="300" width="106" height="1.4" fill="#f3ede3" opacity=".45"/>
+      <rect x="203" y="305" width="106" height="1.4" fill="#f3ede3" opacity=".45"/>
+      <circle cx="256" cy="314" r="2.6" fill="#f3ede3" opacity=".6"/>
+      <g transform="translate(256 236.5) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#f3ede3" letter-spacing="1.2">CHARCOAL</tspan><tspan class="shex" dx="9" fill="#f3ede3" opacity=".75" letter-spacing="0.4">#2B2622</tspan></text></g>
+    </g>
+    <!-- L3 Deep Marine / Primary -->
+    <g>
+      <rect x="324" y="118" width="140" height="212" rx="1.5" fill="#11332f"/>
+      <rect x="324" y="118" width="3" height="212" fill="#ffffff" opacity=".07"/>
+      <rect x="460" y="118" width="4" height="212" fill="#000000" opacity=".10"/>
+      <rect x="324" y="118" width="140" height="20" fill="#f3ede3" opacity=".14"/>
+      <text class="role" x="394" y="131" text-anchor="middle" fill="#f3ede3" opacity=".85" letter-spacing="1">PRIMARY</text>
+      <rect x="334" y="300" width="120" height="1.4" fill="#f3ede3" opacity=".45"/>
+      <rect x="334" y="305" width="120" height="1.4" fill="#f3ede3" opacity=".45"/>
+      <circle cx="394" cy="314" r="2.6" fill="#f3ede3" opacity=".6"/>
+      <g transform="translate(394 222) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#f3ede3" letter-spacing="1.2">DEEP MARINE</tspan><tspan class="shex" dx="9" fill="#f3ede3" opacity=".75" letter-spacing="0.4">#11332F</tspan></text></g>
+    </g>
+    <!-- L4 Hunter Green / Accent -->
+    <g>
+      <rect x="469" y="138" width="120" height="192" rx="1.5" fill="#285f3c"/>
+      <rect x="469" y="138" width="3" height="192" fill="#ffffff" opacity=".07"/>
+      <rect x="585" y="138" width="4" height="192" fill="#000000" opacity=".10"/>
+      <rect x="469" y="138" width="120" height="20" fill="#f3ede3" opacity=".14"/>
+      <text class="role" x="529" y="151" text-anchor="middle" fill="#f3ede3" opacity=".85" letter-spacing="1">ACCENT</text>
+      <rect x="479" y="300" width="100" height="1.4" fill="#f3ede3" opacity=".45"/>
+      <rect x="479" y="305" width="100" height="1.4" fill="#f3ede3" opacity=".45"/>
+      <circle cx="529" cy="314" r="2.6" fill="#f3ede3" opacity=".6"/>
+      <g transform="translate(529 232) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#f3ede3" letter-spacing="1.2">HUNTER GREEN</tspan><tspan class="shex" dx="9" fill="#f3ede3" opacity=".75" letter-spacing="0.4">#285F3C</tspan></text></g>
+    </g>
+    <!-- L5 Clay / Soft -->
+    <g>
+      <rect x="594" y="152" width="158" height="178" rx="1.5" fill="#e0a98c"/>
+      <rect x="594" y="152" width="3" height="178" fill="#ffffff" opacity=".07"/>
+      <rect x="748" y="152" width="4" height="178" fill="#000000" opacity=".10"/>
+      <rect x="594" y="152" width="158" height="20" fill="#2b2622" opacity=".14"/>
+      <text class="role" x="673" y="165" text-anchor="middle" fill="#2b2622" opacity=".85" letter-spacing="1">SOFT</text>
+      <rect x="604" y="300" width="138" height="1.4" fill="#2b2622" opacity=".45"/>
+      <rect x="604" y="305" width="138" height="1.4" fill="#2b2622" opacity=".45"/>
+      <circle cx="673" cy="314" r="2.6" fill="#2b2622" opacity=".6"/>
+      <g transform="translate(673 237) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#2b2622" letter-spacing="1.2">CLAY</tspan><tspan class="shex" dx="9" fill="#2b2622" opacity=".75" letter-spacing="0.4">#E0A98C</tspan></text></g>
+    </g>
+
+    <text class="shelf" x="40" y="354" fill="#6b6258" letter-spacing="1.4">01 · LIGHT MODE</text>
+    <text class="sub" x="752" y="354" text-anchor="end" fill="#9a9088" letter-spacing="0.6">Cream · Charcoal · Marine · Green · Clay</text>
+
+    <!-- ============ SHELF 02 · DARK ============ -->
+    <rect x="40" y="566" width="712" height="14" fill="url(#contact2)"/>
+    <rect x="32" y="566" width="728" height="6" fill="#e6dccd"/>
+    <rect x="32" y="566" width="728" height="1.2" fill="#f5efe4"/>
+    <rect x="32" y="571.2" width="728" height="1" fill="#d6cab6"/>
+
+    <!-- D1 Espresso / Paper -->
+    <g>
+      <rect x="40" y="376" width="132" height="190" rx="1.5" fill="#2a211a"/>
+      <rect x="40" y="376" width="3" height="190" fill="#ffffff" opacity=".07"/>
+      <rect x="168" y="376" width="4" height="190" fill="#000000" opacity=".10"/>
+      <rect x="40" y="376" width="132" height="20" fill="#f0e8d8" opacity=".14"/>
+      <text class="role" x="106" y="389" text-anchor="middle" fill="#f0e8d8" opacity=".85" letter-spacing="1">PAPER</text>
+      <rect x="50" y="536" width="112" height="1.4" fill="#f0e8d8" opacity=".45"/>
+      <rect x="50" y="541" width="112" height="1.4" fill="#f0e8d8" opacity=".45"/>
+      <circle cx="106" cy="550" r="2.6" fill="#f0e8d8" opacity=".6"/>
+      <g transform="translate(106 469) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#f0e8d8" letter-spacing="1.2">ESPRESSO</tspan><tspan class="shex" dx="9" fill="#f0e8d8" opacity=".75" letter-spacing="0.4">#2A211A</tspan></text></g>
+    </g>
+    <!-- D2 Ecru / Ink -->
+    <g>
+      <rect x="177" y="361" width="150" height="205" rx="1.5" fill="#f0e8d8"/>
+      <rect x="177" y="361" width="3" height="205" fill="#ffffff" opacity=".07"/>
+      <rect x="323" y="361" width="4" height="205" fill="#000000" opacity=".10"/>
+      <rect x="177" y="361" width="150" height="20" fill="#2a211a" opacity=".14"/>
+      <text class="role" x="252" y="374" text-anchor="middle" fill="#2a211a" opacity=".85" letter-spacing="1">INK</text>
+      <rect x="187" y="536" width="130" height="1.4" fill="#2a211a" opacity=".45"/>
+      <rect x="187" y="541" width="130" height="1.4" fill="#2a211a" opacity=".45"/>
+      <circle cx="252" cy="550" r="2.6" fill="#2a211a" opacity=".6"/>
+      <g transform="translate(252 461.5) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#2a211a" letter-spacing="1.2">ECRU</tspan><tspan class="shex" dx="9" fill="#2a211a" opacity=".75" letter-spacing="0.4">#F0E8D8</tspan></text></g>
+    </g>
+    <!-- D3 Terracotta / Primary -->
+    <g>
+      <rect x="332" y="388" width="122" height="178" rx="1.5" fill="#b5654a"/>
+      <rect x="332" y="388" width="3" height="178" fill="#ffffff" opacity=".07"/>
+      <rect x="450" y="388" width="4" height="178" fill="#000000" opacity=".10"/>
+      <rect x="332" y="388" width="122" height="20" fill="#f0e8d8" opacity=".14"/>
+      <text class="role" x="393" y="401" text-anchor="middle" fill="#f0e8d8" opacity=".85" letter-spacing="1">PRIMARY</text>
+      <rect x="342" y="536" width="102" height="1.4" fill="#f0e8d8" opacity=".45"/>
+      <rect x="342" y="541" width="102" height="1.4" fill="#f0e8d8" opacity=".45"/>
+      <circle cx="393" cy="550" r="2.6" fill="#f0e8d8" opacity=".6"/>
+      <g transform="translate(393 475) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#f0e8d8" letter-spacing="1.2">TERRACOTTA</tspan><tspan class="shex" dx="9" fill="#f0e8d8" opacity=".75" letter-spacing="0.4">#B5654A</tspan></text></g>
+    </g>
+    <!-- D4 Coral / Accent -->
+    <g>
+      <rect x="459" y="368" width="152" height="198" rx="1.5" fill="#e2754f"/>
+      <rect x="459" y="368" width="3" height="198" fill="#ffffff" opacity=".07"/>
+      <rect x="607" y="368" width="4" height="198" fill="#000000" opacity=".10"/>
+      <rect x="459" y="368" width="152" height="20" fill="#f0e8d8" opacity=".14"/>
+      <text class="role" x="535" y="381" text-anchor="middle" fill="#f0e8d8" opacity=".9" letter-spacing="1">ACCENT</text>
+      <rect x="469" y="536" width="132" height="1.4" fill="#f0e8d8" opacity=".5"/>
+      <rect x="469" y="541" width="132" height="1.4" fill="#f0e8d8" opacity=".5"/>
+      <circle cx="535" cy="550" r="2.6" fill="#f0e8d8" opacity=".65"/>
+      <g transform="translate(535 465) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#f0e8d8" letter-spacing="1.2">CORAL</tspan><tspan class="shex" dx="9" fill="#f0e8d8" opacity=".8" letter-spacing="0.4">#E2754F</tspan></text></g>
+    </g>
+    <!-- D5 Sand / Soft -->
+    <g>
+      <rect x="616" y="382" width="136" height="184" rx="1.5" fill="#f2ead8"/>
+      <rect x="616" y="382" width="3" height="184" fill="#ffffff" opacity=".07"/>
+      <rect x="748" y="382" width="4" height="184" fill="#000000" opacity=".10"/>
+      <rect x="616" y="382" width="136" height="20" fill="#2a211a" opacity=".14"/>
+      <text class="role" x="684" y="395" text-anchor="middle" fill="#2a211a" opacity=".85" letter-spacing="1">SOFT</text>
+      <rect x="626" y="536" width="116" height="1.4" fill="#2a211a" opacity=".45"/>
+      <rect x="626" y="541" width="116" height="1.4" fill="#2a211a" opacity=".45"/>
+      <circle cx="684" cy="550" r="2.6" fill="#2a211a" opacity=".6"/>
+      <g transform="translate(684 472) rotate(-90)"><text text-anchor="middle"><tspan class="sname" fill="#2a211a" letter-spacing="1.2">SAND</tspan><tspan class="shex" dx="9" fill="#2a211a" opacity=".75" letter-spacing="0.4">#F2EAD8</tspan></text></g>
+    </g>
+
+    <text class="shelf" x="40" y="590" fill="#6b6258" letter-spacing="1.4">02 · DARK MODE</text>
+    <text class="sub" x="752" y="590" text-anchor="end" fill="#9a9088" letter-spacing="0.6">Espresso · Ecru · Terracotta · Coral · Sand</text>
+  </g>
+</svg>
