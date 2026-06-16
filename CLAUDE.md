@@ -19,6 +19,7 @@ typography A/B testing. The production site has not been built yet.
 
 - Static HTML/CSS only so far; no build step. `brand.html` is the single brand
   sheet — it stacks every logo option and shares an inline `:root` token block.
-- **Adobe Illustrator source files (`*.ai`) are gitignored** and live in
-  `Illustrator/`. Do not commit them (they are large binaries).
+- **Adobe source files (`*.ai`, `*.indd`) live in `Adobe/` and are tracked in
+  Git** — commit them alongside other changes. They are large binaries (some
+  20 MB+), so keep an eye on repo size, but do not gitignore them.
 - The local `.claude/` directory is gitignored.
