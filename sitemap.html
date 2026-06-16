@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Essays in Bloom — Sitemap</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 13px;
+      padding: 48px 40px;
+    }
+    h1 {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 36px;
+      color: var(--forest);
+    }
+    .tree {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .level-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .nav-row, .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .page {
+      border: 1.5px solid var(--ink);
+      padding: 10px 16px;
+      min-width: 110px;
+      text-align: center;
+      font-weight: 600;
+      background: #fff;
+    }
+    .page.home {
+      border-color: var(--forest);
+      color: var(--forest);
+      border-width: 2px;
+    }
+    .page.footer-page {
+      border-style: dashed;
+      border-color: #aaa;
+      color: #555;
+      font-weight: 400;
+      font-size: 12px;
+    }
+    .page.footer-element {
+      border-style: dotted;
+      border-color: #bbb;
+      color: #888;
+      font-weight: 400;
+      font-size: 11px;
+      font-style: italic;
+    }
+    .connector {
+      width: 1px;
+      height: 20px;
+      background: #ccc;
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Essays in Bloom — Site Structure</h1>
+
+  <div class="tree">
+    <div>
+      <div class="level-label">Root</div>
+      <div class="nav-row">
+        <div class="page home">Homepage</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="level-label">Main Navigation Pages</div>
+      <div class="nav-row">
+        <div class="page">About</div>
+        <div class="page">Approach</div>
+        <div class="page">Coaching</div>
+        <div class="page">Workshops</div>
+        <div class="page">Testimonials</div>
+        <div class="page">Contact</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="level-label">Footer — Pages</div>
+      <div class="footer-row">
+        <div class="page footer-page">Terms of Service</div>
+        <div class="page footer-page">Privacy Policy</div>
+        <div class="page footer-page">Accessibility Statement</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="level-label">Footer — Elements (not pages)</div>
+      <div class="footer-row">
+        <div class="page footer-element">Social media links</div>
+        <div class="page footer-element">Copyright notice</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
