@@ -5,19 +5,66 @@
 
 :root {
 
-  /* --- Colors --- */
-  /* TBD */
+  /* --- Brand palette (named swatches from the brand book) --- */
+  /* Light variant */
+  --soft-linen:    #F2EDE3;  /* paper   */
+  --shadow-grey:   #2B2622;  /* ink     */
+  --evergreen:     #133430;  /* primary */
+  --hunter-green:  #29603D;  /* accent  */
+  --light-bronze:  #E0A98D;  /* soft    */
+  /* Dark variant */
+  --dark-coffee:   #2A2119;  /* paper            */
+  --cinnamon-wood: #B5654A;  /* primary          */
+  --burnt-peach:   #E2754E;  /* accent           */
+  --eggshell:      #F2EAD8;  /* soft             */
+  /* (on the dark variant, ink = --soft-linen) */
+
+  /* --- Semantic color roles (light theme is the default) --- */
+  --color-paper:   var(--soft-linen);
+  --color-ink:     var(--shadow-grey);
+  --color-primary: var(--evergreen);
+  --color-accent:  var(--hunter-green);
+  --color-soft:    var(--light-bronze);
+
+  /* --- Gradient blends --- */
+  --gradient-stone: linear-gradient(90deg, var(--shadow-grey), var(--evergreen));
+  --gradient-bloom: linear-gradient(90deg, var(--evergreen), var(--light-bronze));
+
+  /* --- Tints (each brand hue mixed toward paper; 100 = solid) --- */
+  --primary-100: var(--evergreen);
+  --primary-75:  color-mix(in srgb, var(--evergreen) 75%, var(--soft-linen));
+  --primary-50:  color-mix(in srgb, var(--evergreen) 50%, var(--soft-linen));
+  --primary-25:  color-mix(in srgb, var(--evergreen) 25%, var(--soft-linen));
+  --primary-10:  color-mix(in srgb, var(--evergreen) 10%, var(--soft-linen));
+
+  --accent-100: var(--hunter-green);
+  --accent-75:  color-mix(in srgb, var(--hunter-green) 75%, var(--soft-linen));
+  --accent-50:  color-mix(in srgb, var(--hunter-green) 50%, var(--soft-linen));
+  --accent-25:  color-mix(in srgb, var(--hunter-green) 25%, var(--soft-linen));
+  --accent-10:  color-mix(in srgb, var(--hunter-green) 10%, var(--soft-linen));
+
+  --soft-100: var(--light-bronze);
+  --soft-75:  color-mix(in srgb, var(--light-bronze) 75%, var(--soft-linen));
+  --soft-50:  color-mix(in srgb, var(--light-bronze) 50%, var(--soft-linen));
+  --soft-25:  color-mix(in srgb, var(--light-bronze) 25%, var(--soft-linen));
+  --soft-10:  color-mix(in srgb, var(--light-bronze) 10%, var(--soft-linen));
 
   /* --- Typography: font families --- */
-  --font-display:    'artifex-hand-cf', serif;
-  --font-heading:    'the-seasons', serif;
-  --font-body:       'futura-pt', sans-serif;
+  /* Loaded via the Adobe Fonts (Typekit) kit npx4mzh, imported in main.css.
+     Names below are the Adobe web font-family strings, not the display names. */
+  --font-display:    "artifex-hand-cf", Georgia, "Times New Roman", serif;
+  --font-heading:    "the-seasons", Georgia, "Times New Roman", serif;
+  --font-subheading: "futura-pt", "Century Gothic", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body:       "futura-pt", "Century Gothic", "Avenir Next", "Segoe UI", system-ui, sans-serif;
 
   /* --- Typography: weights --- */
-  --weight-display:    800;
-  --weight-heading:    300;
-  --weight-subheading: 600;
-  --weight-body:       300;
+  /* The kit ships only 400/700 for futura-pt and the-seasons, so the brand's
+     Light/Demibold weights snap to the nearest available. Add those weights to
+     the Adobe kit and bump these to 300/600 to match the book exactly. */
+  --weight-display:    800;  /* Artifex Hand CF Heavy (in kit)               */
+  --weight-heading:    400;  /* The Seasons — book: Light(300); kit: 400/700 */
+  --weight-subheading: 700;  /* Futura PT — book: Demibold(600); kit: 400/700 */
+  --weight-body:       400;  /* Futura PT — book: Light(300); kit: 400/700    */
 
   /* --- Typography: letter-spacing --- */
   --tracking-0: 0;
@@ -57,4 +104,21 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
 
+  /* --- Radius --- */
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-pill: 999px;
+
+}
+
+/* --- Dark variant ---
+   Remaps the semantic roles to the dark palette. Opt in by setting
+   data-theme="dark" on <html> (swap to a prefers-color-scheme query later
+   if you want it automatic). */
+[data-theme="dark"] {
+  --color-paper:   var(--dark-coffee);
+  --color-ink:     var(--soft-linen);
+  --color-primary: var(--cinnamon-wood);
+  --color-accent:  var(--burnt-peach);
+  --color-soft:    var(--eggshell);
 }

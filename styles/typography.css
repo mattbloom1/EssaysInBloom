@@ -1,12 +1,6 @@
 /* ============================================================
    Typography System
-   Adobe Fonts kit: npx4mzh
-   Note: 300 (Light) and 600 (Demi) cuts of The Seasons and
-   Futura PT still need adding at fonts.adobe.com.
    ============================================================ */
-
-/* Adobe Fonts kit */
-@import url("https://use.typekit.net/npx4mzh.css");
 
 /* --- Base --- */
 
@@ -14,49 +8,48 @@ body {
   font-family: var(--font-body);
   font-weight: var(--weight-body);
   font-size: var(--text-base);
-letter-spacing: var(--tracking-0);
+  letter-spacing: var(--tracking-0);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
 }
 
-/* --- Display (artifex-hand-cf 800, ALL CAPS) --- */
+/* --- Display --- */
 
 .display {
   font-family: var(--font-display);
   font-weight: var(--weight-display);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-0);
+  text-transform: uppercase; /* brand: ALL CAPS */
 }
 
-/* --- Headings (the-seasons 300, ALL CAPS) --- */
+/* --- Headings --- */
 
 h1, h2, h3,
 .heading {
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-0);
   line-height: 1.1;
+  text-transform: uppercase; /* brand: ALL CAPS */
 }
 
 h1 { font-size: var(--text-4xl); }
 h2 { font-size: var(--text-3xl); }
 h3 { font-size: var(--text-2xl); }
 
-/* --- Subheadings (futura-pt 600, ALL CAPS) --- */
+/* --- Subheadings --- */
 
 h4, h5, h6,
 .subheading {
-  font-family: var(--font-body);
+  font-family: var(--font-subheading);
   font-weight: var(--weight-subheading);
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-0);
   line-height: 1.2;
+  text-transform: uppercase; /* brand: ALL CAPS */
 }
 
 h4 { font-size: var(--text-xl); }
 h5 { font-size: var(--text-lg); }
 h6 { font-size: var(--text-md); }
 
-/* --- Paragraph / body (futura-pt 300, sentence case) --- */
+/* --- Paragraph / body --- */
 
 p {
   font-family: var(--font-body);

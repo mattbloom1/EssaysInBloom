@@ -3,6 +3,7 @@
    Import order matters: tokens → reset → type → layout → components
    ============================================================ */
 
+@import url("https://use.typekit.net/npx4mzh.css");
 @import "tokens.css";
 @import "reset.css";
 @import "typography.css";
