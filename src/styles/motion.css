@@ -22,9 +22,9 @@
 }
 
 /* --- Hover lift (buttons, cards) --- */
+/* Transform-only: honors the "only transform/opacity animate" constraint. */
 .lift {
-  transition: transform var(--dur-quick) var(--ease-soft),
-              box-shadow var(--dur-quick) var(--ease-soft);
+  transition: transform var(--dur-quick) var(--ease-soft);
 }
 .lift:hover {
   transform: translateY(-2px);
