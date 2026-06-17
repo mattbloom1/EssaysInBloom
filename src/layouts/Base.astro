@@ -31,6 +31,17 @@ const {
             localStorage.getItem('eib-theme') ||
             (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
           if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+
+          // Progressive-enhancement flag (enables reveal hidden-states).
+          document.documentElement.classList.add('has-js');
+
+          // Once-per-visit bloom gate. Play only on first arrival this session,
+          // and never when the visitor prefers reduced motion.
+          var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          if (!reduce && !sessionStorage.getItem('eib-bloomed')) {
+            document.documentElement.classList.add('bloom-play');
+            sessionStorage.setItem('eib-bloomed', '1');
+          }
         } catch (e) {}
       })();
     </script>
@@ -66,6 +77,23 @@ const {
         localStorage.setItem(KEY, next);
         syncLabels();
       });
+
+      // Reveal-on-scroll: reveal each [data-reveal] once as it enters view.
+      const revealEls = document.querySelectorAll('[data-reveal]');
+      if (revealEls.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries, obs) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              obs.unobserve(entry.target);
+            }
+          }
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        // No observer support: show everything.
+        revealEls.forEach((el) => el.classList.add('is-revealed'));
+      }
     </script>
   </body>
 </html>
