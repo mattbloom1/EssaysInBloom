@@ -12,3 +12,36 @@
   color: var(--color-accent);
 }
 .section-heading__title { font-size: var(--text-3xl); }
+
+/* --- Hero --- */
+.hero {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--space-8);
+  padding-block: var(--space-24) var(--space-20);
+  overflow: clip;             /* contain drifting pages */
+}
+.hero__content { display: grid; justify-items: center; gap: var(--space-8); position: relative; z-index: 1; }
+.hero__tagline { max-width: 48ch; font-size: var(--text-lg); color: color-mix(in srgb, var(--color-ink) 80%, transparent); }
+
+/* 3D stage + placeholder essay pages (final art supplied by user) */
+.hero__stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1200px;
+  pointer-events: none;
+  z-index: 0;
+}
+.page-card {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: clamp(120px, 14vw, 200px);
+  aspect-ratio: 8.5 / 11;
+  background: var(--color-paper);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 40px color-mix(in srgb, var(--color-ink) 12%, transparent);
+  transform: translate(-50%, -50%);
+}
