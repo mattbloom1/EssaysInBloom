@@ -1,4 +1,5 @@
 ---
+import FlowerMark from './FlowerMark.astro';
 const NAV = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
@@ -16,7 +17,7 @@ const isActive = (href: string) => (href === '/' ? path === '/' : path === href)
 <header>
   <div class="header-inner">
     <a class="brand" href="/" aria-label="Essays in Bloom — home">
-      <span class="brand__logo" role="img" aria-hidden="true"></span>
+      <span class="brand__logo"><FlowerMark /></span>
     </a>
     <nav class="tabs" aria-label="Primary">
       {NAV.map((item) => (

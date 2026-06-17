@@ -31,10 +31,7 @@ header {
 .brand__logo {
   display: block;
   height: 40px;
-  aspect-ratio: 87.89 / 48.24;          /* Full NO Text.svg viewBox */
-  background-color: var(--color-ink);
-  -webkit-mask: url("/logos/Full%20NO%20Text.svg") center / contain no-repeat;
-  mask: url("/logos/Full%20NO%20Text.svg") center / contain no-repeat;
+  aspect-ratio: 87.89 / 48.24;   /* Full NO Text.svg viewBox */
 }
 
 /* Centered tab group */

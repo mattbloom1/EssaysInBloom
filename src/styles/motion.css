@@ -49,3 +49,30 @@
     transition: none;
   }
 }
+
+/* --- Flower mark + bloom --- */
+.flower {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+.flower path {
+  fill: var(--color-ink);
+}
+
+/* Default = fully bloomed (static). The bloom only runs when <html>.bloom-play
+   is present, so there is no flash on repeat loads or with JS off. */
+.bloom-play .flower path {
+  transform-origin: 44px 44px;          /* floral base; fine-tune in preview */
+  animation: bloom-petal var(--dur-bloom) var(--ease-bloom) both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+
+@keyframes bloom-petal {
+  from { opacity: 0; transform: scale(0.4) rotate(-8deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bloom-play .flower path { animation: none; }
+}
