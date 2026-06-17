@@ -45,3 +45,8 @@
   box-shadow: 0 12px 40px color-mix(in srgb, var(--color-ink) 12%, transparent);
   transform: translate(-50%, -50%);
 }
+
+/* --- Empathy beat --- */
+.empathy { display: grid; gap: var(--space-4); text-align: center; }
+.empathy__heading { font-size: var(--text-2xl); }
+.empathy__body { font-size: var(--text-md); color: color-mix(in srgb, var(--color-ink) 80%, transparent); max-width: 60ch; margin-inline: auto; }
