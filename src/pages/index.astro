@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import StepCard from '../components/StepCard.astro';
+import ServiceCard from '../components/ServiceCard.astro';
 ---
 
 <Base>
@@ -63,6 +64,15 @@ import StepCard from '../components/StepCard.astro';
         <li>M.A. in Teaching English</li>
       </ul>
       <p class="section-link"><a href="/about" class="lift">More about Alison →</a></p>
+    </div>
+  </section>
+
+  <!-- Ways we work together -->
+  <section class="container section services">
+    <SectionHeading eyebrow="Services" heading="Ways we work together." />
+    <div class="service-grid">
+      <ServiceCard index={0} title="Coaching" body="1:1 essay guidance for your Common App and supplemental essays." href="/coaching" cta="Explore coaching" />
+      <ServiceCard index={1} title="Workshops" body="Small-group sessions that build momentum together." href="/workshops" cta="Explore workshops" />
     </div>
   </section>
 </Base>

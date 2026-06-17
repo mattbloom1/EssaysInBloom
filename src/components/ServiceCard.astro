@@ -1,0 +1,9 @@
+---
+interface Props { index: number; title: string; body: string; href: string; cta: string; }
+const { index, title, body, href, cta } = Astro.props;
+---
+<article class="service-card lift" data-reveal style={`--i:${index}`}>
+  <h3 class="service-card__title">{title}</h3>
+  <p class="service-card__body">{body}</p>
+  <a class="service-card__cta" href={href}>{cta} →</a>
+</article>
