@@ -50,3 +50,18 @@
 .empathy { display: grid; gap: var(--space-4); text-align: center; }
 .empathy__heading { font-size: var(--text-2xl); }
 .empathy__body { font-size: var(--text-md); color: color-mix(in srgb, var(--color-ink) 80%, transparent); max-width: 60ch; margin-inline: auto; }
+
+/* --- Approach --- */
+.step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-6); }
+.step-card {
+  display: grid; gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--primary-10);
+  border: 1px solid color-mix(in srgb, var(--color-ink) 8%, transparent);
+  border-radius: var(--radius-md);
+}
+.step-card__step { font-family: var(--font-subheading); font-weight: var(--weight-subheading); color: var(--color-accent); letter-spacing: 0.08em; }
+.step-card__label { font-size: var(--text-xl); }
+.step-card__body { color: color-mix(in srgb, var(--color-ink) 80%, transparent); }
+.section-link { margin-top: var(--space-8); }
+.section-link a { font-family: var(--font-subheading); font-weight: var(--weight-subheading); }

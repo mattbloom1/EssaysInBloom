@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import StepCard from '../components/StepCard.astro';
 ---
 
 <Base>
@@ -32,6 +34,18 @@ import Base from '../layouts/Base.astro';
       A blank essay box is the hardest part. Together, we find the story that's
       already yours — and shape it into words admissions officers remember.
     </p>
+  </section>
+
+  <!-- The Approach -->
+  <section class="container section approach" id="approach">
+    <SectionHeading eyebrow="The Approach" heading="How your essay blooms." />
+    <div class="step-grid">
+      <StepCard index={0} step="01" label="Discover" body="We clarify the roles you play, what you do, and what you care about." />
+      <StepCard index={1} step="02" label="Draft" body="Your ideas become words through an iterative drafting process." />
+      <StepCard index={2} step="03" label="Refine" body="We shape and polish until the narrative is vibrant and cohesive." />
+      <StepCard index={3} step="04" label="Bloom" body="Your Common App and supplemental essays show admissions officers exactly why you belong." />
+    </div>
+    <p class="section-link"><a href="/approach" class="lift">See the full approach →</a></p>
   </section>
 </Base>
 
