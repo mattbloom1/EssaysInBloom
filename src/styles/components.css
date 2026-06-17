@@ -20,7 +20,7 @@ header {
   padding: var(--space-5) var(--space-6) 0;
 }
 
-/* Brand mark (left) — SVG masked so it tints with the theme's ink */
+/* Brand mark (left) — inline SVG that tints with the theme's ink */
 .brand {
   justify-self: start;
   align-self: center;
