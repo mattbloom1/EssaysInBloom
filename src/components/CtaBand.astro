@@ -1,0 +1,10 @@
+---
+interface Props { heading: string; cta: string; href: string; }
+const { heading, cta, href } = Astro.props;
+---
+<section class="cta-band" data-reveal>
+  <div class="container cta-band__inner">
+    <h2 class="cta-band__heading">{heading}</h2>
+    <a class="btn btn--primary lift" href={href}>{cta}</a>
+  </div>
+</section>

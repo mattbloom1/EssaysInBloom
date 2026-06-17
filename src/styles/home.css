@@ -98,3 +98,8 @@
 .testimonial__quote { font-family: var(--font-heading); font-size: var(--text-lg); font-style: italic; }
 .testimonial__by { color: color-mix(in srgb, var(--color-ink) 65%, transparent); }
 .testimonial--placeholder { opacity: 0.7; border-style: dashed; }
+
+/* --- Closing CTA band --- */
+.cta-band { margin-top: var(--space-24); background: var(--gradient-bloom); }
+.cta-band__inner { display: grid; justify-items: center; gap: var(--space-6); text-align: center; padding-block: var(--space-20); }
+.cta-band__heading { font-size: var(--text-3xl); color: var(--soft-linen); }
