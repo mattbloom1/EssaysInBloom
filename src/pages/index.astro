@@ -1,0 +1,142 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="hero container">
+    <span class="hero__logo" role="img" aria-label="Essays in Bloom"></span>
+    <h1 class="visually-hidden">Essays in Bloom — What's Your Story?</h1>
+    <p class="hero__tagline">
+      Together, we turn your experience into an essay that shows admission
+      officers exactly why you belong.
+    </p>
+    <div class="button-row">
+      <a class="btn btn--primary" href="/contact">Start Your Story</a>
+      <a class="btn btn--secondary" href="/approach">Our Approach</a>
+    </div>
+  </section>
+
+  <!-- Brand system showcase -->
+  <section class="showcase container section" aria-label="Brand system">
+    <!-- Buttons & links -->
+    <div class="showcase__block">
+      <h2>Buttons &amp; Links</h2>
+      <div class="button-row">
+        <button class="btn btn--primary" type="button">Primary</button>
+        <button class="btn btn--secondary" type="button">Secondary</button>
+        <button class="btn btn--primary" type="button" disabled>Disabled</button>
+      </div>
+      <p>
+        Body copy with an <a href="#buttons">inline content link</a> to show
+        the prose link style and its hover color.
+      </p>
+    </div>
+
+    <!-- Colors -->
+    <div class="showcase__block">
+      <h2>Colors</h2>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="swatch__chip" style="background: var(--soft-linen)"></div>
+          <div class="swatch__meta">
+            <div class="swatch__name">Paper</div>
+            <div class="swatch__hex">Soft Linen · #F2EDE3</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background: var(--shadow-grey)"></div>
+          <div class="swatch__meta">
+            <div class="swatch__name">Ink</div>
+            <div class="swatch__hex">Shadow Grey · #2B2622</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background: var(--evergreen)"></div>
+          <div class="swatch__meta">
+            <div class="swatch__name">Primary</div>
+            <div class="swatch__hex">Evergreen · #133430</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background: var(--hunter-green)"></div>
+          <div class="swatch__meta">
+            <div class="swatch__name">Accent</div>
+            <div class="swatch__hex">Hunter Green · #29603D</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch__chip" style="background: var(--light-bronze)"></div>
+          <div class="swatch__meta">
+            <div class="swatch__name">Soft</div>
+            <div class="swatch__hex">Light Bronze · #E0A98D</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tints -->
+    <div class="showcase__block">
+      <h2>Tints</h2>
+      <div class="tint-row">
+        <div class="tint" style="background: var(--primary-100)"></div>
+        <div class="tint" style="background: var(--primary-75)"></div>
+        <div class="tint" style="background: var(--primary-50)"></div>
+        <div class="tint" style="background: var(--primary-25)"></div>
+        <div class="tint" style="background: var(--primary-10)"></div>
+      </div>
+      <div class="tint-row">
+        <div class="tint" style="background: var(--accent-100)"></div>
+        <div class="tint" style="background: var(--accent-75)"></div>
+        <div class="tint" style="background: var(--accent-50)"></div>
+        <div class="tint" style="background: var(--accent-25)"></div>
+        <div class="tint" style="background: var(--accent-10)"></div>
+      </div>
+      <div class="tint-row">
+        <div class="tint" style="background: var(--soft-100)"></div>
+        <div class="tint" style="background: var(--soft-75)"></div>
+        <div class="tint" style="background: var(--soft-50)"></div>
+        <div class="tint" style="background: var(--soft-25)"></div>
+        <div class="tint" style="background: var(--soft-10)"></div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="showcase__block">
+      <h2>Typography</h2>
+      <p class="display" style="font-size: var(--text-4xl)">Display</p>
+      <h3>Heading</h3>
+      <h4 class="subheading">Subheading</h4>
+      <p>
+        Paragraph — Futura PT. The quick brown fox jumps over the lazy dog.
+        1234567890 &amp; punctuation set the rhythm of long-form reading copy.
+      </p>
+    </div>
+
+    <!-- Logo & clearspace -->
+    <div class="showcase__block">
+      <h2>Logo &amp; Clearspace</h2>
+      <div class="clearspace">
+        <span class="clearspace__logo" role="img" aria-label="Essays in Bloom full lockup"></span>
+      </div>
+      <div class="favicon-chips">
+        <span class="favicon-chip favicon-chip--light">
+          <img src="/logos/Favicon%20Dark.svg" alt="Favicon on light background" />
+        </span>
+        <span class="favicon-chip favicon-chip--dark">
+          <img src="/logos/Favicon%20Light.svg" alt="Favicon on dark background" />
+        </span>
+      </div>
+    </div>
+
+    <!-- Focus & selection -->
+    <div class="showcase__block">
+      <h2>Focus &amp; Selection</h2>
+      <p>Tab through the controls to see focus rings; select this sentence to see the selection highlight.</p>
+      <div class="button-row">
+        <a class="btn btn--secondary" href="#focus">Focusable link</a>
+        <input class="field" type="text" placeholder="Focusable input" aria-label="Sample input" />
+      </div>
+    </div>
+  </section>
+</Base>

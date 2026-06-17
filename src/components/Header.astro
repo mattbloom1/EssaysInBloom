@@ -1,0 +1,37 @@
+---
+const NAV = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/approach', label: 'Approach' },
+  { href: '/coaching', label: 'Coaching' },
+  { href: '/workshops', label: 'Workshops' },
+  { href: '/testimonials', label: 'Testimonials' },
+];
+const CONTACT = { href: '/contact', label: 'Contact' };
+
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => (href === '/' ? path === '/' : path === href);
+---
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Essays in Bloom — home">
+      <span class="brand__logo" role="img" aria-hidden="true"></span>
+    </a>
+    <nav class="tabs" aria-label="Primary">
+      {NAV.map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+    <a
+      class="tab tab--contact"
+      href={CONTACT.href}
+      aria-current={isActive(CONTACT.href) ? 'page' : undefined}
+    >
+      {CONTACT.label}
+    </a>
+  </div>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+    <span data-theme-label>Dark</span>
+  </button>
+</header>

@@ -11,9 +11,10 @@ Thumbs.db
 
 # Note: Adobe source files (*.ai, *.indd) in Adobe/ are intentionally tracked.
 
-# Dependencies / build output (for the website, added later)
+# Dependencies / build output
 node_modules/
 dist/
 build/
+.astro/
 .env
 .env.local
