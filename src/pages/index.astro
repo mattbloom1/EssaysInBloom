@@ -25,3 +25,41 @@ import Base from '../layouts/Base.astro';
     </div>
   </section>
 </Base>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cards = gsap.utils.toArray<HTMLElement>('.page-card');
+
+  if (!reduce && cards.length) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Resting layout: fan the pages out in depth.
+    const rest = [
+      { x: -160, y: -10, z: -260, ry:  18 },
+      { x:   10, y:  20, z: -120, ry:  -8 },
+      { x:  180, y: -30, z: -360, ry:  26 },
+    ];
+    cards.forEach((card, i) => {
+      const r = rest[i % rest.length];
+      gsap.set(card, { xPercent: -50, yPercent: -50, x: r.x, y: r.y, z: r.z, rotateY: r.ry });
+    });
+
+    // Scrub: pages drift further apart + rotate as the hero scrolls away.
+    gsap.to(cards, {
+      x: (i: number) => rest[i % rest.length].x * 2.2,
+      z: (i: number) => rest[i % rest.length].z - 200,
+      rotateY: (i: number) => rest[i % rest.length].ry * 1.8,
+      yPercent: -90,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.6,
+      },
+    });
+  }
+</script>
