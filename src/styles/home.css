@@ -65,3 +65,11 @@
 .step-card__body { color: color-mix(in srgb, var(--color-ink) 80%, transparent); }
 .section-link { margin-top: var(--space-8); }
 .section-link a { font-family: var(--font-subheading); font-weight: var(--weight-subheading); }
+
+/* --- Meet your coach --- */
+.coach { display: grid; grid-template-columns: auto 1fr; gap: var(--space-10); align-items: center; }
+.coach__photo { border-radius: var(--radius-md); object-fit: cover; }
+.coach__creds { display: grid; gap: var(--space-2); margin-top: var(--space-4); list-style: none; padding: 0; color: color-mix(in srgb, var(--color-ink) 80%, transparent); }
+.coach__creds li { padding-left: var(--space-5); position: relative; }
+.coach__creds li::before { content: "✦"; position: absolute; left: 0; color: var(--color-soft); }
+@media (max-width: 640px) { .coach { grid-template-columns: 1fr; justify-items: center; text-align: center; } }
