@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import StepCard from '../components/StepCard.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import Testimonial from '../components/Testimonial.astro';
 ---
 
 <Base>
@@ -74,6 +75,16 @@ import ServiceCard from '../components/ServiceCard.astro';
       <ServiceCard index={0} title="Coaching" body="1:1 essay guidance for your Common App and supplemental essays." href="/coaching" cta="Explore coaching" />
       <ServiceCard index={1} title="Workshops" body="Small-group sessions that build momentum together." href="/workshops" cta="Explore workshops" />
     </div>
+  </section>
+
+  <!-- What families say -->
+  <section class="container section testimonials">
+    <SectionHeading eyebrow="Testimonials" heading="What families say." />
+    <div class="testimonial-grid">
+      <Testimonial index={0} placeholder={true} quote="Real family testimonial coming soon." attribution="— Placeholder" />
+      <Testimonial index={1} placeholder={true} quote="Real family testimonial coming soon." attribution="— Placeholder" />
+    </div>
+    <p class="section-link"><a href="/testimonials" class="lift">Read more →</a></p>
   </section>
 </Base>
 
