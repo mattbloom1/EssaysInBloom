@@ -71,45 +71,10 @@ header {
 
 .tab[aria-current="page"],
 .tabs a[aria-current="page"] {
-  position: relative;
   color: var(--color-primary);
   font-weight: var(--weight-subheading);
   background-color: var(--color-paper);
   border-color: color-mix(in srgb, var(--color-ink) 12%, transparent);
-}
-
-/* Outward "shoulders" so the active tab flares into the content below, like a
-   browser tab. Each is a paper-filled box with the inner quarter masked away
-   by a radial gradient, leaving a concave corner. */
-.tab[aria-current="page"]::before,
-.tab[aria-current="page"]::after,
-.tabs a[aria-current="page"]::before,
-.tabs a[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: var(--radius-md);
-  height: var(--radius-md);
-}
-
-.tab[aria-current="page"]::before,
-.tabs a[aria-current="page"]::before {
-  left: calc(-1 * var(--radius-md));
-  background: radial-gradient(circle at top left,
-              transparent var(--radius-md),
-              color-mix(in srgb, var(--color-ink) 12%, transparent) var(--radius-md),
-              color-mix(in srgb, var(--color-ink) 12%, transparent) calc(var(--radius-md) + 1px),
-              var(--color-paper) calc(var(--radius-md) + 1px));
-}
-
-.tab[aria-current="page"]::after,
-.tabs a[aria-current="page"]::after {
-  right: calc(-1 * var(--radius-md));
-  background: radial-gradient(circle at top right,
-              transparent var(--radius-md),
-              color-mix(in srgb, var(--color-ink) 12%, transparent) var(--radius-md),
-              color-mix(in srgb, var(--color-ink) 12%, transparent) calc(var(--radius-md) + 1px),
-              var(--color-paper) calc(var(--radius-md) + 1px));
 }
 
 /* Contact — same tab, pinned to the right column */
