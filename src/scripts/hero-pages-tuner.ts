@@ -56,6 +56,7 @@ function serialize(c: HeroPagesConfig): string {
     `  scrub: ${c.scrub},`,
     `  scale: ${c.scale},`,
     `  stagger: ${c.stagger},`,
+    `  reverse: ${c.reverse},`,
     `  entry: { x: ${e.x}, y: ${e.y}, spread: ${e.spread}, rotMin: ${e.rotMin}, rotMax: ${e.rotMax} },`,
     `  crest: { x: ${c.crest.x}, y: ${c.crest.y} },`,
     `  stack: { x: ${s.x}, y: ${s.y}, dx: ${s.dx}, dy: ${s.dy}, rotJitter: ${s.rotJitter} },`,
@@ -153,27 +154,46 @@ export function mountHeroPagesTuner(api: HeroPagesApi): void {
     group.appendChild(head);
     specs.forEach((s) => addControl(group, s));
     body.appendChild(group);
+    return group;
   };
 
-  addGroup('Flow', [
+  const addToggle = (parent: HTMLElement, label: string, get: () => boolean, set: (v: boolean) => void) => {
+    const row = document.createElement('div');
+    row.className = 'hpt__row';
+    const lab = document.createElement('label');
+    lab.textContent = label;
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = get();
+    cb.style.justifySelf = 'start';
+    cb.addEventListener('input', () => {
+      set(cb.checked);
+      refresh();
+    });
+    row.append(lab, cb);
+    parent.appendChild(row);
+  };
+
+  const flow = addGroup('Flow', [
     { label: 'count', min: 10, max: 24, step: 1, get: () => config.count, set: (v) => (config.count = v) },
-    { label: 'pin %', min: 60, max: 320, step: 10, get: () => config.pin, set: (v) => (config.pin = v) },
+    { label: 'length %', min: 60, max: 400, step: 10, get: () => config.pin, set: (v) => (config.pin = v) },
     { label: 'scrub', min: 0, max: 3, step: 0.1, get: () => config.scrub, set: (v) => (config.scrub = v) },
     { label: 'stagger', min: 0.1, max: 1.5, step: 0.05, get: () => config.stagger, set: (v) => (config.stagger = v) },
     { label: 'scale', min: 0.4, max: 2, step: 0.05, get: () => config.scale, set: (v) => (config.scale = v) },
   ]);
+  addToggle(flow, 'reverse', () => config.reverse, (v) => (config.reverse = v));
 
   addGroup('Entry (bottom-right)', [
-    { label: 'x %', min: 90, max: 140, step: 1, get: () => config.entry.x, set: (v) => (config.entry.x = v) },
+    { label: 'x %', min: 90, max: 160, step: 1, get: () => config.entry.x, set: (v) => (config.entry.x = v) },
     { label: 'y %', min: 40, max: 100, step: 1, get: () => config.entry.y, set: (v) => (config.entry.y = v) },
-    { label: 'spread', min: 0, max: 30, step: 1, get: () => config.entry.spread, set: (v) => (config.entry.spread = v) },
+    { label: 'spread', min: 0, max: 200, step: 1, get: () => config.entry.spread, set: (v) => (config.entry.spread = v) },
     { label: 'rot min', min: -90, max: 0, step: 1, get: () => config.entry.rotMin, set: (v) => (config.entry.rotMin = v) },
     { label: 'rot max', min: 0, max: 90, step: 1, get: () => config.entry.rotMax, set: (v) => (config.entry.rotMax = v) },
   ]);
 
   addGroup('Crest (over wordmark)', [
     { label: 'x %', min: 0, max: 100, step: 1, get: () => config.crest.x, set: (v) => (config.crest.x = v) },
-    { label: 'y %', min: -20, max: 60, step: 1, get: () => config.crest.y, set: (v) => (config.crest.y = v) },
+    { label: 'y %', min: -40, max: 100, step: 1, get: () => config.crest.y, set: (v) => (config.crest.y = v) },
   ]);
 
   addGroup('Stack (bottom-left)', [
@@ -181,7 +201,7 @@ export function mountHeroPagesTuner(api: HeroPagesApi): void {
     { label: 'y %', min: 50, max: 100, step: 1, get: () => config.stack.y, set: (v) => (config.stack.y = v) },
     { label: 'dx %', min: -5, max: 5, step: 0.1, get: () => config.stack.dx, set: (v) => (config.stack.dx = v) },
     { label: 'dy %', min: -5, max: 5, step: 0.1, get: () => config.stack.dy, set: (v) => (config.stack.dy = v) },
-    { label: 'rot ±', min: 0, max: 20, step: 1, get: () => config.stack.rotJitter, set: (v) => (config.stack.rotJitter = v) },
+    { label: 'rot ±', min: 0, max: 90, step: 1, get: () => config.stack.rotJitter, set: (v) => (config.stack.rotJitter = v) },
   ]);
 
   const hint = document.createElement('div');

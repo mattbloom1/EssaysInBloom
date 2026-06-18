@@ -25,7 +25,8 @@ interface Pt {
 export interface HeroPagesConfig {
   /** Number of pages (≥10). Cards cycle Paper1/2/3. */
   count: number;
-  /** Pin length — how long the hero stays locked, as % of viewport height. */
+  /** Scroll distance the effect plays over, as % of viewport height. Larger =
+   *  the animation is spread over more scroll, so it plays out more slowly. */
   pin: number;
   /** ScrollTrigger scrub lag (seconds; higher = silkier). */
   scrub: number;
@@ -33,6 +34,9 @@ export interface HeroPagesConfig {
   scale: number;
   /** Scroll-timeline units between each page's start (smaller = tighter stream). */
   stagger: number;
+  /** Reverse the flight: pages start stacked and fly AWAY (stack → off-screen)
+   *  as you scroll, instead of flying in. */
+  reverse: boolean;
   /** Entry: off-screen start point + spread + entry rotation range (deg). */
   entry: { x: number; y: number; spread: number; rotMin: number; rotMax: number };
   /** Crest: the arc's control point, above the wordmark. */
@@ -43,14 +47,15 @@ export interface HeroPagesConfig {
 
 // ── TUNE ME ──────────────────────────────────────────────────────────────
 export const HERO_PAGES_CONFIG: HeroPagesConfig = {
-  count: 12,
-  pin: 170,
-  scrub: 0.7,
+  count: 10,
+  pin: 150,
+  scrub: 2.3,
   scale: 1,
-  stagger: 0.5,
-  entry: { x: 114, y: 76, spread: 9, rotMin: -26, rotMax: 26 },
-  crest: { x: 50, y: 9 },
-  stack: { x: 17, y: 83, dx: 1.6, dy: -1.2, rotJitter: 5 },
+  stagger: 0.1,
+  reverse: false,
+  entry: { x: 50, y: 76, spread: 150, rotMin: -26, rotMax: 26 },
+  crest: { x: 50, y: 70 },
+  stack: { x: 48, y: 82, dx: 0, dy: -0.5, rotJitter: 10 },
 };
 // ───────────────────────────────────────────────────────────────────────────
 
@@ -181,16 +186,20 @@ export function mountHeroPages(): HeroPagesApi | null {
       return;
     }
 
-    cards.forEach((card, i) => place(card, params[i], 0, ctx)); // start off-screen
+    // Direction: forward = fly in (entry → stack); reverse = fly away
+    // (stack → entry) as you scroll.
+    const dirT = (pt: number) => (config.reverse ? 1 - pt : pt);
+    cards.forEach((card, i) => place(card, params[i], dirT(0), ctx)); // initial pose
 
+    // No pin: the hero scrolls normally (no freeze). The animation just scrubs
+    // over `pin`% of scroll, so a large value + scrub makes the effect play out
+    // slowly as you scroll. Begins as soon as the hero reaches the top.
     tween = gsap.timeline({
       scrollTrigger: {
         trigger: hero!,
         start: 'top top',
         end: `+=${config.pin}%`,
-        pin: true,
         scrub: config.scrub,
-        anticipatePin: 1,
         invalidateOnRefresh: true,
       },
     });
@@ -199,7 +208,7 @@ export function mountHeroPages(): HeroPagesApi | null {
       const proxy = { t: 0 };
       tween!.to(
         proxy,
-        { t: 1, ease: 'power1.inOut', duration: 1, onUpdate: () => place(card, params[i], proxy.t, ctx) },
+        { t: 1, ease: 'power1.inOut', duration: 1, onUpdate: () => place(card, params[i], dirT(proxy.t), ctx) },
         i * config.stagger,
       );
     });
