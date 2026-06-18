@@ -12,10 +12,12 @@ scroll-drift hero (`HERO_3D_CONFIG` / `.hero-region`). Cold-start-resumable.
 > (entry → crest → bottom-left stack), peeling in **staggered** as you scroll.
 >
 > Key changes since the original design below:
-> - **NO pin / no freeze** (user asked to remove it). The hero scrolls normally;
->   the animation is a GSAP **ScrollTrigger scrub WITHOUT `pin`**, spread over
->   `config.pin`% of scroll (the field name `pin` is now just "scroll distance" —
->   bigger = slower). Begins at `start: 'top top'`.
+> - **Pinned, but the scene keeps moving** (the no-pin version felt too fast;
+>   user chose pin-with-motion). GSAP **ScrollTrigger `pin: true` + scrub** over
+>   `config.pin`% of scroll (field name `pin` now means "scroll distance" —
+>   bigger = slower; starts at `top top`). During the lock the pages animate AND
+>   the hero content (wordmark/tagline/buttons) drifts up `config.contentRise`%
+>   + fades (`tween.fromTo`), so it reads as slow-motion scroll, not a freeze.
 > - **`reverse` toggle** — `false` = pages fly IN (entry→stack); `true` = fly
 >   AWAY (stack→entry). Implemented as `dirT = reverse ? 1-t : t`.
 > - The **empathy beat was removed**; hero → straight to The Approach.
@@ -28,21 +30,22 @@ scroll-drift hero (`HERO_3D_CONFIG` / `.hero-region`). Cold-start-resumable.
 > **Files (all built):** rig `src/scripts/hero-pages.ts` (`HERO_PAGES_CONFIG` +
 > `mountHeroPages()`, seeded per-page jitter, 0-viewport guard, resize rebuild,
 > reduced-motion = settled stack); dev tuner `src/scripts/hero-pages-tuner.ts`
-> (knobs: count, length%, scrub, stagger, scale, reverse, entry, crest, stack;
-> Copy → paste over `HERO_PAGES_CONFIG`); `src/components/Wordmark.astro`
+> (knobs: count, length%, scrub, stagger, scale, rise%, reverse, entry, crest,
+> stack; Copy → paste over `HERO_PAGES_CONFIG`); `src/components/Wordmark.astro`
 > (inlined SVG, `currentColor`); markup in `src/pages/index.astro`; styles in
 > `src/styles/home.css`. Pages use the `.page-card__ink` mask (theme-adaptive).
 >
 > **Current `HERO_PAGES_CONFIG`:** count 10, pin 150, scrub 2.3, scale 1,
-> stagger 0.1, reverse false, entry {x50,y76,spread150,rotMin-26,rotMax26},
-> crest {x50,y70}, stack {x48,y82,dx0,dy-0.5,rotJitter10}. (Tune live via the
-> dev panel.)
+> stagger 0.1, contentRise 45, reverse false, entry
+> {x50,y76,spread150,rotMin-26,rotMax26}, crest {x50,y70},
+> stack {x48,y82,dx0,dy-0.5,rotJitter10}. (Tune live via the dev panel.)
 >
-> **Verification note:** build clean + dev bits stripped from `dist`; arc logic +
-> scroll-scrub + no-pin/no-sticky confirmed via DOM checks; light+dark looked
-> right in earlier screenshots. Screenshots hang while GSAP's scrub ticker is
-> live (page never goes idle) — a preview-tool quirk, not a site bug. **Worth a
-> real-browser scroll once.**
+> **Verification note:** build clean + dev bits stripped from `dist`; pin
+> (pin-spacer present), content drift (yPercent + fade), arc logic, and
+> no-sticky-nav confirmed via DOM checks; light+dark looked right in earlier
+> screenshots. Screenshots hang while GSAP's scrub ticker is live (page never
+> goes idle) — a preview-tool quirk, not a site bug. **Worth a real-browser
+> scroll once** to feel the slow-motion pacing.
 
 ## Concept
 

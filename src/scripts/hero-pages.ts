@@ -34,6 +34,10 @@ export interface HeroPagesConfig {
   scale: number;
   /** Scroll-timeline units between each page's start (smaller = tighter stream). */
   stagger: number;
+  /** How far the hero content (wordmark/tagline/buttons) drifts UP during the
+   *  lock, as % of its height. Keeps the scene moving so the pin reads as
+   *  slow-motion scroll, not a hard freeze. */
+  contentRise: number;
   /** Reverse the flight: pages start stacked and fly AWAY (stack → off-screen)
    *  as you scroll, instead of flying in. */
   reverse: boolean;
@@ -52,6 +56,7 @@ export const HERO_PAGES_CONFIG: HeroPagesConfig = {
   scrub: 2.3,
   scale: 1,
   stagger: 0.1,
+  contentRise: 45,
   reverse: false,
   entry: { x: 50, y: 76, spread: 150, rotMin: -26, rotMax: 26 },
   crest: { x: 50, y: 70 },
@@ -191,18 +196,35 @@ export function mountHeroPages(): HeroPagesApi | null {
     const dirT = (pt: number) => (config.reverse ? 1 - pt : pt);
     cards.forEach((card, i) => place(card, params[i], dirT(0), ctx)); // initial pose
 
-    // No pin: the hero scrolls normally (no freeze). The animation just scrubs
-    // over `pin`% of scroll, so a large value + scrub makes the effect play out
-    // slowly as you scroll. Begins as soon as the hero reaches the top.
+    const content = hero!.querySelector<HTMLElement>('.hero__content');
+    if (content) gsap.set(content, { yPercent: 0, opacity: 1 }); // reset before (re)build
+
+    // Pinned, but everything keeps moving: the hero locks to the viewport while
+    // the pages animate AND the content (wordmark/tagline/buttons) drifts slowly
+    // up + fades — so it reads as slow-motion scrolling, not a hard freeze. The
+    // effect plays over `pin`% of scroll (bigger = slower), starting at the top.
     tween = gsap.timeline({
       scrollTrigger: {
         trigger: hero!,
         start: 'top top',
         end: `+=${config.pin}%`,
+        pin: true,
         scrub: config.scrub,
+        anticipatePin: 1,
         invalidateOnRefresh: true,
       },
     });
+
+    const total = (config.count - 1) * config.stagger + 1; // full timeline length
+    if (content) {
+      const rise = config.contentRise ?? 45;
+      tween.fromTo(
+        content,
+        { yPercent: 0, opacity: 1 },
+        { yPercent: -rise, opacity: 0.1, ease: 'none', duration: total },
+        0,
+      );
+    }
 
     cards.forEach((card, i) => {
       const proxy = { t: 0 };

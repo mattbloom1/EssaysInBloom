@@ -56,6 +56,7 @@ function serialize(c: HeroPagesConfig): string {
     `  scrub: ${c.scrub},`,
     `  scale: ${c.scale},`,
     `  stagger: ${c.stagger},`,
+    `  contentRise: ${c.contentRise},`,
     `  reverse: ${c.reverse},`,
     `  entry: { x: ${e.x}, y: ${e.y}, spread: ${e.spread}, rotMin: ${e.rotMin}, rotMax: ${e.rotMax} },`,
     `  crest: { x: ${c.crest.x}, y: ${c.crest.y} },`,
@@ -180,6 +181,7 @@ export function mountHeroPagesTuner(api: HeroPagesApi): void {
     { label: 'scrub', min: 0, max: 3, step: 0.1, get: () => config.scrub, set: (v) => (config.scrub = v) },
     { label: 'stagger', min: 0.1, max: 1.5, step: 0.05, get: () => config.stagger, set: (v) => (config.stagger = v) },
     { label: 'scale', min: 0.4, max: 2, step: 0.05, get: () => config.scale, set: (v) => (config.scale = v) },
+    { label: 'rise %', min: 0, max: 120, step: 5, get: () => config.contentRise, set: (v) => (config.contentRise = v) },
   ]);
   addToggle(flow, 'reverse', () => config.reverse, (v) => (config.reverse = v));
 
