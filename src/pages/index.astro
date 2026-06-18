@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Wordmark from '../components/Wordmark.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import StepCard from '../components/StepCard.astro';
 import ServiceCard from '../components/ServiceCard.astro';
@@ -8,17 +9,14 @@ import CtaBand from '../components/CtaBand.astro';
 ---
 
 <Base>
-  <!-- Hero: no center logo; subline + buttons + 3D essay-page drift -->
-  <section class="hero container" aria-label="Introduction">
-    <h1 class="visually-hidden">Essays in Bloom — What's Your Story?</h1>
+  <!-- Pinned hero: scroll locks while ~12 essay pages arc in from the right,
+       over the wordmark, and stack at bottom-left. Pages are injected + driven
+       by src/scripts/hero-pages.ts (homepage-only, reduced-motion safe). -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero__stage" aria-hidden="true"></div>
 
-    <div class="hero__stage" aria-hidden="true">
-      <div class="page-card" data-page="0"></div>
-      <div class="page-card" data-page="1"></div>
-      <div class="page-card" data-page="2"></div>
-    </div>
-
-    <div class="hero__content" data-reveal>
+    <div class="hero__content">
+      <h1 class="hero__wordmark"><Wordmark /></h1>
       <p class="hero__tagline">
         College application essay coaching that turns your real experiences
         into a Common App essay only you could write.
@@ -28,15 +26,6 @@ import CtaBand from '../components/CtaBand.astro';
         <a class="btn btn--secondary lift" href="#approach">See How It Works</a>
       </div>
     </div>
-  </section>
-
-  <!-- Empathy beat -->
-  <section class="container container--narrow section empathy" data-reveal>
-    <h2 class="empathy__heading">Not sure where to start?</h2>
-    <p class="empathy__body">
-      A blank essay box is the hardest part. Together, we find the story that's
-      already yours — and shape it into words admissions officers remember.
-    </p>
   </section>
 
   <!-- The Approach -->
@@ -92,39 +81,16 @@ import CtaBand from '../components/CtaBand.astro';
 </Base>
 
 <script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  // Pinned essay-page arc. Config + rig live in src/scripts/hero-pages.ts —
+  // tune the numbers there (or live, via the dev-only slider panel below).
+  import { mountHeroPages } from '../scripts/hero-pages';
 
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cards = gsap.utils.toArray<HTMLElement>('.page-card');
+  const heroPages = mountHeroPages();
 
-  if (!reduce && cards.length) {
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Resting layout: fan the pages out in depth.
-    const rest = [
-      { x: -160, y: -10, z: -260, ry:  18 },
-      { x:   10, y:  20, z: -120, ry:  -8 },
-      { x:  180, y: -30, z: -360, ry:  26 },
-    ];
-    cards.forEach((card, i) => {
-      const r = rest[i % rest.length];
-      gsap.set(card, { xPercent: -50, yPercent: -50, x: r.x, y: r.y, z: r.z, rotateY: r.ry });
-    });
-
-    // Scrub: pages drift further apart + rotate as the hero scrolls away.
-    gsap.to(cards, {
-      x: (i: number) => rest[i % rest.length].x * 2.2,
-      z: (i: number) => rest[i % rest.length].z - 200,
-      rotateY: (i: number) => rest[i % rest.length].ry * 1.8,
-      yPercent: -90,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.hero',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 0.6,
-      },
-    });
+  // Dev-only live tuner — Vite strips this branch (and the dynamic import) from
+  // production builds. Drag sliders → "Copy" → paste over HERO_PAGES_CONFIG.
+  if (import.meta.env.DEV && heroPages) {
+    (window as unknown as { __heroPages?: unknown }).__heroPages = heroPages;
+    import('../scripts/hero-pages-tuner').then((m) => m.mountHeroPagesTuner(heroPages));
   }
 </script>
