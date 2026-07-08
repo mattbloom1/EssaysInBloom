@@ -18,6 +18,10 @@ Website and brand assets for **Essays in Bloom**, split at the top level:
 
 ## Website
 
+**Live test site:** <https://mattbloom1.github.io/EssaysInBloom/> — deployed
+automatically by GitHub Actions on every push to `main` that touches
+`Website/`.
+
 A fresh Astro scaffold, being rebuilt from scratch:
 
 ```bash
