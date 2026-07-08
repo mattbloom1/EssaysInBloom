@@ -19,7 +19,7 @@ brand styling are wired up per `DESIGN.md`. Everything below is what's left.
 - [ ] **Contact email** — `essaysinbloom@gmail.com` is used in the footer and
   contact page (taken from the letterhead mockup); confirm or correct.
 - [ ] **Social links** — footer Instagram/LinkedIn point to `#`.
-- [ ] **Real testimonials** — quotes + attribution; placeholders are clearly
+- [x] **Real testimonials** — quotes + attribution; placeholders are clearly
   fake (homepage + testimonials page).
 - [ ] **Photography** — About / Coaching / Workshops pages will each want
   imagery. Available in `Brand/Public/Pictures/`: Alison's profile pic and

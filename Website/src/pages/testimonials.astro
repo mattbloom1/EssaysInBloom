@@ -2,6 +2,9 @@
 import Base from '../layouts/Base.astro';
 import PageIntro from '../components/PageIntro.astro';
 import CtaBand from '../components/CtaBand.astro';
+import { testimonials } from '../data/testimonials';
+
+const cardVariants = ['card--soft', 'card--paper', 'card--peri-tint', 'card--accent'];
 ---
 
 <Base title="Testimonials — Essays in Bloom">
@@ -9,11 +12,16 @@ import CtaBand from '../components/CtaBand.astro';
     <PageIntro
       eyebrow="Testimonials"
       title="Stories that bloomed"
-      lede="Placeholder — full testimonial collection from students and parents."
+      lede="Real words from the students and parents Alison has worked with."
     />
-    <section class="section container--narrow container" data-reveal>
-      <div class="card card--paper" data-reveal-child>
-        <p>Page content coming soon.</p>
+    <section class="section container" data-reveal>
+      <div class="bento">
+        {testimonials.map((t, i) => (
+          <figure class={`card ${cardVariants[i % cardVariants.length]} span-3 quote`} data-reveal-child>
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption>{t.attribution}</figcaption>
+          </figure>
+        ))}
       </div>
     </section>
     <CtaBand />
