@@ -57,16 +57,20 @@ git checkout caf1dc6 -- src/                    # restore a whole directory
 The final brand assets that the site served from `static/` were relocated into
 `Public/` so they live with the rest of the brand material:
 
-- `static/logos/` → `Public/Logos/` — final logo set (Full, Full NO Text,
-  Half, Small, Text Only, Favicon Light/Dark)
-- `static/pictures/` → `Public/Pictures/` — profile photo, paper textures,
-  stock photos
+- `static/logos/` → `Brand/Public/Logos/` — final logo set (Full, Full NO
+  Text, Half, Small, Text Only, Favicon Light/Dark)
+- `static/pictures/` → `Brand/Public/Pictures/` — profile photo, paper
+  textures, stock photos
 
 ## What was kept untouched
 
-- `Adobe/` — Illustrator/InDesign source files
-- `Public/Branding and Process/` — brand book PDF, business card and
+- `Brand/Adobe/` — Illustrator/InDesign source files
+- `Brand/Public/Branding and Process/` — brand book PDF, business card and
   letterhead mockups, archived logo explorations (v1–v6)
+
+*(After the reset, the repo was reorganized into two top-level folders:
+`Website/` for the site and `Brand/` for everything else — the paths above
+reflect that.)*
 
 ## Brand values worth carrying into the next site
 

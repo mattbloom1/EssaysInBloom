@@ -4,10 +4,13 @@ Guidance for Claude Code when working in this repository.
 
 ## Project
 
-**Essays in Bloom** — brand assets (logos, colors, typography). A previous
-Astro website was removed for a fresh start; see `WEBSITE-RESET-NOTES.md` for
-what was deleted, where assets moved, and the brand values (palette, fonts) to
-carry into the next site.
+**Essays in Bloom** — website and brand assets, split at the top level:
+
+- `Website/` — the website. The previous Astro site was removed for a fresh
+  start; see `Website/WEBSITE-RESET-NOTES.md` for what was deleted, how to
+  recover it, and the brand values (palette, fonts) to carry into the new
+  build. The new site should be built inside this folder.
+- `Brand/` — everything else: brand and design assets.
 
 ## GitHub
 
@@ -20,11 +23,12 @@ carry into the next site.
 
 ## Conventions
 
-- `Public/` holds brand assets: final logos (`Public/Logos/`), photos and
-  textures (`Public/Pictures/`), and the brand book / mockups / logo archive
-  (`Public/Branding and Process/`).
-- **Adobe source files (`*.ai`, `*.indd`) live in `Adobe/` and are tracked in
-  Git** — commit them alongside other changes. They are large binaries (some
-  20 MB+), so keep an eye on repo size, but do not gitignore them.
+- `Brand/Public/` holds brand assets: final logos (`Brand/Public/Logos/`),
+  photos and textures (`Brand/Public/Pictures/`), and the brand book /
+  mockups / logo archive (`Brand/Public/Branding and Process/`).
+- **Adobe source files (`*.ai`, `*.indd`) live in `Brand/Adobe/` and are
+  tracked in Git** — commit them alongside other changes. They are large
+  binaries (some 20 MB+), so keep an eye on repo size, but do not gitignore
+  them.
 - Fonts are served from the Adobe Fonts (Typekit) kit `npx4mzh`.
 - The local `.claude/` directory is gitignored.
