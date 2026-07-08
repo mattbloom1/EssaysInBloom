@@ -21,6 +21,13 @@ Guidance for Claude Code when working in this repository.
 - **Pre-launch:** committing and pushing directly to `main` is fine without
   asking. Once the site has live viewers, we'll switch to a staging / PR-review
   flow — the user will say when.
+- **Repo is public** (made public 2026-07-08 for GitHub Pages) — everything in
+  it is visible, including `Brand/`.
+- **Test deploys:** every push to `main` touching `Website/` auto-deploys to
+  <https://mattbloom1.github.io/EssaysInBloom/> via
+  `.github/workflows/deploy-pages.yml`. Pages serves under a subpath, so all
+  internal hrefs/srcs must go through `withBase()`
+  (`Website/src/lib/withBase.ts`).
 
 ## Conventions
 
