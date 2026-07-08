@@ -40,6 +40,13 @@
   background: var(--soft-10);
 }
 
+/* Base heading first: variants below override it by source order
+   (.card--x h3 and .card h3 have equal specificity). */
+.card h3 {
+  margin-bottom: var(--space-3);
+  color: var(--color-primary);
+}
+
 .card--paper   { background: color-mix(in srgb, white 55%, var(--soft-linen)); }
 .card--soft    { background: var(--soft-25); }
 .card--accent  { background: var(--accent-10); }
@@ -48,11 +55,6 @@
   color: var(--soft-linen);
 }
 .card--primary h3 { color: var(--soft-linen); }
-
-.card h3 {
-  margin-bottom: var(--space-3);
-  color: var(--color-primary);
-}
 
 /* Edge-to-edge photo card */
 .card--photo {
