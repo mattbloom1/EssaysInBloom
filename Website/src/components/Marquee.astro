@@ -1,33 +1,24 @@
 ---
-interface LogoItem {
-  name: string;
-  logo: string;
-  alt: string;
-}
+import type { School } from '../data/schools';
 
 interface Props {
-  items?: string[];
-  logos?: LogoItem[];
+  logos: School[];
 }
-const { items, logos } = Astro.props;
+const { logos } = Astro.props;
 ---
 
 <div class="marquee" role="presentation">
   <div class="marquee__track">
-    {logos
-      ? logos.map((school) => (
-          <span class="marquee__logo">
-            <img src={school.logo} alt={school.alt} loading="lazy" />
-          </span>
-        ))
-      : items?.map((item) => <span class="marquee__item">{item}</span>)}
+    {logos.map((school) => (
+      <span class="marquee__logo">
+        <img src={school.logo} alt={school.alt} width={school.width} height={school.height} loading="eager" />
+      </span>
+    ))}
     {/* duplicate once so the -50% keyframe loops seamlessly */}
-    {logos
-      ? logos.map((school) => (
-          <span class="marquee__logo" aria-hidden="true">
-            <img src={school.logo} alt="" loading="lazy" />
-          </span>
-        ))
-      : items?.map((item) => <span class="marquee__item" aria-hidden="true">{item}</span>)}
+    {logos.map((school) => (
+      <span class="marquee__logo" aria-hidden="true">
+        <img src={school.logo} alt="" width={school.width} height={school.height} loading="lazy" />
+      </span>
+    ))}
   </div>
 </div>

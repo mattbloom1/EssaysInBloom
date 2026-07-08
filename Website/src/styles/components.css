@@ -107,24 +107,6 @@
   width: max-content;
 }
 
-.marquee__item {
-  font-family: var(--font-subheading);
-  font-weight: var(--weight-subheading);
-  text-transform: uppercase;
-  font-size: var(--text-lg);
-  white-space: nowrap;
-  color: var(--color-primary);
-  display: flex;
-  align-items: center;
-  gap: var(--space-8);
-}
-
-.marquee__item::after {
-  content: "✦";
-  color: var(--periwinkle);
-  font-size: var(--text-sm);
-}
-
 .marquee__logo {
   display: flex;
   align-items: center;
@@ -138,7 +120,9 @@
   object-fit: contain;
   /* grayscale (not brightness(0)) so seals with opaque white fills keep their
      internal linework — brightness(0) flattens any two opaque colors to the
-     same solid black, turning detailed seals into unrecognizable blobs. */
+     same solid black, turning detailed seals into unrecognizable blobs.
+     Tuned against the current 10 dark-ink logos — eyeball any newly added
+     school's logo in the live marquee before shipping it. */
   filter: grayscale(1) contrast(1.6) brightness(0.85) opacity(0.85);
 }
 

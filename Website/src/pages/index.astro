@@ -8,8 +8,7 @@ import { testimonials } from '../data/testimonials';
 
 /* NOTE: all copy below is placeholder — rewrite freely. */
 
-// Curated for variety: student + parent voices, three different schools.
-const homepageTestimonials = [testimonials[0], testimonials[1], testimonials[5]];
+const homepageTestimonials = testimonials.filter((t) => t.featured);
 const homepageCardVariants = ['card--soft', 'card--peri-tint', 'card--paper'];
 
 const steps = [
@@ -142,7 +141,7 @@ const steps = [
         </div>
         <div class="bento">
           {homepageTestimonials.map((t, i) => (
-            <figure class={`card ${homepageCardVariants[i]} span-2 quote`} data-reveal-child>
+            <figure class={`card ${homepageCardVariants[i % homepageCardVariants.length]} span-2 quote`} data-reveal-child>
               <blockquote>“{t.quote}”</blockquote>
               <figcaption>{t.attribution}</figcaption>
             </figure>
