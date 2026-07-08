@@ -58,6 +58,19 @@ color-mix(in srgb, var(--evergreen) 25%, var(--soft-linen))
 (The old site tokenized these as `--primary-100/75/50/25/10` etc. — recoverable
 via `WEBSITE-RESET-NOTES.md` if we want the full ramp back.)
 
+### Periwinkle experiment (not in the brand book)
+
+**Trial color, reversible on request:** Periwinkle / lavender blue
+`#8B8FD4` (`--periwinkle`, tints `--peri-25`/`--peri-10`).
+
+- **Dark text only.** Periwinkle on paper is ~2.5:1 — it fails WCAG even for
+  large text, so never use it *as* text color on light backgrounds.
+  Evergreen or Ink text *on* solid periwinkle passes AA.
+- Current usage: one bento card (`.card--peri`), one testimonial card tint
+  (`.card--peri-tint`), marquee separators, homepage step numbers.
+- **To revert completely:**
+  `git revert $(git log --grep="periwinkle" --format=%H -1)`
+
 ### Contrast rules
 
 - Ink on Paper and Primary on Paper are the workhorse text pairings — both

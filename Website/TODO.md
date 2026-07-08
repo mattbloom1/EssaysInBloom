@@ -6,6 +6,12 @@ brand styling are wired up per `DESIGN.md`. Everything below is what's left.
 
 ## Needs input from Matt
 
+- [ ] **Periwinkle experiment — keep or revert?** `#8B8FD4` was trialed as a
+  pop color (one bento card, a testimonial tint, marquee separators, step
+  numbers). It's a single commit; to undo everything:
+  `git revert $(git log --grep="periwinkle" --format=%H -1)`
+  Details in `DESIGN.md` → "Periwinkle experiment".
+
 - [ ] **Typekit weights** — add The Seasons **Light (300)** and Futura PT
   **Demibold (600)** to Adobe Fonts kit `npx4mzh`, then bump
   `--weight-heading` to 300 and `--weight-subheading` to 600 in

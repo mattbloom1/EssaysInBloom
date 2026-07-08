@@ -56,6 +56,13 @@
 }
 .card--primary h3 { color: var(--soft-linen); }
 
+/* Experimental periwinkle (dark text only — fails contrast on paper) */
+.card--peri {
+  background: var(--periwinkle);
+  color: var(--color-primary);
+}
+.card--peri-tint { background: var(--peri-25); }
+
 /* Edge-to-edge photo card */
 .card--photo {
   padding: 0;
@@ -100,7 +107,7 @@
 
 .marquee__item::after {
   content: "✦";
-  color: var(--color-soft);
+  color: var(--periwinkle);
   font-size: var(--text-sm);
 }
 

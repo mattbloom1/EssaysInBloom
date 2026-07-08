@@ -20,6 +20,13 @@
   --eggshell:      #F2EAD8;  /* soft             */
   /* (on the dark variant, ink = --soft-linen) */
 
+  /* --- EXPERIMENTAL: periwinkle pop (not in the brand book) ---
+     Trial color — see DESIGN.md "Periwinkle experiment" for usage
+     rules and the one-commit revert. */
+  --periwinkle: #8B8FD4;
+  --peri-25: color-mix(in srgb, var(--periwinkle) 25%, var(--soft-linen));
+  --peri-10: color-mix(in srgb, var(--periwinkle) 10%, var(--soft-linen));
+
   /* --- Semantic color roles (light theme is the default) --- */
   --color-paper:   var(--soft-linen);
   --color-ink:     var(--shadow-grey);
