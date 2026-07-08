@@ -1,36 +1,16 @@
 # Essays in Bloom
 
-Website and brand assets for **Essays in Bloom**.
+Brand assets for **Essays in Bloom**.
 
-This repo currently holds the brand foundation and typography experiments that
-the production site will be built on.
+A previous Astro website was removed for a fresh start — see
+`WEBSITE-RESET-NOTES.md` for what was deleted and how to recover it.
 
 ## Contents
 
 | Path | Purpose |
 |------|---------|
-| `index.html` | Simple landing page used for typography A/B testing |
-| `brand.html` | Master brand sheet — all logo options stacked + colors + type scale |
-| `brand.jpg` | Exported full-page JPG of the brand sheet |
-| `export-jpg.mjs` | Script that renders the brand sheet to JPG |
-| `Public/Logos/` | Logo + wordmark SVGs (options v1–v6) |
-| `Public/Pictures/` | Image assets |
-| `Illustrator/` | Adobe Illustrator source files (not tracked — see `.gitignore`) |
-
-## Exporting the brand sheets to JPG
-
-Requires Node and a local install of Google Chrome.
-
-```bash
-npm install            # installs playwright-core
-node export-jpg.mjs    # writes brand.jpg
-```
-
-## Viewing locally
-
-These are static HTML files. Open any of them directly in a browser, or serve
-the folder:
-
-```bash
-npx serve .
-```
+| `Adobe/` | Illustrator / InDesign source files (tracked in Git) |
+| `Public/Logos/` | Final logo set (SVG) |
+| `Public/Pictures/` | Photos and textures |
+| `Public/Branding and Process/` | Brand book PDF, mockups, archived logo explorations |
+| `WEBSITE-RESET-NOTES.md` | Record of the removed website + brand values to carry forward |

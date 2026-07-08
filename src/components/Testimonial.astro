@@ -1,8 +1,0 @@
----
-interface Props { index: number; quote: string; attribution: string; placeholder?: boolean; }
-const { index, quote, attribution, placeholder = false } = Astro.props;
----
-<figure class="testimonial" class:list={[{ 'testimonial--placeholder': placeholder }]} data-reveal style={`--i:${index}`}>
-  <blockquote class="testimonial__quote">{quote}</blockquote>
-  <figcaption class="testimonial__by">{attribution}</figcaption>
-</figure>
