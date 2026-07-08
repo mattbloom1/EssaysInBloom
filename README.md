@@ -4,7 +4,7 @@ Website and brand assets for **Essays in Bloom**, split at the top level:
 
 | Path | Purpose |
 |------|---------|
-| `Website/` | The website (being rebuilt from scratch — currently just the reset notes) |
+| `Website/` | The website — Astro 6, static output |
 | `Brand/` | Everything else: brand and design assets |
 
 ## Brand contents
@@ -18,6 +18,20 @@ Website and brand assets for **Essays in Bloom**, split at the top level:
 
 ## Website
 
-The previous Astro site was removed for a fresh start — see
+A fresh Astro scaffold, being rebuilt from scratch:
+
+```bash
+cd Website
+npm install
+npm run dev      # local dev server
+npm run build    # static HTML to Website/dist/
+```
+
+Routes live in `Website/src/pages/`, the shared shell in
+`Website/src/layouts/Base.astro`, styles in `Website/src/styles/` (brand
+palette and fonts are tokens in `tokens.css`), and web-served assets in
+`Website/static/`.
+
+The previous site was removed for a fresh start — see
 `Website/WEBSITE-RESET-NOTES.md` for what was deleted, how to recover it, and
-the brand values (palette, fonts) to carry into the new build.
+the brand values carried into this build.

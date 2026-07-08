@@ -6,10 +6,9 @@ Guidance for Claude Code when working in this repository.
 
 **Essays in Bloom** — website and brand assets, split at the top level:
 
-- `Website/` — the website. The previous Astro site was removed for a fresh
-  start; see `Website/WEBSITE-RESET-NOTES.md` for what was deleted, how to
-  recover it, and the brand values (palette, fonts) to carry into the new
-  build. The new site should be built inside this folder.
+- `Website/` — the website: a fresh **Astro 6** scaffold (static output). The
+  previous site was removed for a fresh start; see
+  `Website/WEBSITE-RESET-NOTES.md` for what was deleted and how to recover it.
 - `Brand/` — everything else: brand and design assets.
 
 ## GitHub
@@ -23,6 +22,14 @@ Guidance for Claude Code when working in this repository.
 
 ## Conventions
 
+- **Website** (run npm commands from inside `Website/`): `npm run dev` to
+  serve; `npm run build` outputs static HTML to `Website/dist/`. Routes in
+  `src/pages/*.astro`; shared shell (head, fonts) in `src/layouts/Base.astro`;
+  components in `src/components/`; styles in `src/styles/` (`main.css` imports
+  the rest; brand palette/fonts are CSS custom properties in `tokens.css`).
+  Web-served assets live in `Website/static/` (Astro's `publicDir`) — copy
+  what the site needs from `Brand/` into there; `Brand/` itself is never
+  served.
 - `Brand/Public/` holds brand assets: final logos (`Brand/Public/Logos/`),
   photos and textures (`Brand/Public/Pictures/`), and the brand book /
   mockups / logo archive (`Brand/Public/Branding and Process/`).

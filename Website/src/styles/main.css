@@ -1,0 +1,10 @@
+/* Entry point — imports every stylesheet, in order. */
+
+@import './tokens.css';
+@import './reset.css';
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}

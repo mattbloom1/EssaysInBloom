@@ -1,0 +1,50 @@
+/* ============================================================
+   Design Tokens — Essays in Bloom
+   Brand palette and typography from the brand book.
+   (The old site's full token set — spacing, motion, tints — is
+   recoverable via Website/WEBSITE-RESET-NOTES.md.)
+   ============================================================ */
+
+:root {
+
+  /* --- Brand palette (named swatches from the brand book) --- */
+  /* Light variant */
+  --soft-linen:    #F2EDE3;  /* paper   */
+  --shadow-grey:   #2B2622;  /* ink     */
+  --evergreen:     #133430;  /* primary */
+  --hunter-green:  #29603D;  /* accent  */
+  --light-bronze:  #E0A98D;  /* soft    */
+  /* Dark variant */
+  --dark-coffee:   #2A2119;  /* paper            */
+  --cinnamon-wood: #B5654A;  /* primary          */
+  --burnt-peach:   #E2754E;  /* accent           */
+  --eggshell:      #F2EAD8;  /* soft             */
+  /* (on the dark variant, ink = --soft-linen) */
+
+  /* --- Semantic color roles (light theme is the default) --- */
+  --color-paper:   var(--soft-linen);
+  --color-ink:     var(--shadow-grey);
+  --color-primary: var(--evergreen);
+  --color-accent:  var(--hunter-green);
+  --color-soft:    var(--light-bronze);
+
+  /* --- Typography --- */
+  /* Loaded via the Adobe Fonts (Typekit) kit npx4mzh, linked in Base.astro.
+     Names are the Adobe web font-family strings, not the display names. */
+  --font-display:    "artifex-hand-cf", Georgia, "Times New Roman", serif;
+  --font-heading:    "the-seasons", Georgia, "Times New Roman", serif;
+  --font-subheading: "futura-pt", "Century Gothic", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body:       "futura-pt", "Century Gothic", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+
+}
+
+/* --- Dark variant ---
+   Remaps the semantic roles to the dark palette. Opt in by setting
+   data-theme="dark" on <html>. */
+[data-theme="dark"] {
+  --color-paper:   var(--dark-coffee);
+  --color-ink:     var(--soft-linen);
+  --color-primary: var(--cinnamon-wood);
+  --color-accent:  var(--burnt-peach);
+  --color-soft:    var(--eggshell);
+}
