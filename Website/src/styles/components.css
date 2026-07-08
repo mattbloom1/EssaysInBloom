@@ -75,6 +75,20 @@
   object-fit: cover;
 }
 
+.quote blockquote {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-md);
+  line-height: 1.5;
+}
+
+.quote figcaption {
+  font-family: var(--font-subheading);
+  font-weight: var(--weight-subheading);
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+}
+
 /* --- Link underline sweep --- */
 .link {
   color: inherit;

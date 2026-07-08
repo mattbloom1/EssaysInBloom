@@ -4,8 +4,13 @@ import { withBase } from '../lib/withBase';
 import Marquee from '../components/Marquee.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { schools } from '../data/schools';
+import { testimonials } from '../data/testimonials';
 
 /* NOTE: all copy below is placeholder — rewrite freely. */
+
+// Curated for variety: student + parent voices, three different schools.
+const homepageTestimonials = [testimonials[0], testimonials[1], testimonials[5]];
+const homepageCardVariants = ['card--soft', 'card--peri-tint', 'card--paper'];
 
 const steps = [
   {
@@ -136,22 +141,16 @@ const steps = [
           <h2 data-reveal-child>Stories that bloomed</h2>
         </div>
         <div class="bento">
-          <!-- TODO: real testimonials -->
-          <figure class="card card--soft span-3 quote" data-reveal-child>
-            <blockquote>
-              “Placeholder testimonial — a few sentences from a student or
-              parent about working together.”
-            </blockquote>
-            <figcaption>Student, Class of 2026</figcaption>
-          </figure>
-          <figure class="card card--peri-tint span-3 quote" data-reveal-child>
-            <blockquote>
-              “Placeholder testimonial — another voice, ideally a contrasting
-              perspective (parent, different school year).”
-            </blockquote>
-            <figcaption>Parent</figcaption>
-          </figure>
+          {homepageTestimonials.map((t, i) => (
+            <figure class={`card ${homepageCardVariants[i]} span-2 quote`} data-reveal-child>
+              <blockquote>“{t.quote}”</blockquote>
+              <figcaption>{t.attribution}</figcaption>
+            </figure>
+          ))}
         </div>
+        <p class="testimonials__more" data-reveal-child>
+          <a href={withBase('/testimonials/')} class="btn btn--soft">Read more stories</a>
+        </p>
       </div>
     </section>
 
@@ -210,6 +209,11 @@ const steps = [
     color: var(--color-primary);
   }
 
+  .testimonials__more {
+    margin-top: var(--space-8);
+    text-align: center;
+  }
+
   .step {
     display: grid;
     gap: var(--space-2);
@@ -220,20 +224,6 @@ const steps = [
     font-family: var(--font-heading);
     font-size: var(--text-2xl);
     color: var(--periwinkle);
-  }
-
-  .quote blockquote {
-    margin: 0 0 var(--space-4);
-    font-size: var(--text-md);
-    line-height: 1.5;
-  }
-
-  .quote figcaption {
-    font-family: var(--font-subheading);
-    font-weight: var(--weight-subheading);
-    text-transform: uppercase;
-    font-size: var(--text-sm);
-    color: var(--color-accent);
   }
 
   @media (max-width: 900px) {
