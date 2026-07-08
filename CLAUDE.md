@@ -6,9 +6,11 @@ Guidance for Claude Code when working in this repository.
 
 **Essays in Bloom** — website and brand assets, split at the top level:
 
-- `Website/` — the website: a fresh **Astro 6** scaffold (static output). The
-  previous site was removed for a fresh start; see
-  `Website/WEBSITE-RESET-NOTES.md` for what was deleted and how to recover it.
+- `Website/` — the website: **Astro 6** (static output), scaffolded with all
+  routes, brand styling, and GSAP motion. Read `Website/DESIGN.md` (design
+  system + styling direction) and `Website/TODO.md` (current state, open
+  items) before working on it. `Website/WEBSITE-RESET-NOTES.md` records the
+  previous site's removal and how to recover it.
 - `Brand/` — everything else: brand and design assets.
 
 ## GitHub
