@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../lib/withBase';
+
 interface Props {
   title?: string;
   buttonLabel?: string;
@@ -7,7 +9,7 @@ interface Props {
 const {
   title = 'Ready to grow your story?',
   buttonLabel = 'Book a free consult',
-  buttonHref = '/contact/',
+  buttonHref = withBase('/contact/'),
 } = Astro.props;
 ---
 

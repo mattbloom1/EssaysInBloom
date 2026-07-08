@@ -1,5 +1,6 @@
 ---
 import '../styles/main.css';
+import { withBase } from '../lib/withBase';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -21,8 +22,8 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href="/logos/favicon-light.svg" media="(prefers-color-scheme: light)" />
-    <link rel="icon" href="/logos/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href={withBase('/logos/favicon-light.svg')} media="(prefers-color-scheme: light)" />
+    <link rel="icon" href={withBase('/logos/favicon-dark.svg')} media="(prefers-color-scheme: dark)" />
     <link rel="stylesheet" href="https://use.typekit.net/npx4mzh.css" />
   </head>
   <body>

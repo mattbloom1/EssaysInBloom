@@ -39,8 +39,14 @@ brand styling are wired up per `DESIGN.md`. Everything below is what's left.
 - [ ] **Dark theme** — tokens support it (`data-theme="dark"` remaps roles)
   but there's no toggle and it's untested.
 - [ ] **SEO/meta** — per-page descriptions, OG images, sitemap.
-- [ ] **Deployment** — no host chosen yet; output is static (`npm run build`
-  → `dist/`), so anything works (Netlify, Vercel, Cloudflare Pages, ...).
+- [x] **Deployment (test)** — GitHub Pages via
+  `.github/workflows/deploy-pages.yml`: every push to `main` that touches
+  `Website/` deploys to <https://mattbloom1.github.io/EssaysInBloom/>.
+  One-time setup: repo **Settings → Pages → Source: "GitHub Actions"** (and
+  the repo must be public unless the account has GitHub Pro). Links use
+  `withBase()` (`src/lib/withBase.ts`) because Pages serves under a subpath —
+  use it for every internal href/src. For real launch, revisit hosting
+  (custom domain; Netlify/Vercel/Cloudflare or Pages + CNAME).
 
 ## Conventions to keep (see DESIGN.md for the full spec)
 

@@ -1,26 +1,28 @@
 ---
+import { withBase } from '../lib/withBase';
+
 const year = new Date().getFullYear();
 
 const nav = [
-  { href: '/about/', label: 'About' },
-  { href: '/approach/', label: 'Approach' },
-  { href: '/coaching/', label: 'Coaching' },
-  { href: '/workshops/', label: 'Workshops' },
-  { href: '/testimonials/', label: 'Testimonials' },
-  { href: '/contact/', label: 'Contact' },
+  { href: withBase('/about/'), label: 'About' },
+  { href: withBase('/approach/'), label: 'Approach' },
+  { href: withBase('/coaching/'), label: 'Coaching' },
+  { href: withBase('/workshops/'), label: 'Workshops' },
+  { href: withBase('/testimonials/'), label: 'Testimonials' },
+  { href: withBase('/contact/'), label: 'Contact' },
 ];
 
 const legal = [
-  { href: '/terms/', label: 'Terms of Service' },
-  { href: '/privacy/', label: 'Privacy Policy' },
-  { href: '/accessibility/', label: 'Accessibility' },
+  { href: withBase('/terms/'), label: 'Terms of Service' },
+  { href: withBase('/privacy/'), label: 'Privacy Policy' },
+  { href: withBase('/accessibility/'), label: 'Accessibility' },
 ];
 ---
 
 <footer class="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <img src="/logos/half-cream.svg" alt="Essays in Bloom" width="167" height="60" />
+      <img src={withBase('/logos/half-cream.svg')} alt="Essays in Bloom" width="167" height="60" />
       <p class="footer__tagline">What’s Your Story?</p>
     </div>
     <nav class="footer__col" aria-label="Footer">

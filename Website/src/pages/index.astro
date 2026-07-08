@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/withBase';
 import Marquee from '../components/Marquee.astro';
 import CtaBand from '../components/CtaBand.astro';
 
@@ -53,12 +54,12 @@ const steps = [
             admissions officers exactly why you belong.
           </p>
           <div class="hero__actions" data-hero-actions>
-            <a href="/contact/" class="btn btn--primary">Book a free consult</a>
-            <a href="/approach/" class="btn btn--soft">How it works</a>
+            <a href={withBase('/contact/')} class="btn btn--primary">Book a free consult</a>
+            <a href={withBase('/approach/')} class="btn btn--soft">How it works</a>
           </div>
         </div>
         <div class="hero__mark" aria-hidden="true">
-          <img src="/logos/mark.svg" alt="" width="440" height="242" loading="eager" />
+          <img src={withBase('/logos/mark.svg')} alt="" width="440" height="242" loading="eager" />
         </div>
       </div>
     </section>
@@ -92,7 +93,7 @@ const steps = [
           </article>
           <article class="card card--photo span-2" data-reveal-child>
             <img
-              src="/pictures/writing-closeup.jpg"
+              src={withBase('/pictures/writing-closeup.jpg')}
               alt="A student writing by hand"
               width="800"
               height="600"

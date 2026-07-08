@@ -1,10 +1,12 @@
 ---
+import { withBase } from '../lib/withBase';
+
 const nav = [
-  { href: '/about/', label: 'About' },
-  { href: '/approach/', label: 'Approach' },
-  { href: '/coaching/', label: 'Coaching' },
-  { href: '/workshops/', label: 'Workshops' },
-  { href: '/testimonials/', label: 'Testimonials' },
+  { href: withBase('/about/'), label: 'About' },
+  { href: withBase('/approach/'), label: 'Approach' },
+  { href: withBase('/coaching/'), label: 'Coaching' },
+  { href: withBase('/workshops/'), label: 'Workshops' },
+  { href: withBase('/testimonials/'), label: 'Testimonials' },
 ];
 
 const path = Astro.url.pathname;
@@ -13,8 +15,8 @@ const isActive = (href: string) => path === href || path === href.replace(/\/$/,
 
 <header class="header">
   <div class="container header__bar">
-    <a href="/" class="header__logo" aria-label="Essays in Bloom — home">
-      <img src="/logos/half.svg" alt="Essays in Bloom" width="167" height="60" />
+    <a href={withBase('/')} class="header__logo" aria-label="Essays in Bloom — home">
+      <img src={withBase('/logos/half.svg')} alt="Essays in Bloom" width="167" height="60" />
     </a>
     <nav class="header__nav" aria-label="Main">
       {nav.map(({ href, label }) => (
@@ -23,7 +25,7 @@ const isActive = (href: string) => path === href || path === href.replace(/\/$/,
         </a>
       ))}
     </nav>
-    <a href="/contact/" class="btn btn--primary header__cta">Contact</a>
+    <a href={withBase('/contact/')} class="btn btn--primary header__cta">Contact</a>
   </div>
 </header>
 
