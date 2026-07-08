@@ -44,8 +44,7 @@ brand styling are wired up per `DESIGN.md`. Everything below is what's left.
   `Website/` deploys to <https://mattbloom1.github.io/EssaysInBloom/>.
   The repo was made public (2026-07-08) so Pages works on the free plan —
   note that everything in the repo is now visible, including `Brand/`.
-  If Pages isn't already enabled: **Settings → Pages → Source: "GitHub
-  Actions"**. Links use
+  Pages source is set to "GitHub Actions" in repo settings. Links use
   `withBase()` (`src/lib/withBase.ts`) because Pages serves under a subpath —
   use it for every internal href/src. For real launch, revisit hosting
   (custom domain; Netlify/Vercel/Cloudflare or Pages + CNAME).
