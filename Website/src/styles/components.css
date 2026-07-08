@@ -136,11 +136,14 @@
   width: auto;
   max-width: 9rem;
   object-fit: contain;
-  filter: brightness(0) opacity(0.65);
+  /* grayscale (not brightness(0)) so seals with opaque white fills keep their
+     internal linework — brightness(0) flattens any two opaque colors to the
+     same solid black, turning detailed seals into unrecognizable blobs. */
+  filter: grayscale(1) contrast(1.6) brightness(0.85) opacity(0.85);
 }
 
 [data-theme="dark"] .marquee__logo img {
-  filter: brightness(0) invert(1) opacity(0.75);
+  filter: grayscale(1) contrast(1.6) brightness(1.15) invert(1) opacity(0.9);
 }
 
 /* --- Motion (hovers, reveals, marquee) --- */
