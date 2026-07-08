@@ -1,0 +1,70 @@
+---
+const nav = [
+  { href: '/about/', label: 'About' },
+  { href: '/approach/', label: 'Approach' },
+  { href: '/coaching/', label: 'Coaching' },
+  { href: '/workshops/', label: 'Workshops' },
+  { href: '/testimonials/', label: 'Testimonials' },
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path === href.replace(/\/$/, '');
+---
+
+<header class="header">
+  <div class="container header__bar">
+    <a href="/" class="header__logo" aria-label="Essays in Bloom — home">
+      <img src="/logos/half.svg" alt="Essays in Bloom" width="167" height="60" />
+    </a>
+    <nav class="header__nav" aria-label="Main">
+      {nav.map(({ href, label }) => (
+        <a href={href} class="link" aria-current={isActive(href) ? 'page' : undefined}>
+          {label}
+        </a>
+      ))}
+    </nav>
+    <a href="/contact/" class="btn btn--primary header__cta">Contact</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: color-mix(in srgb, var(--color-paper) 88%, transparent);
+    backdrop-filter: blur(12px);
+  }
+
+  .header__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding-block: var(--space-4);
+  }
+
+  .header__logo img {
+    height: 44px;
+    width: auto;
+  }
+
+  .header__nav {
+    display: flex;
+    gap: var(--space-6);
+    margin-inline-start: auto;
+    font-family: var(--font-subheading);
+    font-weight: var(--weight-subheading);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 820px) {
+    .header__nav {
+      display: none; /* mobile menu TBD */
+    }
+    .header__cta {
+      margin-inline-start: auto;
+    }
+  }
+</style>

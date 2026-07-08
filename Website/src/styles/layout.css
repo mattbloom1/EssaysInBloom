@@ -1,0 +1,57 @@
+/* Containers, sections, bento grid */
+
+.container {
+  width: min(100% - 3rem, var(--container-max));
+  margin-inline: auto;
+}
+
+.container--narrow {
+  width: min(100% - 3rem, var(--container-narrow));
+}
+
+.section {
+  padding-block: var(--space-20);
+}
+
+.section__head {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-12);
+  justify-items: start;
+}
+
+/* Bento grid — mixed card sizes, collapses on small screens */
+.bento {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.bento > * {
+  grid-column: span 2;
+}
+
+.bento .span-3 { grid-column: span 3; }
+.bento .span-4 { grid-column: span 4; }
+.bento .span-6 { grid-column: span 6; }
+
+@media (max-width: 900px) {
+  .bento > *,
+  .bento .span-3,
+  .bento .span-4 {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento > *,
+  .bento .span-3,
+  .bento .span-4,
+  .bento .span-6 {
+    grid-column: span 6;
+  }
+
+  .section {
+    padding-block: var(--space-16);
+  }
+}

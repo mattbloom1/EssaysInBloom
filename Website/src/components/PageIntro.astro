@@ -1,0 +1,28 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lede?: string;
+}
+const { eyebrow, title, lede } = Astro.props;
+---
+
+<section class="section intro" data-hero>
+  <div class="container">
+    {eyebrow && <p class="eyebrow" data-hero-copy>{eyebrow}</p>}
+    <h1 data-hero-title>{title}</h1>
+    {lede && <p class="lede" data-hero-copy>{lede}</p>}
+  </div>
+</section>
+
+<style>
+  .intro .container {
+    display: grid;
+    gap: var(--space-6);
+    justify-items: start;
+  }
+
+  .intro {
+    padding-bottom: var(--space-12);
+  }
+</style>

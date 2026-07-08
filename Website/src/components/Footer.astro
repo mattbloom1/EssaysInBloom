@@ -1,0 +1,107 @@
+---
+const year = new Date().getFullYear();
+
+const nav = [
+  { href: '/about/', label: 'About' },
+  { href: '/approach/', label: 'Approach' },
+  { href: '/coaching/', label: 'Coaching' },
+  { href: '/workshops/', label: 'Workshops' },
+  { href: '/testimonials/', label: 'Testimonials' },
+  { href: '/contact/', label: 'Contact' },
+];
+
+const legal = [
+  { href: '/terms/', label: 'Terms of Service' },
+  { href: '/privacy/', label: 'Privacy Policy' },
+  { href: '/accessibility/', label: 'Accessibility' },
+];
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <img src="/logos/half-cream.svg" alt="Essays in Bloom" width="167" height="60" />
+      <p class="footer__tagline">What’s Your Story?</p>
+    </div>
+    <nav class="footer__col" aria-label="Footer">
+      <h3>Explore</h3>
+      {nav.map(({ href, label }) => <a class="link" href={href}>{label}</a>)}
+    </nav>
+    <div class="footer__col">
+      <h3>Say hello</h3>
+      <a class="link" href="mailto:essaysinbloom@gmail.com">essaysinbloom@gmail.com</a>
+      {/* TODO: real social links */}
+      <a class="link" href="#">Instagram</a>
+      <a class="link" href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="container footer__base">
+    <p>© {year} Essays in Bloom. All rights reserved.</p>
+    <div class="footer__legal">
+      {legal.map(({ href, label }) => <a class="link" href={href}>{label}</a>)}
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-primary);
+    color: var(--soft-linen);
+    margin-top: var(--space-20);
+    padding-block: var(--space-16) var(--space-8);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-12);
+    padding-bottom: var(--space-12);
+  }
+
+  .footer__brand img {
+    height: 52px;
+    width: auto;
+  }
+
+  .footer__tagline {
+    margin-top: var(--space-4);
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    color: var(--light-bronze);
+  }
+
+  .footer__col {
+    display: grid;
+    gap: var(--space-2);
+    justify-items: start;
+    align-content: start;
+  }
+
+  .footer__col h3 {
+    color: var(--light-bronze);
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-2);
+  }
+
+  .footer__base {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: space-between;
+    padding-top: var(--space-6);
+    font-size: var(--text-sm);
+    color: color-mix(in srgb, var(--soft-linen) 75%, transparent);
+  }
+
+  .footer__legal {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  @media (max-width: 720px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+  }
+</style>

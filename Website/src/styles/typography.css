@@ -1,0 +1,68 @@
+/* Type system — see Website/DESIGN.md.
+   Tracking is 0 everywhere per the brand book. */
+
+body {
+  font-family: var(--font-body);
+  font-weight: var(--weight-body);
+  font-size: var(--text-md);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+/* Big, confident, uppercase display headings (Futura PT Demibold caps) */
+h1,
+.display {
+  font-family: var(--font-subheading);
+  font-weight: var(--weight-subheading);
+  text-transform: uppercase;
+  font-size: var(--text-5xl);
+  color: var(--color-primary);
+}
+
+/* Serif brand register (The Seasons) for section headings */
+h2 {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-heading);
+  font-size: var(--text-3xl);
+  color: var(--color-primary);
+}
+
+h3 {
+  font-family: var(--font-subheading);
+  font-weight: var(--weight-subheading);
+  text-transform: uppercase;
+  font-size: var(--text-lg);
+}
+
+p {
+  margin: 0;
+}
+
+/* Small uppercase kicker above headings */
+.eyebrow {
+  font-family: var(--font-subheading);
+  font-weight: var(--weight-subheading);
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+}
+
+/* Roomy intro paragraph */
+.lede {
+  font-size: var(--text-lg);
+  line-height: 1.65;
+  max-width: 42ch;
+}
+
+/* Playful emphasis via color, not italics */
+.tint {
+  color: var(--color-accent);
+}

@@ -1,0 +1,14 @@
+---
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+---
+
+<div class="marquee" role="presentation">
+  <div class="marquee__track">
+    {items.map((item) => <span class="marquee__item">{item}</span>)}
+    {/* duplicate once so the -50% keyframe loops seamlessly */}
+    {items.map((item) => <span class="marquee__item" aria-hidden="true">{item}</span>)}
+  </div>
+</div>

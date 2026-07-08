@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+---
+
+<Base title="Contact — Essays in Bloom">
+  <main>
+    <PageIntro
+      eyebrow="Contact"
+      title="Let's talk"
+      lede="Tell us a little about where you are in the application process, and we'll set up a free consult."
+    />
+    <section class="section container container--narrow" data-reveal>
+      <div class="card card--soft contact-card" data-reveal-child>
+        {/* TODO: real contact form / scheduling link */}
+        <h3>For now, email works best</h3>
+        <p>A contact form (or scheduling link) will live here.</p>
+        <a href="mailto:essaysinbloom@gmail.com" class="btn btn--primary">
+          essaysinbloom@gmail.com
+        </a>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .contact-card {
+    display: grid;
+    gap: var(--space-4);
+    justify-items: start;
+  }
+</style>

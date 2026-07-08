@@ -1,5 +1,7 @@
 ---
 import '../styles/main.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
@@ -8,7 +10,7 @@ interface Props {
 
 const {
   title = 'Essays in Bloom',
-  description = 'Essays in Bloom',
+  description = 'College application essay coaching — what’s your story?',
 } = Astro.props;
 ---
 
@@ -24,6 +26,11 @@ const {
     <link rel="stylesheet" href="https://use.typekit.net/npx4mzh.css" />
   </head>
   <body>
+    <Header />
     <slot />
+    <Footer />
+    <script>
+      import '../scripts/motion';
+    </script>
   </body>
 </html>

@@ -2,9 +2,11 @@
 
 @import './tokens.css';
 @import './reset.css';
+@import './typography.css';
+@import './layout.css';
+@import './components.css';
 
 body {
   background: var(--color-paper);
   color: var(--color-ink);
-  font-family: var(--font-body);
 }

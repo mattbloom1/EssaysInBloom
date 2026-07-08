@@ -1,0 +1,148 @@
+/* Shared component styles — buttons, cards, links, marquee.
+   Separation via background shifts and radius, never hard borders. */
+
+/* --- Pill buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.9em 1.8em;
+  border: 0;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-subheading);
+  font-weight: var(--weight-subheading);
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--soft-linen);
+}
+
+.btn--soft {
+  background: var(--accent-10);
+  color: var(--color-primary);
+}
+
+.btn--cream {
+  background: var(--soft-linen);
+  color: var(--color-primary);
+}
+
+/* --- Cards --- */
+.card {
+  border-radius: var(--radius-card);
+  padding: var(--space-8);
+  background: var(--soft-10);
+}
+
+.card--paper   { background: color-mix(in srgb, white 55%, var(--soft-linen)); }
+.card--soft    { background: var(--soft-25); }
+.card--accent  { background: var(--accent-10); }
+.card--primary {
+  background: var(--color-primary);
+  color: var(--soft-linen);
+}
+.card--primary h3 { color: var(--soft-linen); }
+
+.card h3 {
+  margin-bottom: var(--space-3);
+  color: var(--color-primary);
+}
+
+/* Edge-to-edge photo card */
+.card--photo {
+  padding: 0;
+  overflow: hidden;
+  display: grid;
+}
+.card--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Link underline sweep --- */
+.link {
+  color: inherit;
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat;
+}
+
+/* --- Marquee (infinite ticker) --- */
+.marquee {
+  overflow: hidden;
+}
+
+.marquee__track {
+  display: flex;
+  gap: var(--space-8);
+  width: max-content;
+}
+
+.marquee__item {
+  font-family: var(--font-subheading);
+  font-weight: var(--weight-subheading);
+  text-transform: uppercase;
+  font-size: var(--text-lg);
+  white-space: nowrap;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.marquee__item::after {
+  content: "✦";
+  color: var(--color-soft);
+  font-size: var(--text-sm);
+}
+
+/* --- Motion (hovers, reveals, marquee) --- */
+@media (prefers-reduced-motion: no-preference) {
+
+  .card,
+  .btn {
+    transition:
+      transform var(--dur-fast) var(--ease-spring),
+      box-shadow var(--dur-fast) var(--ease-out-soft);
+  }
+
+  .card--hover:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn:hover  { transform: scale(1.05); }
+  .btn:active { transform: scale(0.97); transition-duration: 120ms; }
+
+  .link {
+    transition: background-size var(--dur-fast) var(--ease-out-soft);
+  }
+  .link:hover,
+  .link[aria-current="page"] {
+    background-size: 100% 2px;
+  }
+
+  .marquee__track {
+    animation: marquee 25s linear infinite;
+  }
+  .marquee:hover .marquee__track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link:hover,
+  .link[aria-current="page"] {
+    text-decoration: underline;
+  }
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
