@@ -1,4 +1,4 @@
-/* Shared component styles — buttons, cards, links, marquee.
+/* Shared component styles — buttons, cards, links, school grid.
    Separation via background shifts and radius, never hard borders. */
 
 /* --- Pill buttons --- */
@@ -96,41 +96,58 @@
   background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat;
 }
 
-/* --- Marquee (infinite ticker) --- */
-.marquee {
-  overflow: hidden;
+/* --- School grid (static logo wall) --- */
+.school-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-8) var(--space-6);
+  list-style: none;
 }
 
-.marquee__track {
-  display: flex;
-  gap: var(--space-8);
-  width: max-content;
+.school-grid__item {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
 }
 
-.marquee__logo {
-  display: flex;
-  align-items: center;
+.school-grid__item img {
   height: 2.5rem;
-}
-
-.marquee__logo img {
-  height: 100%;
   width: auto;
-  max-width: 9rem;
+  max-width: 100%;
   object-fit: contain;
   /* grayscale (not brightness(0)) so seals with opaque white fills keep their
      internal linework — brightness(0) flattens any two opaque colors to the
      same solid black, turning detailed seals into unrecognizable blobs.
      Tuned against the current 10 dark-ink logos — eyeball any newly added
-     school's logo in the live marquee before shipping it. */
+     school's logo in the live grid before shipping it. */
+  /* `.school-section`'s background (--soft-10) doesn't invert in dark mode
+     (same fixed-cream treatment as `.card--soft`), so unlike other themed
+     elements this filter stays constant across themes too — no dark-mode
+     override, or the logos would invert toward white and vanish into the
+     still-light band. */
   filter: grayscale(1) contrast(1.6) brightness(0.85) opacity(0.85);
 }
 
-[data-theme="dark"] .marquee__logo img {
-  filter: grayscale(1) contrast(1.6) brightness(1.15) invert(1) opacity(0.9);
+.school-grid__name {
+  font-size: var(--text-xs);
+  color: var(--color-ink);
+  opacity: 0.6;
+  text-align: center;
 }
 
-/* --- Motion (hovers, reveals, marquee) --- */
+@media (max-width: 900px) {
+  .school-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .school-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* --- Motion (hovers, reveals) --- */
 @media (prefers-reduced-motion: no-preference) {
 
   .card,
@@ -155,13 +172,6 @@
   .link[aria-current="page"] {
     background-size: 100% 2px;
   }
-
-  .marquee__track {
-    animation: marquee 25s linear infinite;
-  }
-  .marquee:hover .marquee__track {
-    animation-play-state: paused;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -169,8 +179,4 @@
   .link[aria-current="page"] {
     text-decoration: underline;
   }
-}
-
-@keyframes marquee {
-  to { transform: translateX(-50%); }
 }

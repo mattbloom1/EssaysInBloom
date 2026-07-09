@@ -1,0 +1,17 @@
+---
+import type { School } from '../data/schools';
+
+interface Props {
+  schools: School[];
+}
+const { schools } = Astro.props;
+---
+
+<ul class="school-grid">
+  {schools.map((school) => (
+    <li class="school-grid__item" data-reveal-child>
+      <img src={school.logo} alt={school.alt} width={school.width} height={school.height} loading="lazy" />
+      <span class="school-grid__name">{school.name}</span>
+    </li>
+  ))}
+</ul>

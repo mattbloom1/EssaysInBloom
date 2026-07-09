@@ -223,6 +223,11 @@ gsap.utils.toArray("[data-reveal]").forEach((section) => {
 
 ### Infinite marquee (CSS)
 
+*(Reference pattern only — not currently wired to any component. The
+homepage school-logo strip used this and was switched to a static
+`.school-grid` in `src/components/SchoolGrid.astro`; reach for this again
+if a future ticker/tag strip needs it.)*
+
 ```css
 .marquee { overflow: hidden; }
 .marquee__track { display: flex; gap: 2rem; width: max-content;

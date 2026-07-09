@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { withBase } from '../lib/withBase';
-import Marquee from '../components/Marquee.astro';
+import SchoolGrid from '../components/SchoolGrid.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { schools } from '../data/schools';
 import { testimonials } from '../data/testimonials';
@@ -59,11 +59,17 @@ const steps = [
       </div>
     </section>
 
-    <!-- Marquee -->
-    <div class="strip">
-      <Marquee logos={schools} />
-      <p class="strip__caption">Logos are trademarks of their respective institutions.</p>
-    </div>
+    <!-- Colleges -->
+    <section class="section school-section" data-reveal>
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-reveal-child>Where our students landed</p>
+          <h2 data-reveal-child>Colleges our students now call home</h2>
+        </div>
+        <SchoolGrid schools={schools} />
+        <p class="school-grid__caption">Logos are trademarks of their respective institutions.</p>
+      </div>
+    </section>
 
     <!-- Services bento -->
     <section class="section" data-reveal>
@@ -188,13 +194,12 @@ const steps = [
     opacity: 0.9;
   }
 
-  .strip {
-    padding-block: var(--space-6);
+  .school-section {
     background: var(--soft-10);
   }
 
-  .strip__caption {
-    margin-top: var(--space-3);
+  .school-grid__caption {
+    margin-top: var(--space-8);
     text-align: center;
     font-size: var(--text-xs);
     color: var(--color-ink);
