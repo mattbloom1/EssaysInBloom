@@ -2,20 +2,94 @@
 import Base from '../layouts/Base.astro';
 import PageIntro from '../components/PageIntro.astro';
 import CtaBand from '../components/CtaBand.astro';
+
+/* FILLER COPY — formats and details are placeholders to show the layout;
+   Matt/Alison to define the real workshop lineup. */
+const formats = [
+  {
+    name: 'Summer Kickoff',
+    detail: 'Small group · 4 sessions',
+    blurb: 'Rising seniors leave with a chosen topic and a working first draft before the school year starts.',
+  },
+  {
+    name: 'Blank Page Bootcamp',
+    detail: 'Small group · 2 sessions',
+    blurb: 'For students stuck at zero: guided discovery exercises that turn “I have nothing to write about” into three real story candidates.',
+  },
+  {
+    name: 'School & Community',
+    detail: 'Classroom scale · by arrangement',
+    blurb: 'Essay-writing workshops for schools, libraries, and community programs — format and length tailored to the group.',
+  },
+];
 ---
 
-<Base title="Workshops — Essays in Bloom">
+<Base title="Workshops — Essays in Bloom" description="Small-group college essay workshops — take the fear out of the blank page and leave with real drafts moving.">
   <main>
     <PageIntro
       eyebrow="Workshops"
       title="Small-group workshops"
-      lede="Placeholder — formats, group sizes, schedules, and how workshops differ from 1:1 coaching."
+      lede="The energy of writing alongside other students, with the same discovery-first approach as 1:1 coaching."
     />
-    <section class="section container--narrow container" data-reveal>
-      <div class="card card--paper" data-reveal-child>
-        <p>Page content coming soon.</p>
+
+    <section class="section" data-reveal>
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-reveal-child>Formats</p>
+          <h2 data-reveal-child>Three ways in</h2>
+        </div>
+        <div class="bento">
+          {formats.map((f) => (
+            <article class="card card--soft card--hover span-2 format" data-reveal-child>
+              <p class="format__detail">{f.detail}</p>
+              <h3>{f.name}</h3>
+              <p>{f.blurb}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
-    <CtaBand />
+
+    <section class="section" data-reveal>
+      <div class="container container--narrow">
+        <div class="section__head">
+          <p class="eyebrow" data-reveal-child>Workshops vs. coaching</p>
+          <h2 data-reveal-child>Which one fits?</h2>
+        </div>
+        <div class="compare" data-reveal-child>
+          <p>
+            Workshops get momentum going — shared prompts, group discovery, and
+            the relief of hearing other students wrestle with the same blank
+            page. 1:1 coaching goes deeper on <em>your</em> story, draft after
+            draft. Plenty of students do both: a workshop to start, coaching to
+            finish.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <CtaBand title="Bring a workshop to your school?" buttonLabel="Get in touch" />
   </main>
 </Base>
+
+<style>
+  .format {
+    display: grid;
+    gap: var(--space-3);
+    align-content: start;
+  }
+
+  .format__detail {
+    font-family: var(--font-subheading);
+    font-weight: var(--weight-subheading);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    color: var(--color-accent);
+  }
+
+  .compare p {
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    max-width: 58ch;
+  }
+</style>

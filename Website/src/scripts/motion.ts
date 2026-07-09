@@ -5,6 +5,7 @@
  */
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { mountMeshGradient } from './mesh-gradient';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,6 +27,93 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
         '-=0.4',
       );
     }
+    if (hero.querySelector('[data-hero-media]')) {
+      tl.from('[data-hero-media]', { y: 48, opacity: 0, duration: 0.9 }, 0.25);
+    }
+  }
+
+  // Hero photo parallax — the img is 126% of its clipping box's height, so
+  // sliding it up as the page scrolls stays inside the rounded frame.
+  const heroMedia = document.querySelector<HTMLElement>('[data-hero-media]');
+  if (heroMedia) {
+    gsap.fromTo(
+      heroMedia.querySelector('img'),
+      { yPercent: 0 },
+      {
+        yPercent: -18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroMedia,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      },
+    );
+  }
+
+  // Seed-to-story timeline (homepage) — pin the stage and scrub the track
+  // horizontally so each step slides through the center of the screen.
+  // Without JS the same markup is a native horizontal scroller with snap.
+  const processStage = document.querySelector<HTMLElement>('[data-process-stage]');
+  const processTrack = document.querySelector<HTMLElement>('[data-process-track]');
+  if (processStage && processTrack) {
+    processStage.classList.add('is-pinned');
+    const maxX = () => Math.max(0, processTrack.scrollWidth - processStage.clientWidth);
+    const headerH = () => document.querySelector<HTMLElement>('.header')?.offsetHeight ?? 0;
+
+    const slide = gsap.to(processTrack, {
+      x: () => -maxX(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: processStage,
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+        start: () => `top ${headerH() + 24}px`,
+        end: () => `+=${Math.max(maxX(), 1)}`,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // Each step "slots in" as the track carries it toward center.
+    gsap.utils.toArray<Element>('[data-process-step]').forEach((step) => {
+      gsap.from(step, {
+        opacity: 0.2,
+        y: 28,
+        scale: 0.94,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: step,
+          containerAnimation: slide,
+          start: 'left 78%',
+          end: 'center 55%',
+          scrub: true,
+        },
+      });
+    });
+  }
+
+  // CTA band (mesh gradient panel) — starts container-width and grows to
+  // full-bleed as it scrolls into view. Width is the one property this
+  // effect genuinely needs; it's a single element, scrubbed, so the layout
+  // cost stays acceptable.
+  const ctaBand = document.querySelector<HTMLElement>('[data-cta-band]');
+  const ctaPanel = ctaBand?.querySelector<HTMLElement>('[data-cta]');
+  if (ctaBand && ctaPanel) {
+    gsap.to(ctaPanel, {
+      width: '100vw',
+      borderRadius: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: ctaBand,
+        start: 'top 85%',
+        end: 'top 20%',
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
+    });
   }
 
   // Scroll-triggered staggered reveals
@@ -106,4 +194,10 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
 
     tl.from(pen, { y: 150, opacity: 0, duration: 1, ease: 'back.out(1.6)' }, 2);
   }
+
+  // Animated liquid mesh behind the CTA. Mounted inside the reduced-motion
+  // gate on purpose: reduced-motion users keep the static CSS gradient
+  // fallback that shows through the untouched canvas.
+  const meshCanvas = document.querySelector<HTMLCanvasElement>('[data-cta-mesh]');
+  if (meshCanvas) mountMeshGradient(meshCanvas);
 });

@@ -1,10 +1,33 @@
 # Website TODO
 
-State as of 2026-07-08: full scaffold built and pushed — all brand-book routes
-render, homepage is a complete landing page, motion (GSAP + ScrollTrigger) and
-brand styling are wired up per `DESIGN.md`. Everything below is what's left.
+State as of 2026-07-09: full scaffold built and pushed — all brand-book routes
+render, homepage is a complete landing page (hero photo with parallax, linked
+black-logo school grid, pinned seed-to-story timeline, mesh-gradient CTA,
+editorial testimonials), inner pages have filler layouts, and there's a
+working mobile menu. Motion (GSAP + ScrollTrigger) and brand styling are
+wired up per `DESIGN.md`. Everything below is what's left.
 
 ## Needs input from Matt
+
+- [ ] **Mobile nav book icon** — Matt wants the mobile menu toggle to be a
+  **closed book that becomes an open book** when the menu is selected/open
+  (instead of the current hamburger-to-X lines). Needs the two icon states
+  drawn from the brand mark; the toggle button in
+  `src/components/Header.astro` is ready for the SVG swap.
+
+- [ ] **Footer flower SVGs** — Matt wants to add fun flower SVGs to the
+  footer later (decorative, on-brand blooms scattered in
+  `src/components/Footer.astro`).
+
+- [ ] **Seed-to-story artwork** — the four flower-stage drawings in the
+  homepage timeline (seed → plant → water → bloom, inline SVGs in
+  `src/pages/index.astro`) are line-art placeholders. Matt will make final
+  SVGs or Lottie animations to swap in.
+
+- [ ] **Filler copy review** — About bio paragraphs, Approach phase details,
+  Coaching packages, and Workshop formats are drafted filler (each file is
+  marked with a `FILLER COPY` comment) so the layouts can be judged; Alison
+  to supply/approve real wording, offers, and prices.
 
 - [ ] **Periwinkle experiment — keep or revert?** `#8B8FD4` was trialed as a
   pop color (one bento card, a testimonial tint, marquee separators, step
@@ -21,17 +44,18 @@ brand styling are wired up per `DESIGN.md`. Everything below is what's left.
 - [ ] **Social links** — footer Instagram/LinkedIn point to `#`.
 - [x] **Real testimonials** — quotes + attribution; placeholders are clearly
   fake (homepage + testimonials page).
-- [ ] **Photography** — About / Coaching / Workshops pages will each want
-  imagery. Available in `Brand/Public/Pictures/`: Alison's profile pic and
-  three stock shots. Nothing workshop-specific exists yet.
+- [ ] **Photography** — Coaching / Workshops pages could still use imagery
+  (About now uses Alison's profile pic; the homepage hero and bento use two
+  of the stock shots). Nothing workshop-specific exists yet.
 
 ## Build-out (no input needed)
 
-- [ ] **Mobile menu** — header nav hides below ~820px (logo + Contact button
-  remain); a proper mobile menu needs designing.
-- [ ] **Real copy** — all text is placeholder written from the brand book's
-  mission statement; every page marks TODOs. Inner pages (About, Approach,
-  Coaching, Workshops, Testimonials) are intro + "coming soon" cards.
+- [x] **Mobile menu** — hamburger toggle + dropdown panel below ~820px
+  (`src/components/Header.astro`); icon to be replaced with the open/closed
+  book (see above).
+- [ ] **Real copy** — inner pages now have full filler layouts (About,
+  Approach, Coaching, Workshops, Testimonials, Contact); wording still needs
+  Alison's review — see "Filler copy review" above.
 - [ ] **Contact form** — contact page is an email button; a form or
   scheduling link (Calendly?) should replace it.
 - [ ] **Legal pages** — Terms / Privacy / Accessibility are placeholders;

@@ -10,28 +10,38 @@ import { testimonials } from '../data/testimonials';
 /* NOTE: all copy below is placeholder — rewrite freely. */
 
 const homepageTestimonials = testimonials.filter((t) => t.featured);
-const homepageCardVariants = ['card--soft', 'card--peri-tint', 'card--paper'];
 
+/* From seed to story — each step pairs a coaching phase with a growth stage.
+   The `art` SVGs are PLACEHOLDERS (simple line drawings, currentColor):
+   swap each for final artwork or a Lottie animation when Matt makes them. */
 const steps = [
   {
     n: '01',
+    stage: 'Seed',
     title: 'Discover',
     body: 'We clarify the roles you play, what you do, and what you care about — the raw material of your story.',
+    art: `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 74h88"/><path d="M63 106c-8-3-12-11-10-20 9 2 14 10 13 18-1 1-2 2-3 2Z"/><path d="M44 64l-4-8"/><path d="M76 64l4-8"/><path d="M60 60v-9"/></svg>`,
   },
   {
     n: '02',
+    stage: 'Plant',
     title: 'Draft',
     body: 'An iterative drafting process turns discovery into essays with a real voice — yours.',
+    art: `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 88h88"/><path d="M60 88V56"/><path d="M60 68C49 67 42 59 41 48c11 1 18 9 19 20Z"/><path d="M60 58c11-1 18-9 19-20-11 1-18 9-19 20Z"/></svg>`,
   },
   {
     n: '03',
+    stage: 'Water',
     title: 'Refine',
     body: 'We shape every Common App and supplemental essay into one vibrant, cohesive narrative.',
+    art: `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 96h88"/><path d="M44 96V76"/><path d="M44 84c-9-1-15-7-16-16 9 1 15 7 16 16Z"/><rect x="70" y="24" width="26" height="18" rx="5" transform="rotate(16 83 33)"/><path d="M72 34l-12 7"/><path d="M92 20c7-5 13 0 11 7"/><path d="M56 52l-2 5"/><path d="M50 61l-2 5"/><path d="M60 62l-2 5"/></svg>`,
   },
   {
     n: '04',
+    stage: 'Bloom',
     title: 'Bloom',
     body: 'You submit with confidence, showing admissions officers exactly why you belong.',
+    art: `<svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 102h88"/><path d="M60 102V58"/><path d="M60 86c-11-1-18-9-19-20 11 1 18 9 19 20Z"/><path d="M60 78c11-1 18-9 19-20-11 1-18 9-19 20Z"/><circle cx="60" cy="36" r="7"/><ellipse cx="60" cy="19" rx="6.5" ry="10"/><ellipse cx="60" cy="19" rx="6.5" ry="10" transform="rotate(60 60 36)"/><ellipse cx="60" cy="19" rx="6.5" ry="10" transform="rotate(120 60 36)"/><ellipse cx="60" cy="19" rx="6.5" ry="10" transform="rotate(180 60 36)"/><ellipse cx="60" cy="19" rx="6.5" ry="10" transform="rotate(240 60 36)"/><ellipse cx="60" cy="19" rx="6.5" ry="10" transform="rotate(300 60 36)"/></svg>`,
   },
 ];
 ---
@@ -54,8 +64,15 @@ const steps = [
             <a href={withBase('/approach/')} class="btn btn--soft">How it works</a>
           </div>
         </div>
-        <div class="hero__mark" aria-hidden="true">
-          <img src={withBase('/logos/mark.svg')} alt="" width="440" height="242" loading="eager" />
+        <div class="hero__media" data-hero-media>
+          <img
+            src={withBase('/pictures/hero-writing.jpg')}
+            alt="A student writing an essay by hand in a sunlit classroom"
+            width="1300"
+            height="1625"
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
       </div>
     </section>
@@ -63,7 +80,7 @@ const steps = [
     <!-- Colleges -->
     <section class="section school-section" data-reveal>
       <div class="container">
-        <div class="section__head">
+        <div class="section__head section__head--center">
           <p class="eyebrow" data-reveal-child>Where our students landed</p>
           <h2 data-reveal-child>Colleges our students now call home</h2>
         </div>
@@ -120,19 +137,23 @@ const steps = [
       </div>
     </section>
 
-    <!-- Process -->
-    <section class="section process" data-reveal>
+    <!-- Process: pinned horizontal seed-to-story timeline -->
+    <section class="section process" data-process>
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow" data-reveal-child>The approach</p>
-          <h2 data-reveal-child>From seed to story</h2>
+        <div class="section__head section__head--center">
+          <p class="eyebrow">The approach</p>
+          <h2>From seed to story</h2>
         </div>
-        <div class="bento">
+      </div>
+      <div class="process__stage" data-process-stage>
+        <div class="process__track" data-process-track>
           {steps.map((step) => (
-            <article class="card card--paper span-3 step" data-reveal-child>
-              <span class="step__n">{step.n}</span>
+            <article class="process__step" data-process-step>
+              <div class="process__art" set:html={step.art} />
+              <span class="process__node" aria-hidden="true"></span>
+              <p class="process__stagename">{step.n} · {step.stage}</p>
               <h3>{step.title}</h3>
-              <p>{step.body}</p>
+              <p class="process__body">{step.body}</p>
             </article>
           ))}
         </div>
@@ -141,15 +162,17 @@ const steps = [
 
     <!-- Testimonials -->
     <section class="section" data-reveal>
-      <div class="container">
-        <div class="section__head">
+      <div class="container container--narrow">
+        <div class="section__head section__head--center">
           <p class="eyebrow" data-reveal-child>Kind words</p>
           <h2 data-reveal-child>Stories that bloomed</h2>
         </div>
-        <div class="bento">
-          {homepageTestimonials.map((t, i) => (
-            <figure class={`card ${homepageCardVariants[i % homepageCardVariants.length]} span-2 quote`} data-reveal-child>
-              <blockquote>“{t.quote}”</blockquote>
+        <div class="testimonial-list">
+          {homepageTestimonials.map((t) => (
+            <figure class="testimonial" data-reveal-child>
+              <blockquote>
+                <p>“{t.excerpt ?? t.quote}”</p>
+              </blockquote>
               <figcaption>{t.attribution}</figcaption>
             </figure>
           ))}
@@ -168,12 +191,12 @@ const steps = [
 
 <style>
   .hero {
-    padding-block: var(--space-24) var(--space-16);
+    padding-block: var(--space-16) var(--space-16);
   }
 
   .hero__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: var(--space-12);
   }
@@ -191,10 +214,23 @@ const steps = [
     margin-top: var(--space-2);
   }
 
-  .hero__mark img {
+  /* Hero photo: rounded clipping box; the oversized img inside is what the
+     parallax tween in motion.ts moves, so travel stays within these bounds. */
+  .hero__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    height: clamp(420px, 66vh, 620px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .hero__media img {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: auto;
-    opacity: 0.9;
+    height: 126%; /* extra height = parallax travel room */
+    object-fit: cover;
+    will-change: transform;
   }
 
   .school-section {
@@ -216,29 +252,159 @@ const steps = [
     color: var(--color-primary);
   }
 
-  .testimonials__more {
-    margin-top: var(--space-8);
-    text-align: center;
+  /* --- Seed-to-story timeline --- */
+  .process {
+    /* the pin needs breathing room, not double padding */
+    padding-block: var(--space-20) 0;
   }
 
-  .step {
+  .process__stage {
+    /* JS pins this and drives the track's x. Without JS (or with reduced
+       motion) it degrades to a native horizontal scroller with snap. */
+    height: max(440px, calc(100svh - 320px));
     display: grid;
-    gap: var(--space-2);
-    align-content: start;
+    align-items: center;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    padding-bottom: var(--space-8);
   }
 
-  .step__n {
-    font-family: var(--font-heading);
-    font-size: var(--text-2xl);
+  .process__stage.is-pinned {
+    overflow: hidden;
+  }
+
+  .process__track {
+    --step-w: min(440px, 78vw);
+    position: relative;
+    display: flex;
+    gap: clamp(4rem, 10vw, 8rem);
+    width: max-content;
+    padding-inline: calc(50vw - var(--step-w) / 2);
+    align-items: stretch;
+  }
+
+  /* The timeline rule: runs behind every node dot (fixed art height keeps
+     the nodes on one line across steps). */
+  .process__track::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(120px + var(--space-6) + 5px);
+    height: 2px;
+    border-radius: 1px;
+    background: var(--soft-50);
+  }
+
+  .process__step {
+    width: var(--step-w);
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: var(--space-3);
+    scroll-snap-align: center;
+  }
+
+  .process__art {
+    height: 120px;
+    width: 120px;
+    color: var(--color-accent);
+    margin-bottom: var(--space-6);
+  }
+
+  .process__art :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .process__node {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    margin-top: -13px; /* sit on the timeline rule */
+    margin-bottom: var(--space-4);
+  }
+
+  .process__stagename {
+    font-family: var(--font-subheading);
+    font-weight: var(--weight-subheading);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
     color: var(--periwinkle);
   }
 
+  .process__step h3 {
+    font-size: var(--text-xl);
+    color: var(--color-primary);
+  }
+
+  .process__body {
+    max-width: 38ch;
+  }
+
+  /* --- Testimonials --- */
+  .testimonial-list {
+    display: grid;
+  }
+
+  .testimonial {
+    margin: 0;
+    padding-block: var(--space-10);
+    display: grid;
+    gap: var(--space-5);
+    justify-items: center;
+    text-align: center;
+  }
+
+  /* soft divider bar, not a hard border (decorative bronze is allowed) */
+  .testimonial + .testimonial::before {
+    content: '';
+    width: 48px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--soft-50);
+    margin-bottom: var(--space-8);
+  }
+
+  .testimonial blockquote {
+    margin: 0;
+  }
+
+  .testimonial blockquote p {
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    line-height: 1.5;
+    color: var(--color-primary);
+    text-wrap: pretty;
+  }
+
+  .testimonial figcaption {
+    font-family: var(--font-subheading);
+    font-weight: var(--weight-subheading);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    color: var(--color-accent);
+  }
+
+  .testimonials__more {
+    margin-top: var(--space-4);
+    text-align: center;
+  }
+
   @media (max-width: 900px) {
+    .hero {
+      padding-block: var(--space-12);
+    }
+
     .hero__grid {
       grid-template-columns: 1fr;
+      gap: var(--space-8);
     }
-    .hero__mark {
-      display: none;
+
+    .hero__media {
+      height: min(52vh, 420px);
     }
   }
 </style>

@@ -1,21 +1,161 @@
 ---
 import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/withBase';
 import PageIntro from '../components/PageIntro.astro';
 import CtaBand from '../components/CtaBand.astro';
+
+/* Credentials are verbatim from the old site (essaysinbloom.com); the bio
+   paragraphs are draft copy written around them — Matt/Alison to review. */
+const credentials = [
+  'College essay writing coach — 10+ years',
+  'M.A., Teaching English',
+  'Former high-school English teacher',
+  'Adjunct professor, Writing',
+  'Associate member, IECA — Independent Educational Consultants Association',
+];
 ---
 
-<Base title="About — Essays in Bloom">
+<Base title="About — Essays in Bloom" description="Meet Alison Bloomfield — college essay writing coach with 10+ years of experience helping students find and tell their story.">
   <main>
     <PageIntro
       eyebrow="About"
-      title="Meet your coach"
-      lede="Placeholder — Alison's story: background, credentials, and why she coaches college essays."
+      title="Meet Alison"
+      lede="A writing coach, teacher, and professor who has spent more than a decade helping students find the story only they can tell."
     />
-    <section class="section container--narrow container" data-reveal>
-      <div class="card card--paper" data-reveal-child>
-        <p>Page content coming soon.</p>
+
+    <section class="section about" data-reveal>
+      <div class="container about__grid">
+        <div class="about__media" data-reveal-child>
+          <img
+            src={withBase('/pictures/alison.jpg')}
+            alt="Alison Bloomfield, founder of Essays in Bloom"
+            width="720"
+            height="900"
+            loading="eager"
+          />
+        </div>
+        <div class="about__copy">
+          <h2 data-reveal-child>Alison Bloomfield</h2>
+          <p data-reveal-child>
+            Alison has coached college application essays for more than ten
+            years. Before that — and still — she taught: as a high-school
+            English teacher and as an adjunct professor of writing, with an
+            M.A. in Teaching English. She is an associate member of the
+            Independent Educational Consultants Association (IECA).
+          </p>
+          <p data-reveal-child>
+            Her approach is simple: the essay is not a performance, it's a
+            portrait. Students arrive unsure they have anything to say, and
+            leave with a narrative that could belong to no one else — in their
+            own words, in their own voice.
+          </p>
+          <ul class="about__creds" data-reveal-child>
+            {credentials.map((c) => (
+              <li>{c}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
+
+    <!-- Mission statement — verbatim from the 2026 brand book -->
+    <section class="section mission" data-reveal>
+      <div class="container container--narrow">
+        <figure class="mission__quote" data-reveal-child>
+          <p class="eyebrow">Our mission</p>
+          <blockquote>
+            <p>
+              “What’s your story? Not sure? Together, we clarify the roles you
+              play, what you do, and what you care about. Through an iterative
+              discovery and drafting process, your Common App and supplemental
+              essays bloom into a vibrant, cohesive narrative that demonstrates
+              to admission officers exactly why you belong.”
+            </p>
+          </blockquote>
+        </figure>
+      </div>
+    </section>
+
     <CtaBand />
   </main>
 </Base>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  .about__media img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .about__copy {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .about__copy p {
+    max-width: 58ch;
+  }
+
+  .about__creds {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .about__creds li {
+    background: var(--accent-10);
+    color: var(--color-primary);
+    border-radius: var(--radius-pill);
+    padding: 0.5em 1.1em;
+    font-family: var(--font-subheading);
+    font-weight: var(--weight-subheading);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+  }
+
+  .mission {
+    background: var(--soft-10);
+  }
+
+  .mission__quote {
+    margin: 0;
+    display: grid;
+    gap: var(--space-6);
+    justify-items: center;
+    text-align: center;
+  }
+
+  .mission__quote blockquote {
+    margin: 0;
+  }
+
+  .mission__quote blockquote p {
+    font-family: var(--font-heading);
+    font-size: var(--text-2xl);
+    line-height: 1.5;
+    color: var(--color-primary);
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 820px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+
+    .about__media img {
+      max-width: 380px;
+    }
+  }
+</style>

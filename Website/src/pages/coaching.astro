@@ -1,21 +1,115 @@
 ---
 import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/withBase';
 import PageIntro from '../components/PageIntro.astro';
 import CtaBand from '../components/CtaBand.astro';
+
+/* FILLER COPY — packages, pricing structure, and session details are
+   placeholders to show the layout; Matt/Alison to define the real offer. */
+const packages = [
+  {
+    name: 'Common App Essay',
+    blurb: 'The main personal statement, start to finish: discovery, drafting, and as many revision rounds as it takes.',
+    includes: ['Discovery session', 'Unlimited drafts', 'Line-by-line feedback', 'Final polish pass'],
+  },
+  {
+    name: 'Supplementals',
+    blurb: 'The “why us” and short-answer essays — tuned to each school while staying one coherent story.',
+    includes: ['Per-school strategy', 'Reusable core answers', 'Draft feedback', 'Deadline tracking'],
+  },
+  {
+    name: 'Full Application Story',
+    blurb: 'Everything: Common App, supplementals, activity list, and interview prep, spread across the season.',
+    includes: ['Everything in both packages', 'Activity list editing', 'Interview practice', 'Priority scheduling'],
+  },
+];
 ---
 
-<Base title="Coaching — Essays in Bloom">
+<Base title="Coaching — Essays in Bloom" description="1:1 college essay coaching — Common App, supplemental essays, and full application story packages.">
   <main>
     <PageIntro
       eyebrow="Coaching"
       title="1:1 essay coaching"
-      lede="Placeholder — packages, what's included, timelines, and who this is for."
+      lede="Personal, iterative coaching from brainstorm to final draft — one student, one coach, one story worth telling."
     />
-    <section class="section container--narrow container" data-reveal>
-      <div class="card card--paper" data-reveal-child>
-        <p>Page content coming soon.</p>
+
+    <section class="section" data-reveal>
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-reveal-child>Ways to work together</p>
+          <h2 data-reveal-child>Pick the scope that fits</h2>
+        </div>
+        <div class="bento">
+          {packages.map((pkg) => (
+            <article class="card card--paper card--hover span-2 package" data-reveal-child>
+              <h3>{pkg.name}</h3>
+              <p>{pkg.blurb}</p>
+              <ul class="package__list">
+                {pkg.includes.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+        <p class="packages__note" data-reveal-child>
+          Not sure which fits? The free consult is exactly for that —
+          <a class="link" href={withBase('/contact/')}>tell us where you are</a> and we’ll point you right.
+        </p>
       </div>
     </section>
+
+    <section class="section" data-reveal>
+      <div class="container container--narrow">
+        <div class="section__head">
+          <p class="eyebrow" data-reveal-child>Who this is for</p>
+          <h2 data-reveal-child>Every kind of writer</h2>
+        </div>
+        <div class="who" data-reveal-child>
+          <p>
+            Confident writers who want a sharper story. Reluctant writers who
+            dread the blank page. Students aiming at reach schools, and
+            students who just want this off their plate before senior year
+            buries them. The process meets you where you are — the only
+            requirement is that the story is yours.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <CtaBand />
   </main>
 </Base>
+
+<style>
+  .package {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+  }
+
+  .package__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .package__list li {
+    padding-left: var(--space-6);
+    background: no-repeat 0 0.45em / 0.9em 0.9em
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2329603D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg>');
+  }
+
+  .packages__note {
+    margin-top: var(--space-8);
+    color: var(--color-ink);
+  }
+
+  .who p {
+    font-size: var(--text-lg);
+    line-height: 1.65;
+    max-width: 58ch;
+  }
+</style>

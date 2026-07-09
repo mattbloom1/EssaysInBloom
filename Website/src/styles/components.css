@@ -106,26 +106,33 @@
 
 .school-grid__item {
   display: grid;
-  justify-items: center;
-  gap: var(--space-3);
 }
 
-.school-grid__item img {
+.school-grid__link {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.school-grid__link img {
   height: 2.5rem;
   width: auto;
   max-width: 100%;
   object-fit: contain;
-  /* grayscale (not brightness(0)) so seals with opaque white fills keep their
-     internal linework — brightness(0) flattens any two opaque colors to the
-     same solid black, turning detailed seals into unrecognizable blobs.
-     Tuned against the current 10 dark-ink logos — eyeball any newly added
-     school's logo in the live grid before shipping it. */
+  /* Pure black, no gray shades: grayscale, darken, then slam contrast so
+     every tone snaps to black or white — dark inks/seal linework go solid
+     black while opaque-white seal interiors stay white instead of flattening
+     into blobs (which is what a plain brightness(0) would do). Tuned against
+     the current 10 logos — eyeball any newly added school's logo in the live
+     grid before shipping it. */
   /* `.school-section`'s background (--soft-10) doesn't invert in dark mode
      (same fixed-cream treatment as `.card--soft`), so unlike other themed
      elements this filter stays constant across themes too — no dark-mode
      override, or the logos would invert toward white and vanish into the
      still-light band. */
-  filter: grayscale(1) contrast(1.6) brightness(0.85) opacity(0.85);
+  filter: grayscale(1) brightness(0.8) contrast(20);
 }
 
 .school-grid__name {
@@ -164,6 +171,23 @@
 
   .btn:hover  { transform: scale(1.05); }
   .btn:active { transform: scale(0.97); transition-duration: 120ms; }
+
+  /* School tiles: gentle lift, name warms to accent */
+  .school-grid__link,
+  .school-grid__link img,
+  .school-grid__name {
+    transition:
+      transform var(--dur-fast) var(--ease-spring),
+      color var(--dur-fast) var(--ease-out-soft),
+      opacity var(--dur-fast) var(--ease-out-soft);
+  }
+  .school-grid__link:hover { transform: translateY(-4px); }
+  .school-grid__link:hover img { transform: scale(1.05); }
+  .school-grid__link:hover .school-grid__name,
+  .school-grid__link:focus-visible .school-grid__name {
+    color: var(--color-accent);
+    opacity: 1;
+  }
 
   .link {
     transition: background-size var(--dur-fast) var(--ease-out-soft);

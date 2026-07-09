@@ -20,6 +20,11 @@
   justify-items: start;
 }
 
+.section__head--center {
+  justify-items: center;
+  text-align: center;
+}
+
 /* Bento grid — mixed card sizes, collapses on small screens */
 .bento {
   display: grid;

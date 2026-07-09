@@ -2,20 +2,147 @@
 import Base from '../layouts/Base.astro';
 import PageIntro from '../components/PageIntro.astro';
 import CtaBand from '../components/CtaBand.astro';
+
+/* FILLER COPY — written to show the layout; Matt/Alison to rewrite. */
+const phases = [
+  {
+    n: '01',
+    stage: 'Seed',
+    title: 'Discover',
+    body: 'One or two conversations, no blank page in sight. We map the roles you play — teammate, sibling, builder, organizer — what you actually do all week, and what you care about enough to defend. Most students leave this stage surprised by how much raw material they already have.',
+    takeaway: 'A short list of true, specific story candidates.',
+  },
+  {
+    n: '02',
+    stage: 'Plant',
+    title: 'Draft',
+    body: 'We pick the story with the most life in it and get a real first draft down fast. Messy is fine — messy is the point. Alison guides structure and momentum while every sentence stays yours.',
+    takeaway: 'A complete first draft in your own voice.',
+  },
+  {
+    n: '03',
+    stage: 'Water',
+    title: 'Refine',
+    body: 'Draft by draft, the essay gets sharper: cutting what stalls, growing what works, tuning the opening until it earns the read. Supplementals join here so the whole application tells one coherent story.',
+    takeaway: 'Essays that sound like you on your best day.',
+  },
+  {
+    n: '04',
+    stage: 'Bloom',
+    title: 'Bloom',
+    body: 'Final passes for polish and fit, then you submit with confidence — a vibrant, cohesive narrative that shows admissions officers exactly why you belong.',
+    takeaway: 'A finished application you are proud to send.',
+  },
+];
 ---
 
-<Base title="Approach — Essays in Bloom">
+<Base title="Approach — Essays in Bloom" description="The Essays in Bloom process: discover, draft, refine, bloom — an iterative coaching approach that grows essays from real stories.">
   <main>
     <PageIntro
       eyebrow="Approach"
       title="How essays bloom"
-      lede="Placeholder — the discovery-and-drafting process in depth: what happens at each stage and what students walk away with."
+      lede="No templates, no ghost-writing — an iterative process that starts with who you are and ends with essays only you could have written."
     />
-    <section class="section container--narrow container" data-reveal>
-      <div class="card card--paper" data-reveal-child>
-        <p>Page content coming soon.</p>
+
+    <section class="section phases" data-reveal>
+      <div class="container container--narrow phases__list">
+        {phases.map((phase) => (
+          <article class="phase" data-reveal-child>
+            <div class="phase__label">
+              <span class="phase__n">{phase.n}</span>
+              <span class="phase__stage">{phase.stage}</span>
+            </div>
+            <div class="phase__body">
+              <h2>{phase.title}</h2>
+              <p>{phase.body}</p>
+              <p class="phase__takeaway">
+                <strong>You walk away with:</strong> {phase.takeaway}
+              </p>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
+
+    <section class="section expect" data-reveal>
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-reveal-child>Good to know</p>
+          <h2 data-reveal-child>What working together looks like</h2>
+        </div>
+        <div class="bento">
+          <article class="card card--soft span-2" data-reveal-child>
+            <h3>Remote-friendly</h3>
+            <p>Sessions happen over video with shared docs between meetings — students have worked with Alison from anywhere.</p>
+          </article>
+          <article class="card card--paper span-2" data-reveal-child>
+            <h3>Your pace</h3>
+            <p>Some students finish over a summer; some spread the work across a semester. The process flexes around your deadlines.</p>
+          </article>
+          <article class="card card--accent span-2" data-reveal-child>
+            <h3>Always your words</h3>
+            <p>Alison coaches, questions, and edits alongside you — she never writes for you. Admissions officers hear you, not a service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <CtaBand />
   </main>
 </Base>
+
+<style>
+  .phases__list {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .phase {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .phase__label {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-1);
+    padding-top: var(--space-1);
+  }
+
+  .phase__n {
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    color: var(--periwinkle);
+    line-height: 1;
+  }
+
+  .phase__stage {
+    font-family: var(--font-subheading);
+    font-weight: var(--weight-subheading);
+    text-transform: uppercase;
+    font-size: var(--text-xs);
+    color: var(--color-accent);
+  }
+
+  .phase__body {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .phase__body h2 {
+    font-size: var(--text-2xl);
+  }
+
+  .phase__takeaway {
+    color: var(--color-primary);
+  }
+
+  @media (max-width: 640px) {
+    .phase {
+      grid-template-columns: 72px 1fr;
+      gap: var(--space-4);
+    }
+  }
+</style>

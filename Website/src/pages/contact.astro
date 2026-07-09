@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageIntro from '../components/PageIntro.astro';
 ---
 
-<Base title="Contact — Essays in Bloom">
+<Base title="Contact — Essays in Bloom" description="Book a free consult — tell us where you are in the application process.">
   <main>
     <PageIntro
       eyebrow="Contact"
@@ -11,22 +11,66 @@ import PageIntro from '../components/PageIntro.astro';
       lede="Tell us a little about where you are in the application process, and we'll set up a free consult."
     />
     <section class="section container container--narrow" data-reveal>
-      <div class="card card--soft contact-card" data-reveal-child>
-        {/* TODO: real contact form / scheduling link */}
-        <h3>For now, email works best</h3>
-        <p>A contact form (or scheduling link) will live here.</p>
-        <a href="mailto:essaysinbloom@gmail.com" class="btn btn--primary">
-          essaysinbloom@gmail.com
-        </a>
+      <div class="contact-grid">
+        <div class="card card--soft contact-card" data-reveal-child>
+          {/* TODO: real contact form / scheduling link (Calendly?) */}
+          <h3>For now, email works best</h3>
+          <p>A contact form (or scheduling link) will live here.</p>
+          <a href="mailto:essaysinbloom@gmail.com" class="btn btn--primary">
+            essaysinbloom@gmail.com
+          </a>
+        </div>
+        <div class="card card--paper contact-card" data-reveal-child>
+          <h3>Helpful to include</h3>
+          <ul class="contact-list">
+            <li>Student's grade year and application deadlines</li>
+            <li>Where you are — no topic yet, drafting, or polishing</li>
+            <li>Whether you're thinking 1:1 coaching or a workshop</li>
+          </ul>
+          <p class="contact-note">Replies typically within a couple of days.</p>
+        </div>
       </div>
     </section>
   </main>
 </Base>
 
 <style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+    align-items: start;
+  }
+
   .contact-card {
     display: grid;
     gap: var(--space-4);
     justify-items: start;
+    align-content: start;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .contact-list li {
+    padding-left: var(--space-6);
+    background: no-repeat 0 0.45em / 0.9em 0.9em
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2329603D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg>');
+  }
+
+  .contact-note {
+    font-size: var(--text-sm);
+    opacity: 0.7;
+  }
+
+  @media (max-width: 720px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
