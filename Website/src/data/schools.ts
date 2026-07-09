@@ -12,7 +12,7 @@ export interface School {
 
 export const schools: School[] = [
   { name: 'University of Texas at Austin', logo: withBase('/logos/schools/ut-austin.svg'), alt: 'University of Texas at Austin logo', width: 350, height: 100 },
-  { name: 'University of Wisconsin-Madison', logo: withBase('/logos/schools/wisconsin-madison.svg'), alt: 'University of Wisconsin-Madison logo', width: 300, height: 300 },
+  { name: 'University of Wisconsin-Madison', logo: withBase('/logos/schools/wisconsin-madison.svg'), alt: 'University of Wisconsin-Madison logo', width: 367, height: 123.6 },
   { name: 'University of Michigan', logo: withBase('/logos/schools/michigan.svg'), alt: 'University of Michigan logo', width: 372.6, height: 72 },
   { name: 'Chapman University', logo: withBase('/logos/schools/chapman.svg'), alt: 'Chapman University logo', width: 375.5, height: 71.8 },
   { name: 'University of Maryland, College Park', logo: withBase('/logos/schools/maryland.svg'), alt: 'University of Maryland, College Park logo', width: 277, height: 55 },
