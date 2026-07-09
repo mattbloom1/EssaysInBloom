@@ -42,28 +42,68 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     });
   });
 
-  // Footer bloom (homepage only) — the mark opens like a book, then blooms,
-  // then the pen nib rises. Closed-book artwork is a separate asset overlaid
-  // on the book base; everything else animates from the mark's own paths.
+  // Footer bloom (homepage only) — the book opens, then each petal grows in
+  // from a near-invisible point at the shared spine origin while spinning
+  // into place, then the pen nib rises last.
   const footerBloom = document.querySelector('[data-footer-bloom]');
   if (footerBloom) {
-    const closed = footerBloom.querySelector('[data-bloom-closed]');
-    const book = footerBloom.querySelector('[data-bloom-book]');
-    const pen = footerBloom.querySelector('[data-bloom-pen]');
-    const innerTier = footerBloom.querySelectorAll('[data-bloom-tier="inner"] path');
-    const midTier = footerBloom.querySelectorAll('[data-bloom-tier="mid"] path');
-    const outerTier = footerBloom.querySelectorAll('[data-bloom-tier="outer"] path');
+    const book = footerBloom.querySelector<SVGGElement>('[data-bloom-book]')!;
+    const pen = footerBloom.querySelector<SVGGElement>('[data-bloom-pen]')!;
 
-    gsap
-      .timeline({
-        defaults: { ease: 'power3.out' },
-        scrollTrigger: { trigger: footerBloom, start: 'top 75%', once: true },
-      })
-      .fromTo(closed, { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.15, duration: 0.5, ease: 'power2.in' }, 0)
-      .from(book, { scaleX: 0.82, scaleY: 0.9, opacity: 0, duration: 0.6 }, 0.15)
-      .from(innerTier, { scale: 0.5, y: 20, opacity: 0, duration: 0.5, stagger: 0.06 }, 0.45)
-      .from(midTier, { scale: 0.5, y: 24, opacity: 0, duration: 0.55, stagger: 0.06 }, 0.55)
-      .from(outerTier, { scale: 0.5, y: 28, opacity: 0, duration: 0.6, stagger: 0.06 }, 0.68)
-      .from(pen, { y: 24, opacity: 0, duration: 0.45, ease: 'back.out(1.6)' }, 0.95);
+    const PETALS = ['inner-left', 'inner-right', 'mid-left', 'mid-right', 'outer-left', 'outer-right'] as const;
+    const PETAL_CONFIG: Record<(typeof PETALS)[number], { fromX: number; fromY: number; fromScale: number; fromRotation: number; duration: number; start: number }> = {
+      'inner-left': { fromX: 10, fromY: -543, fromScale: 0.001, fromRotation: 90, duration: 1, start: 0.2 },
+      'inner-right': { fromX: 600, fromY: -543, fromScale: 0.001, fromRotation: -90, duration: 1, start: 1 },
+      'mid-left': { fromX: 10, fromY: -200, fromScale: 0.001, fromRotation: 90, duration: 1, start: 0.4 },
+      'mid-right': { fromX: 600, fromY: -200, fromScale: 0.001, fromRotation: 90, duration: 1, start: 1.2 },
+      'outer-left': { fromX: 10, fromY: -200, fromScale: 0.001, fromRotation: 90, duration: 1, start: 0.6 },
+      'outer-right': { fromX: 600, fromY: -189, fromScale: 0.001, fromRotation: 90, duration: 1, start: 1.4 },
+    };
+
+    // GSAP does not reliably read a CSS transform-origin (stylesheet or
+    // inline) for its own SVG transforms — it needs the origin fed through
+    // its `svgOrigin` API as absolute SVG-user-unit coordinates, or scale and
+    // position silently pivot around the wrong point. getBBox() is local
+    // geometry, unaffected by ancestor transforms, so each origin below is
+    // computed once up front: the book's own bottom-center, the shared spine
+    // point every petal blooms from, and each petal's own center (so
+    // rotation spins it in place instead of orbiting the shared point).
+    const bookBox = book.getBBox();
+    const bookOrigin = `${bookBox.x + bookBox.width / 2} ${bookBox.y + bookBox.height}`;
+    const sharedOrigin = '0 0';
+
+    const petalEls: Record<string, SVGGElement> = {};
+    const petalRotateEls: Record<string, SVGPathElement> = {};
+    const petalOrigins: Record<string, string> = {};
+    PETALS.forEach((petal) => {
+      petalEls[petal] = footerBloom.querySelector<SVGGElement>(`[data-bloom-petal="${petal}"]`)!;
+      const path = footerBloom.querySelector<SVGPathElement>(`[data-bloom-petal-rotate="${petal}"]`)!;
+      petalRotateEls[petal] = path;
+      const b = path.getBBox();
+      petalOrigins[petal] = `${b.x + b.width / 2} ${b.y + b.height / 2}`;
+    });
+
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.out' },
+      scrollTrigger: { trigger: footerBloom, start: 'top 75%', once: true },
+    });
+
+    tl.from(book, { scaleX: 1.67, scaleY: 0.96, opacity: 0, svgOrigin: bookOrigin, duration: 2 }, 0);
+
+    PETALS.forEach((petal) => {
+      const cfg = PETAL_CONFIG[petal];
+      tl.from(
+        petalEls[petal],
+        { x: cfg.fromX, y: cfg.fromY, scaleX: cfg.fromScale, scaleY: cfg.fromScale, opacity: 0, svgOrigin: sharedOrigin, duration: cfg.duration },
+        cfg.start,
+      );
+      tl.from(
+        petalRotateEls[petal],
+        { rotation: cfg.fromRotation, svgOrigin: petalOrigins[petal], duration: cfg.duration },
+        cfg.start,
+      );
+    });
+
+    tl.from(pen, { y: 150, opacity: 0, duration: 1, ease: 'back.out(1.6)' }, 2);
   }
 });
