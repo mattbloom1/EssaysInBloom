@@ -258,6 +258,21 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     tl.from(pen, { y: 150, opacity: 0, duration: 1, ease: 'back.out(1.6)' }, 2);
   }
 
+  // Pen pop — hovering the header logo lifts the pen out of the book a
+  // touch, then settles it back on leave. Hover-capable pointers only, so
+  // touch taps never leave the pen stuck up. overwrite kills the bloom
+  // timeline's competing y tween if someone hovers mid-bloom.
+  const logoLink = document.querySelector<HTMLElement>('.header__logo');
+  if (bloomMark && logoLink && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const pen = bloomMark.querySelector<SVGGElement>('[data-bloom-pen]')!;
+    logoLink.addEventListener('pointerenter', () => {
+      gsap.to(pen, { y: -28, duration: 0.3, ease: 'back.out(2)', overwrite: 'auto' });
+    });
+    logoLink.addEventListener('pointerleave', () => {
+      gsap.to(pen, { y: 0, duration: 0.45, ease: 'power3.out', overwrite: 'auto' });
+    });
+  }
+
   // Animated liquid mesh behind the CTA. Mounted inside the reduced-motion
   // gate on purpose: reduced-motion users keep the static CSS gradient
   // fallback that shows through the untouched canvas.
