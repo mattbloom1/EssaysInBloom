@@ -102,20 +102,39 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
   const ctaBand = document.querySelector<HTMLElement>('[data-cta-band]');
   const ctaPanel = ctaBand?.querySelector<HTMLElement>('[data-cta]');
   if (ctaBand && ctaPanel) {
-    gsap.to(ctaPanel, {
-      // 100% of the full-width band, not 100vw — vw includes the scrollbar
-      // gutter, which pushed the panel past the viewport at full scroll.
-      width: '100%',
-      borderRadius: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: ctaBand,
-        start: 'top 85%',
-        end: 'top 20%',
-        scrub: 1,
-        invalidateOnRefresh: true,
+    // Both ends must be deterministic (fromTo + a measured "from"): a plain
+    // .to() from the current width re-records mid-tween values whenever
+    // ScrollTrigger refreshes (fonts, images, scroll restoration), ratcheting
+    // the panel toward stuck-open or stuck-closed.
+    const naturalWidth = () => {
+      const inline = ctaPanel.style.width;
+      ctaPanel.style.width = '';
+      const w = ctaPanel.offsetWidth;
+      ctaPanel.style.width = inline;
+      return `${w}px`;
+    };
+    const naturalRadius = getComputedStyle(ctaPanel).borderRadius;
+    gsap.fromTo(
+      ctaPanel,
+      { width: naturalWidth, borderRadius: naturalRadius },
+      {
+        // 100% of the full-width band, not 100vw — vw includes the scrollbar
+        // gutter, which pushed the panel past the viewport at full scroll.
+        width: '100%',
+        borderRadius: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: ctaBand,
+          // clamp() keeps both positions inside the page's scrollable range,
+          // so the expansion always completes by max scroll even on short
+          // pages where the band never reaches 20% from the top.
+          start: 'clamp(top 85%)',
+          end: 'clamp(top 20%)',
+          scrub: 1,
+          invalidateOnRefresh: true,
+        },
       },
-    });
+    );
   }
 
   // Scroll-triggered staggered reveals
