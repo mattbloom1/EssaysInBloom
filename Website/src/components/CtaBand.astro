@@ -14,9 +14,10 @@ const {
 ---
 
 <!-- Full-bleed band; the inner panel starts container-width and motion.ts
-     scrubs it out to 100vw as it scrolls into view. The canvas is the
-     animated liquid mesh gradient (mesh-gradient.ts); the CSS gradient
-     underneath is the no-WebGL / reduced-motion fallback. -->
+     scrubs it out to full width as it scrolls into view. The canvas is the
+     animated liquid mesh gradient (mesh-gradient.ts), held at viewport width
+     so the widening panel reveals more of it instead of stretching it; the
+     CSS gradient underneath is the no-WebGL / reduced-motion fallback. -->
 <section class="cta-band" data-cta-band>
   <div class="cta" data-cta>
     <canvas class="cta__mesh" data-cta-mesh aria-hidden="true"></canvas>
@@ -30,9 +31,9 @@ const {
 
 <style>
   .cta-band {
-    /* no bottom padding: the band always sits last in <main>, and the
-       expanded panel should meet the footer edge-to-edge */
-    padding-block: var(--space-20) 0;
+    /* symmetric padding: the band sits last in <main>, with breathing room
+       between the expanded panel and the footer */
+    padding-block: var(--space-20);
   }
 
   .cta {
@@ -44,11 +45,16 @@ const {
     background: var(--gradient-bloom);
   }
 
+  /* Pinned at viewport width and centered, so its size never changes while
+     the panel's width animates — the panel just clips a stable gradient
+     (stretching the canvas would warp the noise field every scroll frame). */
   .cta__mesh {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
     display: block;
   }
 
