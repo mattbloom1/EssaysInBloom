@@ -1,6 +1,6 @@
 /**
  * Liquid mesh gradient — one continuous, domain-warped fbm noise field
- * (Inigo Quilez "warp fbm by fbm") mapped onto a 5-stop brand color ramp.
+ * (Inigo Quilez "warp fbm by fbm") mapped onto a brand color ramp.
  * Vanilla port of the Framer reference component (Desktop/mesh), recolored
  * from the Essays in Bloom tokens at mount time so it always matches the
  * active theme instead of hard-coding hex values.
@@ -9,10 +9,66 @@
  * host) simply stays visible through the transparent canvas.
  */
 
-const SPEED = 0.045; // flow tempo (lower = slower drift)
-const SCALE = 2.2; // noise frequency (lower = larger, softer features)
-const WARP = 4.2; // domain-warp strength (higher = more liquid folding)
-const STRETCH = 1.9; // >1 = wide streaky horizontal bands
+// ─────────────────────────────────────────────────────────────────────────
+// TWEAK ME — everything adjustable lives here.
+// ─────────────────────────────────────────────────────────────────────────
+const CONFIG = {
+  // ── Motion ──────────────────────────────────────────────────────────
+  speed: 0.12, // flow tempo (lower = slower drift)
+  fpsFallback: 30, // frame rate of the setTimeout fallback loop
+
+  // ── Noise field ─────────────────────────────────────────────────────
+  scale: 1, // noise frequency (lower = larger, softer features)
+  warp: 4, // domain-warp strength (higher = more liquid folding)
+  stretch: 0.8, // >1 = wide streaky horizontal bands
+  octaves: 2, // fbm detail layers (more = finer, costlier)
+  gain: 0.2, // amplitude falloff per octave (0–1; lower = smoother)
+  lacunarity: 2.5, // frequency growth per octave (higher = more detail)
+
+  // ── Value blend (composes the scalar fed to the color ramp) ─────────
+  warpWeight: 0.65, // weight of the final warped fbm value
+  foldWeight: 0.35, // weight of the warp-vector length (adds contrast)
+
+  // ── Rendering ───────────────────────────────────────────────────────
+  maxDpr: 2, // device-pixel-ratio cap (higher = sharper, costlier)
+
+  // ── Colors ──────────────────────────────────────────────────────────
+  // Pulled from CSS tokens at mount; the hexes are fallbacks only.
+  // Brand ramp, dark → light: evergreen holds most of the field, hunter
+  // green mid-tones, bronze high-value streaks, periwinkle the rare peaks.
+  colors: {
+    evergreenToken: '--evergreen',
+    evergreen: '#133430',
+    hunterToken: '--hunter-green',
+    hunter: '#29603D',
+    bronzeToken: '--light-bronze',
+    bronze: '#E0A98D',
+    periwinkleToken: '--periwinkle', // "Essays in Bloom" lavender blue
+    periwinkle: '#8B8FD4',
+    shadowMix: 0.25, // darken evergreen toward black for the lowest stop
+    midMix: 0.5, // hunter → bronze blend for the mid-high stop
+  },
+};
+// ─────────────────────────────────────────────────────────────────────────
+
+/** Number of color stops in the ramp — must match the recipe in buildRamp. */
+const STOPS = 6;
+
+/** Format a JS number as a GLSL float literal (always has a decimal point). */
+const glf = (n: number): string => (Number.isInteger(n) ? n.toFixed(1) : String(n));
+
+/** Generate the GLSL `ramp()` function for `stops` evenly-spaced color stops.
+ * Unrolls into an if-chain over the (stops - 1) segments so the number of
+ * colors can change without hand-editing shader source. */
+function rampGLSL(stops: number): string {
+  const seg = stops - 1;
+  const lines = [`    t = clamp(t, 0.0, 1.0) * ${glf(seg)};`];
+  for (let i = 0; i < seg - 1; i++) {
+    lines.push(`    if (t < ${glf(i + 1)}) return mix(u_ramp[${i}], u_ramp[${i + 1}], t - ${glf(i)});`);
+  }
+  lines.push(`    return mix(u_ramp[${seg - 1}], u_ramp[${seg}], t - ${glf(seg - 1)});`);
+  return `vec3 ramp(float t) {\n${lines.join('\n')}\n}`;
+}
 
 const VERT = `
 attribute vec2 a;
@@ -23,7 +79,7 @@ const FRAG = `
 precision highp float;
 uniform vec2 u_res;
 uniform float u_time;
-uniform vec3 u_ramp[5];
+uniform vec3 u_ramp[${STOPS}];
 
 float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123); }
 
@@ -35,31 +91,28 @@ float noise(vec2 p) {
 }
 
 float fbm(vec2 p) {
-    float v = 0.0, a = 0.5;
-    for (int i = 0; i < 5; i++) { v += a * noise(p); p *= 2.0; a *= 0.5; }
-    return v;
+    // norm accumulates total amplitude so the result stays in [0, 1] no matter
+    // how octaves/gain are tuned — otherwise low settings shrink the range and
+    // the top color stops (bronze, periwinkle) become unreachable.
+    float v = 0.0, a = 0.5, norm = 0.0;
+    for (int i = 0; i < ${CONFIG.octaves}; i++) { v += a * noise(p); norm += a; p *= ${glf(CONFIG.lacunarity)}; a *= ${glf(CONFIG.gain)}; }
+    return v / norm;
 }
 
-vec3 ramp(float t) {
-    t = clamp(t, 0.0, 1.0) * 4.0;
-    if (t < 1.0) return mix(u_ramp[0], u_ramp[1], t);
-    if (t < 2.0) return mix(u_ramp[1], u_ramp[2], t - 1.0);
-    if (t < 3.0) return mix(u_ramp[2], u_ramp[3], t - 2.0);
-    return mix(u_ramp[3], u_ramp[4], t - 3.0);
-}
+${rampGLSL(STOPS)}
 
 void main() {
     vec2 uv = gl_FragCoord.xy / u_res;
-    vec2 p = uv * ${SCALE.toFixed(1)};
-    p.x /= ${STRETCH.toFixed(1)};
-    float t = u_time * ${SPEED.toFixed(3)};
+    vec2 p = uv * ${glf(CONFIG.scale)};
+    p.x /= ${glf(CONFIG.stretch)};
+    float t = u_time * ${glf(CONFIG.speed)};
 
     vec2 q = vec2(fbm(p + vec2(0.0, 0.0)), fbm(p + vec2(5.2, 1.3)));
-    vec2 r = vec2(fbm(p + ${WARP.toFixed(1)} * q + vec2(1.7, 9.2) + t),
-                  fbm(p + ${WARP.toFixed(1)} * q + vec2(8.3, 2.8) - t));
-    float f = fbm(p + ${WARP.toFixed(1)} * r);
+    vec2 r = vec2(fbm(p + ${glf(CONFIG.warp)} * q + vec2(1.7, 9.2) + t),
+                  fbm(p + ${glf(CONFIG.warp)} * q + vec2(8.3, 2.8) - t));
+    float f = fbm(p + ${glf(CONFIG.warp)} * r);
 
-    float v = f * 0.65 + length(r) * 0.35;
+    float v = f * ${glf(CONFIG.warpWeight)} + length(r) * ${glf(CONFIG.foldWeight)};
     gl_FragColor = vec4(ramp(v), 1.0);
 }
 `;
@@ -84,6 +137,23 @@ function token(name: string, fallback: string): string {
   return /^#[0-9a-fA-F]{6}$/.test(v) ? v : fallback;
 }
 
+/** Resolve the brand color ramp (dark → light) from CSS tokens, falling back
+ * to the CONFIG hexes. Length MUST equal STOPS (the shader is sized to it). */
+function buildRamp(c: typeof CONFIG.colors): string[] {
+  const evergreen = token(c.evergreenToken, c.evergreen);
+  const hunter = token(c.hunterToken, c.hunter);
+  const bronze = token(c.bronzeToken, c.bronze);
+  const periwinkle = token(c.periwinkleToken, c.periwinkle);
+  return [
+    lerpHex(evergreen, '#000000', c.shadowMix), // 0 — deepest shadow
+    evergreen, //                                  1
+    hunter, //                                     2
+    lerpHex(hunter, bronze, c.midMix), //          3 — green→bronze mid
+    bronze, //                                     4 — warm highlight
+    periwinkle, //                                 5 — brightest peaks
+  ];
+}
+
 function compile(gl: WebGLRenderingContext, type: number, src: string) {
   const s = gl.createShader(type)!;
   gl.shaderSource(s, src);
@@ -97,20 +167,7 @@ export function mountMeshGradient(canvas: HTMLCanvasElement): (() => void) | und
   const gl = canvas.getContext('webgl', { antialias: true });
   if (!gl) return;
 
-  // Brand ramp, dark → light: evergreen holds most of the field, hunter
-  // green mid-tones, bronze only as high-value streaks. Swatches come from
-  // the CSS tokens at runtime (the hexes here are only their fallbacks, plus
-  // black as a darkening constant).
-  const evergreen = token('--evergreen', '#133430');
-  const hunter = token('--hunter-green', '#29603D');
-  const bronze = token('--light-bronze', '#E0A98D');
-  const RAMP = [
-    lerpHex(evergreen, '#000000', 0.25),
-    evergreen,
-    hunter,
-    lerpHex(hunter, bronze, 0.5),
-    bronze,
-  ];
+  const RAMP = buildRamp(CONFIG.colors);
 
   const program = gl.createProgram()!;
   gl.attachShader(program, compile(gl, gl.VERTEX_SHADER, VERT));
@@ -131,7 +188,7 @@ export function mountMeshGradient(canvas: HTMLCanvasElement): (() => void) | und
   gl.uniform3fv(uRamp, new Float32Array(RAMP.flatMap(hexToRGB)));
 
   const resize = () => {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, CONFIG.maxDpr);
     const w = Math.max(1, Math.round(canvas.clientWidth * dpr));
     const h = Math.max(1, Math.round(canvas.clientHeight * dpr));
     if (canvas.width !== w || canvas.height !== h) {
@@ -165,7 +222,7 @@ export function mountMeshGradient(canvas: HTMLCanvasElement): (() => void) | und
     draw(now / 1000);
     if (document.hidden) return;
     raf = requestAnimationFrame(render);
-    timer = window.setTimeout(() => render(performance.now()), 1000 / 30);
+    timer = window.setTimeout(() => render(performance.now()), 1000 / CONFIG.fpsFallback);
   };
   const onVisibility = () => {
     if (!document.hidden) render(performance.now());
