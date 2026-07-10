@@ -32,6 +32,31 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     }
   }
 
+  // "What's your story?" — while the pointer rests on the hero title, the
+  // word "story" cycles through the brand's type families (Futura → The
+  // Seasons → Artifex hand script). Styling lives on [data-font] in
+  // index.astro; leaving resets it to the heading's own face.
+  const storyFlip = document.querySelector<HTMLElement>('[data-story-flip]');
+  if (storyFlip) {
+    const heading = storyFlip.closest('h1') ?? storyFlip;
+    const FACES = 3; // 0 = inherited futura, 1 = the-seasons, 2 = artifex script
+    let face = 0;
+    let timer = 0;
+    const show = (next: number) => {
+      face = next;
+      if (face === 0) delete storyFlip.dataset.font;
+      else storyFlip.dataset.font = String(face);
+    };
+    heading.addEventListener('pointerenter', () => {
+      show((face + 1) % FACES);
+      timer = window.setInterval(() => show((face + 1) % FACES), 500);
+    });
+    heading.addEventListener('pointerleave', () => {
+      window.clearInterval(timer);
+      show(0);
+    });
+  }
+
   // Hero photo parallax — the img is 126% of its clipping box's height, so
   // sliding it up as the page scrolls stays inside the rounded frame.
   const heroMedia = document.querySelector<HTMLElement>('[data-hero-media]');
@@ -160,8 +185,22 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
   // shared spine origin while spinning into place, then the pen nib rises
   // last. (Values were tuned when this lived above the footer; they scale
   // with the SVG, so they hold at logo size.)
+  // …but only once per visit: the timestamp refreshes on every page load, so
+  // browsing around the site keeps the logo still, and it blooms again only
+  // after 10+ minutes away. Storage failure (private mode) = always play.
+  const BLOOM_LAST_KEY = 'eib-bloom-last';
+  const BLOOM_COOLDOWN_MS = 10 * 60 * 1000;
+  let bloomDue = true;
+  try {
+    const last = Number(localStorage.getItem(BLOOM_LAST_KEY));
+    bloomDue = !(Date.now() - last < BLOOM_COOLDOWN_MS);
+    localStorage.setItem(BLOOM_LAST_KEY, String(Date.now()));
+  } catch {
+    /* keep bloomDue = true */
+  }
+
   const bloomMark = document.querySelector('[data-bloom]');
-  if (bloomMark) {
+  if (bloomMark && bloomDue) {
     const book = bloomMark.querySelector<SVGGElement>('[data-bloom-book]')!;
     const pen = bloomMark.querySelector<SVGGElement>('[data-bloom-pen]')!;
 

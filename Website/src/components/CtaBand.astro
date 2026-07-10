@@ -65,10 +65,16 @@ const {
   }
 
   /* Keeps the title's side of the panel dark enough for the cream text no
-     matter where the mesh's bronze highlights drift. */
+     matter where the mesh's bronze highlights drift. Pinned at viewport
+     width exactly like the canvas: sized to the panel (inset: 0) its sweep
+     would visibly stretch while the panel's width animates. */
   .cta__scrim {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 100%;
+    transform: translateX(-50%);
     background: linear-gradient(
       100deg,
       color-mix(in srgb, var(--evergreen) 55%, transparent) 0%,

@@ -52,7 +52,7 @@ const steps = [
       <div class="container hero__grid">
         <div class="hero__copy">
           <p class="eyebrow" data-hero-copy>College application essay coaching</p>
-          <h1 data-hero-title>What’s <span class="tint">your</span> story?</h1>
+          <h1 data-hero-title>What’s <span class="tint">your</span> <span data-story-flip>story</span>?</h1>
           <p class="lede" data-hero-copy>
             Not sure? Together, we clarify the roles you play, what you do, and
             what you care about — and grow it into a narrative that shows
@@ -161,7 +161,7 @@ const steps = [
 
     <!-- Testimonials -->
     <section class="section" data-reveal>
-      <div class="container container--narrow">
+      <div class="container">
         <div class="section__head section__head--center">
           <p class="eyebrow" data-reveal-child>Kind words</p>
           <h2 data-reveal-child>Stories that bloomed</h2>
@@ -202,6 +202,25 @@ const steps = [
     display: grid;
     gap: var(--space-6);
     justify-items: start;
+  }
+
+  /* Hover easter egg (motion.ts): while the pointer rests on the title, the
+     word "story" cycles through the brand's type families via data-font. */
+  [data-story-flip] {
+    /* inline-block so the word swaps as one unit instead of re-wrapping */
+    display: inline-block;
+  }
+
+  [data-story-flip][data-font='1'] {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-heading);
+  }
+
+  [data-story-flip][data-font='2'] {
+    font-family: var(--font-display);
+    font-weight: var(--weight-display);
+    /* the hand script reads as scribble in caps — show it lowercase */
+    text-transform: lowercase;
   }
 
   .hero__actions {
@@ -344,6 +363,34 @@ const steps = [
   /* --- Testimonials (shared .testimonial styles live in components.css) --- */
   .testimonial-list {
     display: grid;
+    /* stacked reading column while the entries flow vertically */
+    max-width: var(--container-narrow);
+    margin-inline: auto;
+  }
+
+  /* Desktop: the three featured quotes sit side by side */
+  @media (min-width: 901px) {
+    .testimonial-list {
+      max-width: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-10);
+      align-items: start;
+    }
+
+    /* the divider bars and tall stacked padding only make sense vertically */
+    .testimonial-list .testimonial + .testimonial::before {
+      display: none;
+    }
+
+    .testimonial-list .testimonial {
+      padding-block: var(--space-6) 0;
+    }
+
+    /* the homepage pull-quote size is tuned for one wide column; step it
+       down so three abreast don't fight each other */
+    .testimonial-list .testimonial blockquote p {
+      font-size: var(--text-lg);
+    }
   }
 
   .testimonials__more {
