@@ -8,7 +8,10 @@
       }
 
       .st1 {
-        fill: #feca06;
+        /* brand maize is #feca06; the site's logo wall renders every logo
+           pure black via a contrast filter, and the light maize M lands on
+           the filter threshold and glitches — keep this copy single-color */
+        fill: #052b4f;
       }
     </style>
   </defs>

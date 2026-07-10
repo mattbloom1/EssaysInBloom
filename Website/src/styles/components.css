@@ -166,6 +166,9 @@
   grid-template-columns: repeat(5, 1fr);
   gap: var(--space-8) var(--space-6);
   list-style: none;
+  /* it's a <ul> — default inline padding shifts the wall off-center */
+  padding: 0;
+  margin: 0;
 }
 
 .school-grid__item {
