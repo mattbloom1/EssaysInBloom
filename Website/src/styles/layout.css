@@ -13,6 +13,13 @@
   padding-block: var(--space-20);
 }
 
+/* The page intro carries its own bottom padding, so the first content
+   section after it pulls closer — full section padding on top of the
+   intro's reads as a dead zone between the lede and the content. */
+.intro + .section {
+  padding-block-start: var(--space-8);
+}
+
 .section__head {
   display: grid;
   gap: var(--space-3);

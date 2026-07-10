@@ -22,8 +22,8 @@ const legal = [
 <footer class="footer">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <img src={withBase('/logos/half-cream.svg')} alt="Essays in Bloom" width="167" height="60" />
-      <p class="footer__tagline">What’s Your Story?</p>
+      {/* Full stacked lockup — includes the "What's Your Story?" tagline */}
+      <img src={withBase('/logos/full-cream.svg')} alt="Essays in Bloom — What's Your Story?" width="143" height="175" />
     </div>
     <nav class="footer__col" aria-label="Footer">
       <h3>Explore</h3>
@@ -62,15 +62,8 @@ const legal = [
   }
 
   .footer__brand img {
-    height: 52px;
+    height: 148px;
     width: auto;
-  }
-
-  .footer__tagline {
-    margin-top: var(--space-4);
-    font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    color: var(--light-bronze);
   }
 
   .footer__col {

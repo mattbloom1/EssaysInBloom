@@ -128,6 +128,10 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
       duration: 0.8,
       ease: 'power3.out',
       stagger: 0.1,
+      // strip inline transform/opacity once each element lands — an
+      // interrupted tween can otherwise freeze siblings mid-stagger,
+      // leaving side-by-side cards permanently offset
+      clearProps: 'all',
       scrollTrigger: { trigger: section, start: 'top 80%', once: true },
     });
   });
