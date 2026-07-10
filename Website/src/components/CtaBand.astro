@@ -30,7 +30,9 @@ const {
 
 <style>
   .cta-band {
-    padding-block: var(--space-20);
+    /* no bottom padding: the band always sits last in <main>, and the
+       expanded panel should meet the footer edge-to-edge */
+    padding-block: var(--space-20) 0;
   }
 
   .cta {

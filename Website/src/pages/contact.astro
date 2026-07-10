@@ -22,7 +22,7 @@ import PageIntro from '../components/PageIntro.astro';
         </div>
         <div class="card card--paper contact-card" data-reveal-child>
           <h3>Helpful to include</h3>
-          <ul class="contact-list">
+          <ul class="check-list">
             <li>Student's grade year and application deadlines</li>
             <li>Where you are — no topic yet, drafting, or polishing</li>
             <li>Whether you're thinking 1:1 coaching or a workshop</li>
@@ -47,20 +47,6 @@ import PageIntro from '../components/PageIntro.astro';
     gap: var(--space-4);
     justify-items: start;
     align-content: start;
-  }
-
-  .contact-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .contact-list li {
-    padding-left: var(--space-6);
-    background: no-repeat 0 0.45em / 0.9em 0.9em
-      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2329603D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg>');
   }
 
   .contact-note {

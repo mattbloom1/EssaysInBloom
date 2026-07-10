@@ -61,7 +61,6 @@
   background: var(--periwinkle);
   color: var(--color-primary);
 }
-.card--peri-tint { background: var(--peri-25); }
 
 /* Edge-to-edge photo card */
 .card--photo {
@@ -75,18 +74,83 @@
   object-fit: cover;
 }
 
-.quote blockquote {
-  margin: 0 0 var(--space-4);
-  font-size: var(--text-md);
-  line-height: 1.5;
+/* --- Testimonials (homepage list + testimonials page) --- */
+.testimonial {
+  margin: 0;
+  padding-block: var(--space-10);
+  display: grid;
+  gap: var(--space-4);
 }
 
-.quote figcaption {
+/* soft divider bar between entries, not a hard border */
+.testimonial + .testimonial::before {
+  content: '';
+  width: 48px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--soft-50);
+  margin-bottom: var(--space-6);
+}
+
+.testimonial blockquote {
+  margin: 0;
+}
+
+.testimonial blockquote p {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  color: var(--color-primary);
+  text-wrap: pretty;
+}
+
+.testimonial figcaption {
   font-family: var(--font-subheading);
   font-weight: var(--weight-subheading);
   text-transform: uppercase;
   font-size: var(--text-sm);
   color: var(--color-accent);
+}
+
+/* Centered variant (homepage) */
+.testimonial--center {
+  justify-items: center;
+  text-align: center;
+}
+
+.testimonial--center blockquote p {
+  font-size: var(--text-xl);
+}
+
+.testimonial--center + .testimonial--center::before {
+  margin-bottom: var(--space-8);
+}
+
+/* --- Checkmark bullet list (coaching packages, contact checklist) --- */
+.check-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.check-list li {
+  position: relative;
+  padding-left: var(--space-6);
+}
+
+/* masked so the check inherits the accent token instead of a baked-in hex */
+.check-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.9em;
+  height: 0.9em;
+  background: var(--color-accent);
+  mask: no-repeat center / contain
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg>');
 }
 
 /* --- Link underline sweep --- */
@@ -133,6 +197,9 @@
      override, or the logos would invert toward white and vanish into the
      still-light band. */
   filter: grayscale(1) brightness(0.8) contrast(20);
+  /* Multiply the thresholded result onto the band: white (and any remaining
+     light tone) becomes the section background, so tiles are black + bg only. */
+  mix-blend-mode: multiply;
 }
 
 .school-grid__name {

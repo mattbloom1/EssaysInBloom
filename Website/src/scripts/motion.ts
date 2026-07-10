@@ -103,7 +103,9 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
   const ctaPanel = ctaBand?.querySelector<HTMLElement>('[data-cta]');
   if (ctaBand && ctaPanel) {
     gsap.to(ctaPanel, {
-      width: '100vw',
+      // 100% of the full-width band, not 100vw — vw includes the scrollbar
+      // gutter, which pushed the panel past the viewport at full scroll.
+      width: '100%',
       borderRadius: 0,
       ease: 'none',
       scrollTrigger: {
@@ -130,13 +132,15 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     });
   });
 
-  // Footer bloom (homepage only) — the book opens, then each petal grows in
-  // from a near-invisible point at the shared spine origin while spinning
-  // into place, then the pen nib rises last.
-  const footerBloom = document.querySelector('[data-footer-bloom]');
-  if (footerBloom) {
-    const book = footerBloom.querySelector<SVGGElement>('[data-bloom-book]')!;
-    const pen = footerBloom.querySelector<SVGGElement>('[data-bloom-pen]')!;
+  // Header logo bloom — on every page load the mark assembles itself: the
+  // book opens, then each petal grows in from a near-invisible point at the
+  // shared spine origin while spinning into place, then the pen nib rises
+  // last. (Values were tuned when this lived above the footer; they scale
+  // with the SVG, so they hold at logo size.)
+  const bloomMark = document.querySelector('[data-bloom]');
+  if (bloomMark) {
+    const book = bloomMark.querySelector<SVGGElement>('[data-bloom-book]')!;
+    const pen = bloomMark.querySelector<SVGGElement>('[data-bloom-pen]')!;
 
     const PETALS = ['inner-left', 'inner-right', 'mid-left', 'mid-right', 'outer-left', 'outer-right'] as const;
     const PETAL_CONFIG: Record<(typeof PETALS)[number], { fromX: number; fromY: number; fromScale: number; fromRotation: number; duration: number; start: number }> = {
@@ -164,17 +168,14 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     const petalRotateEls: Record<string, SVGPathElement> = {};
     const petalOrigins: Record<string, string> = {};
     PETALS.forEach((petal) => {
-      petalEls[petal] = footerBloom.querySelector<SVGGElement>(`[data-bloom-petal="${petal}"]`)!;
-      const path = footerBloom.querySelector<SVGPathElement>(`[data-bloom-petal-rotate="${petal}"]`)!;
+      petalEls[petal] = bloomMark.querySelector<SVGGElement>(`[data-bloom-petal="${petal}"]`)!;
+      const path = bloomMark.querySelector<SVGPathElement>(`[data-bloom-petal-rotate="${petal}"]`)!;
       petalRotateEls[petal] = path;
       const b = path.getBBox();
       petalOrigins[petal] = `${b.x + b.width / 2} ${b.y + b.height / 2}`;
     });
 
-    const tl = gsap.timeline({
-      defaults: { ease: 'power3.out' },
-      scrollTrigger: { trigger: footerBloom, start: 'top 75%', once: true },
-    });
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     tl.from(book, { scaleX: 1.67, scaleY: 0.96, opacity: 0, svgOrigin: bookOrigin, duration: 2 }, 0);
 

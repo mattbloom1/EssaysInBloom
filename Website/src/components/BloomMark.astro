@@ -1,0 +1,80 @@
+---
+/**
+ * The Essays in Bloom mark (open book + petals + pen), structured for the
+ * bloom load-in animation in scripts/motion.ts: the book opens, each petal
+ * grows in from the spine, the pen nib rises last. Groups are keyed with
+ * data-bloom-* attributes the timeline targets; rendered statically (and for
+ * reduced motion) it is simply the full mark.
+ */
+---
+
+<svg
+  class="bloom-mark"
+  viewBox="0 0 657.4 354.6"
+  xmlns="http://www.w3.org/2000/svg"
+  data-bloom
+  aria-hidden="true"
+  focusable="false"
+>
+  <!-- Book base: the open-pages silhouette -->
+  <g data-bloom-book>
+    <path d="M652.1,324.4c-12-17.2-24-33.7-35.2-50.9-70.4,29.2-149-18.7-217.9,15.7-16.5,7.5-30.7,18.7-46.4,29.9-6-2.2-11.2-6.7-24-6.7-34.4,3.7-12,15.7-44.9-9-71.1-58.4-164.7,0-242.6-30.7-12.7,20.2-27.7,40.4-41.2,60.6,94.3,11.2,195.4-33.7,287.5.7,13.5,6.7,24.7,22.5,41.2,20.2,17.2,2.2,28.5-13.5,41.2-21,92.8-32.2,192.4,9,287.5.7-2.2-3.7-3-6.7-5.2-9.7h0ZM345.9,343.9c-5.4,5.7-24,3.9-31.4,1.5-1.6-.5-6.7-1.5-5.2-4.5,6-5.2,10.5,3.7,18.7,3,8.2,0,11.2-1.5,15.7-5.2,3-1.5,3.2,4.2,2.2,5.2Z"/>
+  </g>
+
+  <!-- Petals: three mirrored tiers, closest-to-spine first. The outer group
+       (data-bloom-petal) handles position/scale; rotation lives on the <path>
+       (data-bloom-petal-rotate) because fill-box only resolves against an
+       element's own geometry. -->
+  <g data-bloom-petal="inner-left">
+    <path data-bloom-petal-rotate="inner-left" d="M65.1,275.7c90.6,10.5,161.7-33.7,241.1,38.2.7,0,1.5-.7,3-1.5-47.2-71.1-148.2-55.4-209.6-107.1-18.7,22.5-41.2,40.4-63.6,59.1,9,6,19.5,9,29.2,11.2h0Z"/>
+  </g>
+  <g data-bloom-petal="inner-right">
+    <path data-bloom-petal-rotate="inner-right" d="M559.3,205.4c-62.9,50.9-160.2,36.7-209.6,106.3,1.5,0,2.2,1.5,3.7,1.5,97.3-86.9,174.5-5.2,270.3-48.7-22.5-18.7-44.9-36.7-63.6-59.1h-.7Z"/>
+  </g>
+  <g data-bloom-petal="mid-left">
+    <path data-bloom-petal-rotate="mid-left" d="M99.6,198.6c62.1,53.9,166.2,37.4,214.1,111.6,1.5,0,2.2-.7,4.5-1.5-24-93.6-120.5-92.8-148.2-170.7-33.7-25.5-71.1,6-105.6,9,7.5,20.2,19.5,36.7,35.2,51.7h0Z"/>
+  </g>
+  <g data-bloom-petal="mid-right">
+    <path data-bloom-petal-rotate="mid-right" d="M558.6,197.9c14.2-15,27-30.7,33.7-50.2-36.7-5.2-68.9-38.2-104.1-11.2-1.5,4.5-3,9-5.2,13.5h0c-36.7,67.4-122.8,71.1-143,158.7,1.5,0,2.2,0,3.7.7,49.4-72.6,149-58.4,212.6-109.3l2.2-2.2Z"/>
+  </g>
+  <g data-bloom-petal="outer-left">
+    <path data-bloom-petal-rotate="outer-left" d="M169.2,115.5c16.5,95.8,125.8,89.1,153.5,188.7,3.7-12-3.7-23.2-3.7-34.4-2.2-19.5-7.5-38.2-9.7-56.9-3.7-16.5-7.5-31.4-9-49.4-1.5-13.5-9-24-6-38.2-22.5-42.7-86.9-50.9-98.8-101.1-21,25.5-32.9,59.1-26.2,91.3h0Z"/>
+  </g>
+  <g data-bloom-petal="outer-right">
+    <path data-bloom-petal-rotate="outer-right" d="M351.9,175.4c-3.7,23.2-6.7,47.9-10.5,71.9-1.5,18.7-9.7,38.2-5.2,57.7,19.5-79.4,89.1-88.4,133.3-142.3,29.2-40.4,28.5-101.1-5.2-139.3-13.5,51.7-80.1,58.4-106.3,100.3,4.5,9,.7,17.2,0,25.5-1.5,9.7-4.5,18-6,26.2h0Z"/>
+  </g>
+
+  <!-- Pen nib + stem, rises last -->
+  <g data-bloom-pen>
+    <path d="M310.7,112.5c10.5-5.2,21.7-5.2,32.2,1.5,2.2-17.2,11.2-35.9,18-51.7-10.9-20.4-20.5-40.2-28.9-61.6-.5-1.3-2.3-.9-2.3.4.3,12.8-.2,26-.2,38.7v26.2c0,3.7-6,3.7-5.2,0,.7-22.2,1.3-42,.9-63.7,0-1.4-1.9-1.7-2.3-.4-7,21.1-17.7,40-27.8,59.6,6,16.5,12.7,32.9,15.7,50.9h0Z"/>
+    <path d="M301,145.5c6,22.5,6.7,43.4,12.7,65.1,4.5,29.9,12,57.7,14.2,87.6,2.2,9.7,1.5-22.5,3-25.5,9-44.2,12.7-89.1,21.7-133.3,1.5-3.7,3-15-4.5-16.5-6-3-15-9.7-22.5-9-6.7,0-28.5,8.2-27.7,15.7,0,8.2,1.5,8.2,3,15.7h0Z"/>
+  </g>
+</svg>
+
+<style>
+  .bloom-mark {
+    overflow: visible; /* petals travel slightly outside the box mid-animation */
+  }
+
+  .bloom-mark path {
+    fill: currentColor;
+  }
+
+  /* Transform origins the bloom timeline relies on (GSAP feeds exact origins
+     via svgOrigin, but these keep any static/fallback transforms sane). */
+  [data-bloom-book] {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+
+  [data-bloom-pen],
+  [data-bloom-petal] {
+    transform-box: view-box;
+    transform-origin: 50% 87%;
+  }
+
+  [data-bloom-petal-rotate] {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+  }
+</style>

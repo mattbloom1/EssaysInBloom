@@ -15,7 +15,7 @@ import { testimonials } from '../data/testimonials';
     <section class="section container container--narrow" data-reveal>
       <div class="testimonial-page-list">
         {testimonials.map((t) => (
-          <figure class="testimonial-full" data-reveal-child>
+          <figure class="testimonial" data-reveal-child>
             <blockquote>
               <p>“{t.quote}”</p>
             </blockquote>
@@ -29,44 +29,8 @@ import { testimonials } from '../data/testimonials';
 </Base>
 
 <style>
+  /* Entry styling is the shared .testimonial class in components.css */
   .testimonial-page-list {
     display: grid;
-  }
-
-  .testimonial-full {
-    margin: 0;
-    padding-block: var(--space-10);
-    display: grid;
-    gap: var(--space-5);
-  }
-
-  /* soft divider bar, not a hard border */
-  .testimonial-full + .testimonial-full::before {
-    content: '';
-    width: 48px;
-    height: 3px;
-    border-radius: 2px;
-    background: var(--soft-50);
-    margin-bottom: var(--space-6);
-  }
-
-  .testimonial-full blockquote {
-    margin: 0;
-  }
-
-  .testimonial-full blockquote p {
-    font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    line-height: 1.6;
-    color: var(--color-primary);
-    text-wrap: pretty;
-  }
-
-  .testimonial-full figcaption {
-    font-family: var(--font-subheading);
-    font-weight: var(--weight-subheading);
-    text-transform: uppercase;
-    font-size: var(--text-sm);
-    color: var(--color-accent);
   }
 </style>

@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import { withBase } from '../lib/withBase';
 import SchoolGrid from '../components/SchoolGrid.astro';
 import CtaBand from '../components/CtaBand.astro';
-import FooterBloom from '../components/FooterBloom.astro';
 import { schools } from '../data/schools';
 import { testimonials } from '../data/testimonials';
 
@@ -169,7 +168,7 @@ const steps = [
         </div>
         <div class="testimonial-list">
           {homepageTestimonials.map((t) => (
-            <figure class="testimonial" data-reveal-child>
+            <figure class="testimonial testimonial--center" data-reveal-child>
               <blockquote>
                 <p>“{t.excerpt ?? t.quote}”</p>
               </blockquote>
@@ -184,8 +183,6 @@ const steps = [
     </section>
 
     <CtaBand />
-
-    <FooterBloom />
   </main>
 </Base>
 
@@ -344,48 +341,9 @@ const steps = [
     max-width: 38ch;
   }
 
-  /* --- Testimonials --- */
+  /* --- Testimonials (shared .testimonial styles live in components.css) --- */
   .testimonial-list {
     display: grid;
-  }
-
-  .testimonial {
-    margin: 0;
-    padding-block: var(--space-10);
-    display: grid;
-    gap: var(--space-5);
-    justify-items: center;
-    text-align: center;
-  }
-
-  /* soft divider bar, not a hard border (decorative bronze is allowed) */
-  .testimonial + .testimonial::before {
-    content: '';
-    width: 48px;
-    height: 3px;
-    border-radius: 2px;
-    background: var(--soft-50);
-    margin-bottom: var(--space-8);
-  }
-
-  .testimonial blockquote {
-    margin: 0;
-  }
-
-  .testimonial blockquote p {
-    font-family: var(--font-heading);
-    font-size: var(--text-xl);
-    line-height: 1.5;
-    color: var(--color-primary);
-    text-wrap: pretty;
-  }
-
-  .testimonial figcaption {
-    font-family: var(--font-subheading);
-    font-weight: var(--weight-subheading);
-    text-transform: uppercase;
-    font-size: var(--text-sm);
-    color: var(--color-accent);
   }
 
   .testimonials__more {

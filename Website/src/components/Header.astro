@@ -1,5 +1,6 @@
 ---
 import { withBase } from '../lib/withBase';
+import BloomMark from './BloomMark.astro';
 
 const nav = [
   { href: withBase('/about/'), label: 'About' },
@@ -16,7 +17,7 @@ const isActive = (href: string) => path === href || path === href.replace(/\/$/,
 <header class="header">
   <div class="container header__bar">
     <a href={withBase('/')} class="header__logo" aria-label="Essays in Bloom — home">
-      <img src={withBase('/logos/half.svg')} alt="Essays in Bloom" width="167" height="60" />
+      <BloomMark />
     </a>
     <nav class="header__nav" aria-label="Main" id="site-nav">
       {nav.map(({ href, label }) => (
@@ -82,7 +83,12 @@ const isActive = (href: string) => path === href || path === href.replace(/\/$/,
     padding-block: var(--space-4);
   }
 
-  .header__logo img {
+  .header__logo {
+    display: inline-flex;
+    color: var(--color-ink);
+  }
+
+  .header__logo :global(svg) {
     height: 44px;
     width: auto;
   }

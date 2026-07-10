@@ -44,7 +44,7 @@ const packages = [
             <article class="card card--paper card--hover span-2 package" data-reveal-child>
               <h3>{pkg.name}</h3>
               <p>{pkg.blurb}</p>
-              <ul class="package__list">
+              <ul class="check-list">
                 {pkg.includes.map((item) => (
                   <li>{item}</li>
                 ))}
@@ -86,20 +86,6 @@ const packages = [
     display: grid;
     gap: var(--space-4);
     align-content: start;
-  }
-
-  .package__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: var(--space-2);
-  }
-
-  .package__list li {
-    padding-left: var(--space-6);
-    background: no-repeat 0 0.45em / 0.9em 0.9em
-      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%2329603D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 7"/></svg>');
   }
 
   .packages__note {

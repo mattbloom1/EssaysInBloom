@@ -49,7 +49,8 @@ const legal = [
   .footer {
     background: var(--color-primary);
     color: var(--soft-linen);
-    margin-top: var(--space-20);
+    /* no margin-top: the CTA band (or a page's last .section padding)
+       provides the space above, and the CTA panel must touch the footer */
     padding-block: var(--space-16) var(--space-8);
   }
 
