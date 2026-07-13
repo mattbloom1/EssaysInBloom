@@ -16,3 +16,18 @@ body {
   background: var(--color-accent);
   color: var(--soft-linen);
 }
+
+/* Lenis smooth scroll housekeeping (motion.ts mounts it; these classes are
+   set by the library on <html>) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}

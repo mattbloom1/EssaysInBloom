@@ -27,11 +27,13 @@ h1,
   color: var(--color-primary);
 }
 
-/* Serif brand register (The Seasons) for section headings */
+/* Serif brand register (The Seasons) for section headings — fluid: the
+   serif earns more presence on wide viewports (audit: flat 2.5rem read
+   timid next to the display scale) */
 h2 {
   font-family: var(--font-heading);
   font-weight: var(--weight-heading);
-  font-size: var(--text-3xl);
+  font-size: clamp(var(--text-3xl), 1.4rem + 2.2vw, var(--text-4xl));
   color: var(--color-primary);
 }
 

@@ -274,6 +274,14 @@
   .btn:hover  { transform: scale(1.05); }
   .btn:active { transform: scale(0.97); transition-duration: 120ms; }
 
+  /* Photo cards: the image answers the hover, not the frame */
+  .card--photo img {
+    transition: transform var(--dur-med) var(--ease-out-soft);
+  }
+  .card--photo:hover img {
+    transform: scale(1.04);
+  }
+
   /* School tiles: gentle lift, name warms to accent */
   .school-grid__link,
   .school-grid__link img,

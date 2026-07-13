@@ -1,5 +1,6 @@
 ---
 import '../styles/main.css';
+import { ClientRouter } from 'astro:transitions';
 import { withBase } from '../lib/withBase';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -65,6 +66,10 @@ const jsonLd = JSON.stringify({
     <link rel="stylesheet" href="https://use.typekit.net/npx4mzh.css" />
 
     <script type="application/ld+json" set:html={jsonLd} />
+
+    <!-- Client-side navigation with view transitions: pages cross-fade and
+         the scroll scripts re-init via astro:page-load (see motion.ts). -->
+    <ClientRouter />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

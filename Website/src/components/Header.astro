@@ -45,23 +45,32 @@ const isActive = (href: string) => path === href || path === href.replace(/\/$/,
 </header>
 
 <script>
-  const header = document.querySelector('.header')!;
-  const toggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]')!;
-
+  /* ClientRouter swaps the header DOM on every navigation, so element
+     listeners are bound per page inside astro:page-load; the Escape handler
+     is document-level and bound once, resolving the header lazily. */
   const setOpen = (open: boolean) => {
+    const header = document.querySelector('.header');
+    const toggle = header?.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    if (!header || !toggle) return;
     header.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   };
 
-  toggle.addEventListener('click', () => {
-    setOpen(!header.classList.contains('is-open'));
+  document.addEventListener('astro:page-load', () => {
+    const header = document.querySelector('.header')!;
+    const toggle = header.querySelector<HTMLButtonElement>('[data-menu-toggle]')!;
+
+    toggle.addEventListener('click', () => {
+      setOpen(!header.classList.contains('is-open'));
+    });
+
+    // Close when a nav link is chosen.
+    header.querySelectorAll('.header__nav a').forEach((a) => {
+      a.addEventListener('click', () => setOpen(false));
+    });
   });
 
-  // Close when a nav link is chosen or focus leaves via Escape.
-  header.querySelectorAll('.header__nav a').forEach((a) => {
-    a.addEventListener('click', () => setOpen(false));
-  });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') setOpen(false);
   });
