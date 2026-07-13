@@ -1,21 +1,48 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageIntro from '../components/PageIntro.astro';
+
+/* Calendly: replace with the real scheduling link (e.g.
+   https://calendly.com/essaysinbloom/free-consult) and the embed goes live —
+   everything below keys off this one constant. While it still contains
+   REPLACE-ME the page shows the email card as the primary action instead of
+   a broken Calendly frame. */
+const CALENDLY_URL = 'https://calendly.com/REPLACE-ME/free-consult';
+const calendlyReady = !CALENDLY_URL.includes('REPLACE-ME');
 ---
 
 <Base title="Contact — Essays in Bloom" description="Book a free consult — tell us where you are in the application process.">
-  <main>
+  <main id="main">
     <PageIntro
       eyebrow="Contact"
       title="Let's talk"
       lede="Tell us a little about where you are in the application process, and we'll set up a free consult."
     />
+
+    {calendlyReady && (
+      <section class="section section--flush container" data-reveal>
+        <div class="card card--paper booking" data-reveal-child>
+          <h2 class="booking__title">Book your free consult</h2>
+          <div
+            class="calendly-inline-widget"
+            data-url={`${CALENDLY_URL}?hide_gdpr_banner=1&primary_color=29603d`}
+            style="min-width:320px;height:720px;"
+          >
+          </div>
+        </div>
+        <script is:inline src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      </section>
+    )}
+
     <section class="section container container--narrow" data-reveal>
       <div class="contact-grid">
         <div class="card card--soft contact-card" data-reveal-child>
-          {/* TODO: real contact form / scheduling link (Calendly?) */}
-          <h3>For now, email works best</h3>
-          <p>A contact form (or scheduling link) will live here.</p>
+          {calendlyReady ? (
+            <h3>Prefer email?</h3>
+          ) : (
+            <h3>For now, email works best</h3>
+          )}
+          <p>We read everything and reply personally.</p>
           <a href="mailto:essaysinbloom@gmail.com" class="btn btn--primary">
             essaysinbloom@gmail.com
           </a>
@@ -35,6 +62,19 @@ import PageIntro from '../components/PageIntro.astro';
 </Base>
 
 <style>
+  .section--flush {
+    padding-block-end: 0;
+  }
+
+  .booking {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .booking__title {
+    font-size: var(--text-2xl);
+  }
+
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

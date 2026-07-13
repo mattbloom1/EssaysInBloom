@@ -56,12 +56,12 @@ wired up per `DESIGN.md`. Everything below is what's left.
 - [ ] **Real copy** — inner pages now have full filler layouts (About,
   Approach, Coaching, Workshops, Testimonials, Contact); wording still needs
   Alison's review — see "Filler copy review" above.
-- [ ] **Contact form** — contact page is an email button; a form or
-  scheduling link (Calendly?) should replace it.
+- [ ] **Calendly link** — the contact page has a Calendly inline embed wired
+  up behind a placeholder: put the real scheduling URL in `CALENDLY_URL` at
+  the top of `src/pages/contact.astro` and the booking panel appears (until
+  then the page shows the email card as primary).
 - [ ] **Legal pages** — Terms / Privacy / Accessibility are placeholders;
   write real policies before launch.
-- [ ] **Dark theme** — tokens support it (`data-theme="dark"` remaps roles)
-  but there's no toggle and it's untested.
 - [ ] **SEO/meta** — per-page descriptions, OG images, sitemap.
 - [x] **Deployment (test)** — GitHub Pages via
   `.github/workflows/deploy-pages.yml`: every push to `main` that touches

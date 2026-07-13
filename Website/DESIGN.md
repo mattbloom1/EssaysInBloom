@@ -6,17 +6,19 @@ v.final) and mapped to code where relevant. The brand book is the source of
 truth; this file is the web translation of it.
 
 In code, colors and fonts live as CSS custom properties in
-`src/styles/tokens.css` — always use the tokens, never raw hex values, so the
-dark variant keeps working.
+`src/styles/tokens.css` — always use the tokens, never raw hex values, so
+palette changes stay one-file edits.
 
 ---
 
 ## Colors
 
-Two palettes, each with the same five roles. Light is the default; dark remaps
-the roles (opt in with `data-theme="dark"` on `<html>`).
+The brand book defines two palettes with the same five roles. **The site
+implements the light palette only** — dark-mode support was removed
+(2026-07-13); the dark palette is kept below as brand reference for print or
+future use.
 
-### Light variant (default)
+### Light variant (the site palette)
 
 | Role | Swatch | Hex | Token | Web usage |
 |------|--------|-----|-------|-----------|
@@ -26,7 +28,7 @@ the roles (opt in with `data-theme="dark"` on `<html>`).
 | Accent | Hunter Green | `#29603D` | `--color-accent` | Links, buttons, interactive states |
 | Soft | Light Bronze | `#E0A98D` | `--color-soft` | Warm highlights, decoration |
 
-### Dark variant
+### Dark variant (brand book only — not implemented on the site)
 
 | Role | Swatch | Hex | Web usage |
 |------|--------|-----|-----------|
@@ -67,7 +69,9 @@ via `WEBSITE-RESET-NOTES.md` if we want the full ramp back.)
   large text, so never use it *as* text color on light backgrounds.
   Evergreen or Ink text *on* solid periwinkle passes AA.
 - Current usage: one bento card (`.card--peri`), one testimonial card tint
-  (`.card--peri-tint`), marquee separators, homepage step numbers.
+  (`.card--peri-tint`), marquee separators. (The homepage step numbers were
+  switched from periwinkle to Hunter Green 2026-07-13 — periwinkle text on
+  paper fails AA.)
 - **To revert completely:**
   `git revert $(git log --grep="periwinkle" --format=%H -1)`
 

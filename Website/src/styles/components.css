@@ -1,6 +1,43 @@
 /* Shared component styles — buttons, cards, links, school grid.
    Separation via background shifts and radius, never hard borders. */
 
+/* --- Keyboard focus (designed, not UA default) --- */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* accent green is invisible on the dark brand surfaces */
+.footer :focus-visible,
+.cta :focus-visible,
+.card--primary :focus-visible {
+  outline-color: var(--soft-linen);
+}
+
+/* --- Skip link: visually hidden until keyboard-focused --- */
+.skip-link {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 20; /* above the sticky header (10) */
+  padding: 0.75em 1.4em;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--soft-linen);
+  font-family: var(--font-subheading);
+  font-weight: var(--weight-subheading);
+  text-transform: uppercase;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transform: translateY(calc(-100% - var(--space-6)));
+}
+
+.skip-link:focus {
+  transform: none;
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
 /* --- Pill buttons --- */
 .btn {
   display: inline-flex;
@@ -194,11 +231,6 @@
      into blobs (which is what a plain brightness(0) would do). Tuned against
      the current 10 logos — eyeball any newly added school's logo in the live
      grid before shipping it. */
-  /* `.school-section`'s background (--soft-10) doesn't invert in dark mode
-     (same fixed-cream treatment as `.card--soft`), so unlike other themed
-     elements this filter stays constant across themes too — no dark-mode
-     override, or the logos would invert toward white and vanish into the
-     still-light band. */
   filter: grayscale(1) brightness(0.8) contrast(20);
   /* Multiply the thresholded result onto the band: white (and any remaining
      light tone) becomes the section background, so tiles are black + bg only. */

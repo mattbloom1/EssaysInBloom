@@ -46,7 +46,7 @@ const steps = [
 ---
 
 <Base>
-  <main>
+  <main id="main">
     <!-- Hero -->
     <section class="section hero" data-hero>
       <div class="hero__frame">
@@ -102,8 +102,8 @@ const steps = [
             <img
               src={withBase('/pictures/writing-closeup.jpg')}
               alt="A student writing by hand"
-              width="800"
-              height="600"
+              width="1200"
+              height="801"
               loading="lazy"
             />
           </article>
@@ -217,10 +217,19 @@ const steps = [
     color: var(--soft-linen);
   }
 
-  /* accent + eyebrow greens vanish on the dark scrim — warm them up */
-  .hero__copy .eyebrow,
+  /* Over the dark scrim: the small eyebrow needs full AA contrast, so it
+     goes cream; bronze stays only on the large "your" (3:1 large-text bar). */
+  .hero__copy .eyebrow {
+    color: var(--soft-linen);
+  }
+
   .hero__copy .tint {
     color: var(--color-soft);
+  }
+
+  /* accent-green focus rings vanish on the scrim */
+  .hero__copy :global(:focus-visible) {
+    outline-color: var(--soft-linen);
   }
 
   /* Hover easter egg (motion.ts): while the pointer rests on the title, the
@@ -376,7 +385,9 @@ const steps = [
     font-weight: var(--weight-subheading);
     text-transform: uppercase;
     font-size: var(--text-sm);
-    color: var(--periwinkle);
+    /* was --periwinkle: 2.6:1 on paper, fails AA — periwinkle is
+       dark-text-only per DESIGN.md */
+    color: var(--color-accent);
   }
 
   .process__step h3 {
