@@ -240,7 +240,7 @@
 .school-grid__name {
   font-size: var(--text-xs);
   color: var(--color-ink);
-  opacity: 0.6;
+  opacity: 0.75; /* 0.6 was 3.8:1 on the band — fails AA for small text */
   text-align: center;
 }
 

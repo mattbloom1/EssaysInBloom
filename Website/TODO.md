@@ -62,7 +62,11 @@ wired up per `DESIGN.md`. Everything below is what's left.
   then the page shows the email card as primary).
 - [ ] **Legal pages** — Terms / Privacy / Accessibility are placeholders;
   write real policies before launch.
-- [ ] **SEO/meta** — per-page descriptions, OG images, sitemap.
+- [x] **SEO/meta** — canonical, OG/Twitter cards, JSON-LD
+  (EducationalOrganization), sitemap (`@astrojs/sitemap` + `robots.txt`),
+  Typekit preconnect, and a 404 page all landed 2026-07-13 in `Base.astro` /
+  `astro.config.mjs`. robots.txt hardcodes the Pages URL — update it (and
+  `site` in the config) when the custom domain lands.
 - [x] **Deployment (test)** — GitHub Pages via
   `.github/workflows/deploy-pages.yml`: every push to `main` that touches
   `Website/` deploys to <https://mattbloom1.github.io/EssaysInBloom/>.

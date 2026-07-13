@@ -1,2 +1,6 @@
 User-agent: *
 Allow: /
+
+# NOTE: hardcoded to the GitHub Pages deploy — update when the custom
+# domain lands (see TODO.md "Deployment").
+Sitemap: https://mattbloom1.github.io/EssaysInBloom/sitemap-index.xml

@@ -13,6 +13,29 @@ const {
   title = 'Essays in Bloom',
   description = 'College application essay coaching — what’s your story?',
 } = Astro.props;
+
+/* Astro.url.pathname already includes the deploy base (BASE_PATH in CI), so
+   composing against Astro.site yields the full Pages URL. */
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(withBase('/pictures/hero-writing.jpg'), Astro.site);
+
+/* Structured data: tells search engines this is a real coaching practice
+   with a real founder — feeds rich results / knowledge panels. */
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'Essays in Bloom',
+  description: 'College application essay coaching — 1:1 coaching, workshops, and application strategy.',
+  url: new URL(withBase('/'), Astro.site).href,
+  logo: new URL(withBase('/logos/Full.svg'), Astro.site).href,
+  email: 'essaysinbloom@gmail.com',
+  founder: {
+    '@type': 'Person',
+    name: 'Alison Bloomfield',
+    jobTitle: 'College Essay Writing Coach',
+  },
+  slogan: "What's your story?",
+});
 ---
 
 <!doctype html>
@@ -22,9 +45,26 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+
+    <!-- Social cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Essays in Bloom" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImage.href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+
     <link rel="icon" href={withBase('/logos/favicon-light.svg')} media="(prefers-color-scheme: light)" />
     <link rel="icon" href={withBase('/logos/favicon-dark.svg')} media="(prefers-color-scheme: dark)" />
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
     <link rel="stylesheet" href="https://use.typekit.net/npx4mzh.css" />
+
+    <script type="application/ld+json" set:html={jsonLd} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

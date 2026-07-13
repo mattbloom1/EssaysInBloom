@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   output: 'static',
@@ -9,4 +10,7 @@ export default defineConfig({
   base: process.env.BASE_PATH,
   // Serve web assets from static/ (Brand/ at the repo root is never served).
   publicDir: './static',
+  // Emits sitemap-index.xml on build (URLs only correct when BASE_PATH is
+  // set, i.e. the CI Pages build — static/robots.txt points at it).
+  integrations: [sitemap()],
 });

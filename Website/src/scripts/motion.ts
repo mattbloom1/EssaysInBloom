@@ -88,6 +88,10 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     const maxX = () => Math.max(0, processTrack.scrollWidth - processStage.clientWidth);
     const headerH = () => document.querySelector<HTMLElement>('.header')?.offsetHeight ?? 0;
 
+    // Scroll affordance: the timeline rule fills with accent as the scrub
+    // advances, so it's obvious the section moves sideways and how far.
+    const progressEl = processTrack.querySelector<HTMLElement>('[data-process-progress]');
+
     const slide = gsap.to(processTrack, {
       x: () => -maxX(),
       ease: 'none',
@@ -99,6 +103,9 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
         start: () => `top ${headerH() + 24}px`,
         end: () => `+=${Math.max(maxX(), 1)}`,
         invalidateOnRefresh: true,
+        onUpdate: (st) => {
+          if (progressEl) gsap.set(progressEl, { scaleX: st.progress });
+        },
       },
     });
 

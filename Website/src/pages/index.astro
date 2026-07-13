@@ -145,6 +145,7 @@ const steps = [
       </div>
       <div class="process__stage" data-process-stage>
         <div class="process__track" data-process-track>
+          <span class="process__progress" data-process-progress aria-hidden="true"></span>
           {steps.map((step) => (
             <article class="process__step" data-process-step>
               <div class="process__art" set:html={step.art} />
@@ -295,7 +296,7 @@ const steps = [
     text-align: center;
     font-size: var(--text-xs);
     color: var(--color-ink);
-    opacity: 0.6;
+    opacity: 0.75; /* AA floor, same as .school-grid__name */
   }
 
   .bento__quote {
@@ -348,6 +349,21 @@ const steps = [
     height: 2px;
     border-radius: 1px;
     background: var(--soft-50);
+  }
+
+  /* Scroll affordance: the rule fills with accent as the pinned scrub
+     advances (motion.ts drives scaleX from the slide's progress). Sits on
+     the same line as ::before; invisible until JS scales it up. */
+  .process__progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(120px + var(--space-6) + 5px);
+    height: 2px;
+    border-radius: 1px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left center;
   }
 
   .process__step {

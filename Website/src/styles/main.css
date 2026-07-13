@@ -10,3 +10,9 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
 }
+
+/* Text selection in brand colors */
+::selection {
+  background: var(--color-accent);
+  color: var(--soft-linen);
+}

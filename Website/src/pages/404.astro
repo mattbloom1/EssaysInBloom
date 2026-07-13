@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/withBase';
+---
+
+<Base title="Page not found — Essays in Bloom" description="That page doesn't exist — let's get you back to the story.">
+  <main id="main">
+    <section class="section notfound" data-hero>
+      <div class="container">
+        <p class="eyebrow" data-hero-copy>404</p>
+        <h1 data-hero-title>This page hasn't bloomed yet</h1>
+        <p class="lede" data-hero-copy>
+          The page you're looking for doesn't exist, or it moved. Either way,
+          the story continues from the homepage.
+        </p>
+        <div class="notfound__actions" data-hero-actions>
+          <a href={withBase('/')} class="btn btn--primary">Back to the homepage</a>
+          <a href={withBase('/contact/')} class="btn btn--soft">Contact us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .notfound {
+    /* short page: give the band enough height that the footer doesn't crowd */
+    min-height: 55vh;
+    display: grid;
+    align-items: center;
+  }
+
+  .notfound .container {
+    display: grid;
+    gap: var(--space-6);
+    justify-items: start;
+  }
+
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+</style>
