@@ -49,20 +49,7 @@ const steps = [
   <main>
     <!-- Hero -->
     <section class="section hero" data-hero>
-      <div class="container hero__grid">
-        <div class="hero__copy">
-          <p class="eyebrow" data-hero-copy>College application essay coaching</p>
-          <h1 data-hero-title>What’s <span class="tint">your</span> <span data-story-flip>story</span>?</h1>
-          <p class="lede" data-hero-copy>
-            Not sure? Together, we clarify the roles you play, what you do, and
-            what you care about — and grow it into a narrative that shows
-            admissions officers exactly why you belong.
-          </p>
-          <div class="hero__actions" data-hero-actions>
-            <a href={withBase('/contact/')} class="btn btn--primary">Book a free consult</a>
-            <a href={withBase('/approach/')} class="btn btn--soft">How it works</a>
-          </div>
-        </div>
+      <div class="hero__frame">
         <div class="hero__media" data-hero-media>
           <img
             src={withBase('/pictures/hero-writing.jpg')}
@@ -73,18 +60,19 @@ const steps = [
             fetchpriority="high"
           />
         </div>
-      </div>
-    </section>
-
-    <!-- Colleges -->
-    <section class="section school-section" data-reveal>
-      <div class="container">
-        <div class="section__head section__head--center">
-          <p class="eyebrow" data-reveal-child>Where our students landed</p>
-          <h2 data-reveal-child>Colleges our students now call home</h2>
+        <div class="hero__copy">
+          <p class="eyebrow" data-hero-copy>College application essay coaching</p>
+          <h1 data-hero-title>What’s <span class="tint">your</span> <span data-story-flip>story</span>?</h1>
+          <p class="lede" data-hero-copy>
+            Not sure? Together, we clarify the roles you play, what you do, and
+            what you care about — and grow it into a narrative that shows
+            admissions officers exactly why you belong.
+          </p>
+          <div class="hero__actions" data-hero-actions>
+            <a href={withBase('/contact/')} class="btn btn--primary">Book a free consult</a>
+            <a href={withBase('/approach/')} class="btn btn--cream">How it works</a>
+          </div>
         </div>
-        <SchoolGrid schools={schools} />
-        <p class="school-grid__caption">Logos are trademarks of their respective institutions.</p>
       </div>
     </section>
 
@@ -133,6 +121,17 @@ const steps = [
             </p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- Colleges -->
+    <section class="section school-section" data-reveal>
+      <div class="container">
+        <div class="section__head section__head--center">
+          <h2 data-reveal-child>Colleges our students now call home</h2>
+        </div>
+        <SchoolGrid schools={schools} />
+        <p class="school-grid__caption">Logos are trademarks of their respective institutions.</p>
       </div>
     </section>
 
@@ -188,20 +187,40 @@ const steps = [
 
 <style>
   .hero {
-    padding-block: var(--space-16) var(--space-16);
+    padding-block: var(--space-8) var(--space-16);
   }
 
-  .hero__grid {
+  /* The rounded photo frame is the hero: 90% of the viewport, copy centered
+     on top. The media (and its scrim) sit absolutely behind the copy. */
+  .hero__frame {
+    position: relative;
+    width: 90%;
+    margin-inline: auto;
+    min-height: clamp(480px, 72vh, 680px);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: var(--space-12);
+    place-items: center;
   }
 
   .hero__copy {
+    position: relative;
+    z-index: 1;
     display: grid;
     gap: var(--space-6);
-    justify-items: start;
+    justify-items: center;
+    text-align: center;
+    padding: var(--space-12) var(--space-6);
+    max-width: 46rem;
+    color: var(--soft-linen);
+  }
+
+  .hero__copy h1 {
+    color: var(--soft-linen);
+  }
+
+  /* accent + eyebrow greens vanish on the dark scrim — warm them up */
+  .hero__copy .eyebrow,
+  .hero__copy .tint {
+    color: var(--color-soft);
   }
 
   /* Hover easter egg (motion.ts): while the pointer rests on the title, the
@@ -230,13 +249,14 @@ const steps = [
     margin-top: var(--space-2);
   }
 
-  /* Hero photo: rounded clipping box; the oversized img inside is what the
-     parallax tween in motion.ts moves, so travel stays within these bounds. */
+  /* Hero photo: rounded clipping box filling the frame; the oversized img
+     inside is what the parallax tween in motion.ts moves, so travel stays
+     within these bounds. */
   .hero__media {
-    position: relative;
+    position: absolute;
+    inset: 0;
     overflow: hidden;
     border-radius: var(--radius-lg);
-    height: clamp(420px, 66vh, 620px);
     box-shadow: var(--shadow-soft);
   }
 
@@ -247,6 +267,14 @@ const steps = [
     height: 126%; /* extra height = parallax travel room */
     object-fit: cover;
     will-change: transform;
+  }
+
+  /* Scrim so the centered copy stays readable over the sunlit photo */
+  .hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgb(19 52 48 / 0.55), rgb(43 38 34 / 0.6));
   }
 
   .school-section {
@@ -400,16 +428,15 @@ const steps = [
 
   @media (max-width: 900px) {
     .hero {
-      padding-block: var(--space-12);
+      padding-block: var(--space-6) var(--space-12);
     }
 
-    .hero__grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-8);
+    .hero__frame {
+      min-height: min(78vh, 560px);
     }
 
-    .hero__media {
-      height: min(52vh, 420px);
+    .hero__copy {
+      padding: var(--space-10) var(--space-4);
     }
   }
 </style>
