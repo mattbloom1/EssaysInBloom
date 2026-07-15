@@ -51,18 +51,19 @@ const legal = [
     color: var(--soft-linen);
     /* no margin-top: the CTA band's bottom padding (or a page's last
        .section padding) provides the space above */
-    padding-block: var(--space-16) var(--space-8);
+    padding-block: var(--space-12) var(--space-6);
+    font-size: var(--text-sm);
   }
 
   .footer__grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
-    gap: var(--space-12);
-    padding-bottom: var(--space-12);
+    gap: var(--space-8);
+    padding-bottom: var(--space-8);
   }
 
   .footer__brand img {
-    height: 148px;
+    height: 104px;
     width: auto;
   }
 
@@ -80,7 +81,7 @@ const legal = [
 
   .footer__col h3 {
     color: var(--light-bronze);
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     margin-bottom: var(--space-2);
   }
 
@@ -89,8 +90,8 @@ const legal = [
     flex-wrap: wrap;
     gap: var(--space-4);
     justify-content: space-between;
-    padding-top: var(--space-6);
-    font-size: var(--text-sm);
+    padding-top: var(--space-4);
+    font-size: var(--text-xs);
     color: color-mix(in srgb, var(--soft-linen) 75%, transparent);
   }
 
@@ -106,13 +107,19 @@ const legal = [
   }
 
   @media (max-width: 720px) {
+    /* Brand on top, then the two link columns side by side — half the
+       height of the old single-column stack */
     .footer__grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-8);
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    .footer__brand {
+      grid-column: 1 / -1;
     }
 
     .footer__brand img {
-      height: 120px;
+      height: 88px;
     }
   }
 </style>
