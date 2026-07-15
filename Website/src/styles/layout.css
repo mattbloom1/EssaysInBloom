@@ -10,7 +10,7 @@
 }
 
 .section {
-  padding-block: var(--space-20);
+  padding-block: var(--space-16);
 }
 
 /* The page intro carries its own bottom padding, so the first content
@@ -23,7 +23,7 @@
 .section__head {
   display: grid;
   gap: var(--space-3);
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-8);
   justify-items: start;
 }
 
@@ -64,7 +64,7 @@
   }
 
   .section {
-    padding-block: var(--space-16);
+    padding-block: var(--space-12);
   }
 }
 

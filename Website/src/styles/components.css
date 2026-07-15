@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
-  padding: 0.9em 1.8em;
+  padding: 0.7em 1.5em;
   border: 0;
   border-radius: var(--radius-pill);
   font-family: var(--font-subheading);
@@ -53,8 +53,8 @@
   font-size: var(--text-sm);
   text-decoration: none;
   cursor: pointer;
-  /* comfortable thumb target */
-  min-height: 44px;
+  /* 40px on desktop pointers — the standard compact button height */
+  min-height: 2.5rem;
   /* never wider than the column: unbreakable labels (the email address
      button) were pushing 320px screens sideways */
   max-width: 100%;
@@ -77,17 +77,24 @@
   color: var(--color-primary);
 }
 
+/* Fingers still get the 44px minimum touch target */
+@media (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+  }
+}
+
 /* --- Cards --- */
 .card {
   border-radius: var(--radius-card);
-  padding: var(--space-8);
+  padding: var(--space-6);
   background: var(--soft-10);
 }
 
-/* Phones: the 2rem card inset eats too much of a narrow column */
+/* Phones: even the 1.5rem inset eats too much of a narrow column */
 @media (max-width: 640px) {
   .card {
-    padding: var(--space-6);
+    padding: var(--space-5);
   }
 }
 
@@ -128,7 +135,7 @@
 /* --- Testimonials (homepage list + testimonials page) --- */
 .testimonial {
   margin: 0;
-  padding-block: var(--space-10);
+  padding-block: var(--space-8);
   display: grid;
   gap: var(--space-4);
 }
@@ -159,7 +166,7 @@
   font-family: var(--font-subheading);
   font-weight: var(--weight-subheading);
   text-transform: uppercase;
-  font-size: var(--text-sm);
+  font-size: var(--text-xs);
   color: var(--color-accent);
 }
 
