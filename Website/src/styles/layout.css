@@ -67,3 +67,14 @@
     padding-block: var(--space-16);
   }
 }
+
+/* Small phones: relax the side gutter so text columns keep some width */
+@media (max-width: 420px) {
+  .container {
+    width: min(100% - 2.5rem, var(--container-max));
+  }
+
+  .container--narrow {
+    width: min(100% - 2.5rem, var(--container-narrow));
+  }
+}

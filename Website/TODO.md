@@ -50,9 +50,19 @@ wired up per `DESIGN.md`. Everything below is what's left.
 
 ## Build-out (no input needed)
 
-- [x] **Mobile menu** — hamburger toggle + dropdown panel below ~820px
-  (`src/components/Header.astro`); icon to be replaced with the open/closed
-  book (see above).
+- [x] **Mobile menu** — hamburger toggle + full-screen evergreen overlay
+  below ~820px (`src/components/Header.astro`): large centered links,
+  Contact pill inside the menu (the header CTA hides on mobile), scroll
+  locked while open. Icon still to be replaced with the open/closed book
+  (see above).
+- [x] **Mobile optimization pass** (2026-07-15) — fluid type scale
+  (`--text-xl`…`--text-5xl` clamp down to 320px screens), ≥44px touch
+  targets (buttons, hamburger, footer links), hover effects gated on
+  `(hover: hover)` so taps don't stick, shorter mobile hero with stacked
+  full-width CTAs, homepage seed-to-story timeline stacks vertically below
+  821px (the pinned horizontal scrub is desktop-only in `motion.ts`),
+  tighter card/section/gutter spacing on phones, and overflow fixes at
+  320px (h1 sizes, email button).
 - [ ] **Real copy** — inner pages now have full filler layouts (About,
   Approach, Coaching, Workshops, Testimonials, Contact); wording still needs
   Alison's review — see "Filler copy review" above.
