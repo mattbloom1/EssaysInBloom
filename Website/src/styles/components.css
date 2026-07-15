@@ -53,6 +53,13 @@
   font-size: var(--text-sm);
   text-decoration: none;
   cursor: pointer;
+  /* comfortable thumb target */
+  min-height: 44px;
+  /* never wider than the column: unbreakable labels (the email address
+     button) were pushing 320px screens sideways */
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .btn--primary {
@@ -75,6 +82,13 @@
   border-radius: var(--radius-card);
   padding: var(--space-8);
   background: var(--soft-10);
+}
+
+/* Phones: the 2rem card inset eats too much of a narrow column */
+@media (max-width: 640px) {
+  .card {
+    padding: var(--space-6);
+  }
 }
 
 /* Base heading first: variants below override it by source order
@@ -253,6 +267,11 @@
 @media (max-width: 640px) {
   .school-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6) var(--space-4);
+  }
+
+  .school-grid__link img {
+    height: 2.25rem;
   }
 }
 
@@ -266,20 +285,11 @@
       box-shadow var(--dur-fast) var(--ease-out-soft);
   }
 
-  .card--hover:hover {
-    transform: scale(1.03);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .btn:hover  { transform: scale(1.05); }
   .btn:active { transform: scale(0.97); transition-duration: 120ms; }
 
   /* Photo cards: the image answers the hover, not the frame */
   .card--photo img {
     transition: transform var(--dur-med) var(--ease-out-soft);
-  }
-  .card--photo:hover img {
-    transform: scale(1.04);
   }
 
   /* School tiles: gentle lift, name warms to accent */
@@ -291,9 +301,6 @@
       color var(--dur-fast) var(--ease-out-soft),
       opacity var(--dur-fast) var(--ease-out-soft);
   }
-  .school-grid__link:hover { transform: translateY(-4px); }
-  .school-grid__link:hover img { transform: scale(1.05); }
-  .school-grid__link:hover .school-grid__name,
   .school-grid__link:focus-visible .school-grid__name {
     color: var(--color-accent);
     opacity: 1;
@@ -302,8 +309,33 @@
   .link {
     transition: background-size var(--dur-fast) var(--ease-out-soft);
   }
-  .link:hover,
   .link[aria-current="page"] {
+    background-size: 100% 2px;
+  }
+}
+
+/* Hover effects only where a real hover exists — on touch screens a tap
+   would otherwise leave cards stuck mid-scale until the next tap. */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .card--hover:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn:hover { transform: scale(1.05); }
+
+  .card--photo:hover img {
+    transform: scale(1.04);
+  }
+
+  .school-grid__link:hover { transform: translateY(-4px); }
+  .school-grid__link:hover img { transform: scale(1.05); }
+  .school-grid__link:hover .school-grid__name {
+    color: var(--color-accent);
+    opacity: 1;
+  }
+
+  .link:hover {
     background-size: 100% 2px;
   }
 }

@@ -104,55 +104,6 @@ function initPage() {
       );
     }
 
-    // Seed-to-story timeline (homepage) — pin the stage and scrub the track
-    // horizontally so each step slides through the center of the screen.
-    // Without JS the same markup is a native horizontal scroller with snap.
-    const processStage = document.querySelector<HTMLElement>('[data-process-stage]');
-    const processTrack = document.querySelector<HTMLElement>('[data-process-track]');
-    if (processStage && processTrack) {
-      processStage.classList.add('is-pinned');
-      const maxX = () => Math.max(0, processTrack.scrollWidth - processStage.clientWidth);
-      const headerH = () => document.querySelector<HTMLElement>('.header')?.offsetHeight ?? 0;
-
-      // Scroll affordance: the timeline rule fills with accent as the scrub
-      // advances, so it's obvious the section moves sideways and how far.
-      const progressEl = processTrack.querySelector<HTMLElement>('[data-process-progress]');
-
-      const slide = gsap.to(processTrack, {
-        x: () => -maxX(),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: processStage,
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
-          start: () => `top ${headerH() + 24}px`,
-          end: () => `+=${Math.max(maxX(), 1)}`,
-          invalidateOnRefresh: true,
-          onUpdate: (st) => {
-            if (progressEl) gsap.set(progressEl, { scaleX: st.progress });
-          },
-        },
-      });
-
-      // Each step "slots in" as the track carries it toward center.
-      gsap.utils.toArray<Element>('[data-process-step]').forEach((step) => {
-        gsap.from(step, {
-          opacity: 0.2,
-          y: 28,
-          scale: 0.94,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: step,
-            containerAnimation: slide,
-            start: 'left 78%',
-            end: 'center 55%',
-            scrub: true,
-          },
-        });
-      });
-    }
-
     // CTA band (mesh gradient panel) — starts container-width and grows to
     // full-bleed as it scrolls into view. Width is the one property this
     // effect genuinely needs; it's a single element, scrubbed, so the layout
@@ -312,6 +263,62 @@ function initPage() {
     // its render loop when the page is swapped away.
     const meshCanvas = document.querySelector<HTMLCanvasElement>('[data-cta-mesh]');
     if (meshCanvas) unmountMesh = mountMeshGradient(meshCanvas);
+  });
+
+  // Seed-to-story timeline (homepage) — pin the stage and scrub the track
+  // horizontally so each step slides through the center of the screen.
+  // Desktop-only context: below 821px the steps stack vertically
+  // (index.astro), and gsap.matchMedia reverts the pin automatically when a
+  // resize crosses the breakpoint. Without JS (or with reduced motion) the
+  // markup is a native horizontal scroller with snap on desktop.
+  mm.add('(prefers-reduced-motion: no-preference) and (min-width: 821px)', () => {
+    const processStage = document.querySelector<HTMLElement>('[data-process-stage]');
+    const processTrack = document.querySelector<HTMLElement>('[data-process-track]');
+    if (!processStage || !processTrack) return;
+    processStage.classList.add('is-pinned');
+    const maxX = () => Math.max(0, processTrack.scrollWidth - processStage.clientWidth);
+    const headerH = () => document.querySelector<HTMLElement>('.header')?.offsetHeight ?? 0;
+
+    // Scroll affordance: the timeline rule fills with accent as the scrub
+    // advances, so it's obvious the section moves sideways and how far.
+    const progressEl = processTrack.querySelector<HTMLElement>('[data-process-progress]');
+
+    const slide = gsap.to(processTrack, {
+      x: () => -maxX(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: processStage,
+        pin: true,
+        scrub: 1,
+        anticipatePin: 1,
+        start: () => `top ${headerH() + 24}px`,
+        end: () => `+=${Math.max(maxX(), 1)}`,
+        invalidateOnRefresh: true,
+        onUpdate: (st) => {
+          if (progressEl) gsap.set(progressEl, { scaleX: st.progress });
+        },
+      },
+    });
+
+    // Each step "slots in" as the track carries it toward center.
+    gsap.utils.toArray<Element>('[data-process-step]').forEach((step) => {
+      gsap.from(step, {
+        opacity: 0.2,
+        y: 28,
+        scale: 0.94,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: step,
+          containerAnimation: slide,
+          start: 'left 78%',
+          end: 'center 55%',
+          scrub: true,
+        },
+      });
+    });
+
+    // matchMedia reverts tweens/triggers itself; the class is ours to undo
+    return () => processStage.classList.remove('is-pinned');
   });
 }
 

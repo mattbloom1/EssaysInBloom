@@ -68,9 +68,14 @@ const legal = [
 
   .footer__col {
     display: grid;
-    gap: var(--space-2);
+    gap: var(--space-1);
     justify-items: start;
     align-content: start;
+  }
+
+  /* comfortable thumb targets without changing the visual rhythm */
+  .footer__col :global(.link) {
+    padding-block: 0.4em;
   }
 
   .footer__col h3 {
@@ -91,13 +96,23 @@ const legal = [
 
   .footer__legal {
     display: flex;
-    gap: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+  }
+
+  .footer__legal :global(.link),
+  .footer__base p {
+    padding-block: 0.4em;
   }
 
   @media (max-width: 720px) {
     .footer__grid {
       grid-template-columns: 1fr;
       gap: var(--space-8);
+    }
+
+    .footer__brand img {
+      height: 120px;
     }
   }
 </style>

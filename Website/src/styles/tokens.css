@@ -59,17 +59,20 @@
   --weight-subheading: 700;
   --weight-body:       400;
 
-  /* --- Type scale (rem) --- */
+  /* --- Type scale (rem) ---
+     The display steps (xl and up) are fluid so headings track the viewport
+     down to small phones — the old fixed sizes overflowed 320px screens
+     (a single ALL-CAPS word like "WORKSHOPS" can't wrap). */
   --text-xs:   0.75rem;
   --text-sm:   0.875rem;
   --text-base: 1rem;
   --text-md:   1.125rem;
   --text-lg:   1.25rem;
-  --text-xl:   1.5rem;
-  --text-2xl:  2rem;
-  --text-3xl:  2.5rem;
-  --text-4xl:  3.25rem;
-  --text-5xl:  clamp(3rem, 7vw, 5rem);
+  --text-xl:   clamp(1.3rem, 1.15rem + 0.75vw, 1.5rem);
+  --text-2xl:  clamp(1.5rem, 1.2rem + 1.5vw, 2rem);
+  --text-3xl:  clamp(1.85rem, 1.4rem + 2.25vw, 2.5rem);
+  --text-4xl:  clamp(2.25rem, 1.6rem + 3.25vw, 3.25rem);
+  --text-5xl:  clamp(2.5rem, 1.5rem + 5vw, 5rem);
 
   /* --- Spacing scale (rem) --- */
   --space-1:  0.25rem;
